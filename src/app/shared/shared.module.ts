@@ -6,18 +6,22 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from '../material/material/material.module';
 import { MeetingRoomModalComponent } from './meeting-room-modal/meeting-room-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OtherSettingModalComponent } from './other-setting-modal/other-setting-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     SideBarComponent,
     NavBarComponent,
-    MeetingRoomModalComponent
+    MeetingRoomModalComponent,
+    OtherSettingModalComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     NavBarComponent,

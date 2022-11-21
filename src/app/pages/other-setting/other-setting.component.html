@@ -4,10 +4,7 @@
 
   <!-- user-setting -->
   <label class="text-xl font-bold">หมวดหมู่ผู้ใช้งาน</label>
-
-
   <div class="flex flex-row">
-
     <!-- สังกัด -->
     <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
       <label class="text-lg font-bold ">สังกัด</label>
@@ -154,6 +151,84 @@
     </div>
 
 
+  </div>
+
+
+  <!-- meeting-room-setting -->
+  <label class="text-xl font-bold">หมวดหมู่ห้องประชุม</label>
+  <div class="flex flex-row">
+    <!-- ขนาดห้องประชุม -->
+    <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+      <label class="text-lg font-bold ">ขนาดห้องประชุม</label>
+      <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+        <div *ngFor="let meetingRoomSize of meetingRoomSizeList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">{{meetingRoomSize.name}}</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+        <!-- <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">กรมสนับสนุนสุขภาพ</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+        <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">กรมสนับสนุนสุขภาพ</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+        <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">กรมสนับสนุนสุขภาพ</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div> -->
+      </div >
+        <i (click)="onAddMeetingRoomSize()" class="bi bi-plus-square-fill text-xl text-green-500 hover:text-green-600 hover:cursor-pointer"></i>
+    </div>
+
+    <!-- สถานะห้องประชุม -->
+    <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+      <label class="text-lg font-bold ">สถานะห้องประชุม</label>
+      <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+        <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">โปรแกรมเมอร์</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+        <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">โปรแกรมเมอร์</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+        <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">โปรแกรมเมอร์</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+        <div class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+          <label for=""class="text-base text-white break-words">โปรแกรมเมอร์</label>
+          <div class="flex flex-row">
+            <i class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+            <i class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+          </div>
+        </div>
+
+      </div>
+        <i class="bi bi-plus-square-fill text-xl text-green-500 hover:text-green-600 hover:cursor-pointer"></i>
+    </div>
   </div>
 </div>
 
