@@ -1,9 +1,9 @@
-<div class="flex flex-row w-full h-full">
-  <app-side-bar></app-side-bar>
-  <div class="flex flex-col w-full h-full">
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <app-side-bar></app-side-bar>
+  </mat-drawer>
+  <mat-drawer-content>
     <app-nav-bar></app-nav-bar>
     <router-outlet></router-outlet>
-  </div>
-</div>
-
-
+  </mat-drawer-content>
+</mat-drawer-container>
