@@ -2,20 +2,24 @@
   <label class="text-2xl font-bold my-2" for="">{{title}}</label>
 
   <form class="py-3" [formGroup]="form">
-    <!-- room name -->
+    <!-- name -->
     <div class="mb-3 w-96">
-      <label class="text-lg form-label inline-block mb-2 text-gray-700"
-        >{{name_input}}</label
+      <label class="text-base text-gray-700"
+          >{{name_input}}</label
       >
-      <input
-        type="text"
-        class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-        placeholder="{{name_input}}"
-        formControlName="name"
-      />
-      <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)">
-        <label *ngIf="form.controls['name'].errors?.['required']" class="text-red-500 text-xs">กรุณากรอก{{name_input}}</label>
-      </div>
+      <mat-form-field appearance="outline" class="w-full">
+
+        <input
+          matInput
+          type="text"
+          class="w-full text-base"
+          placeholder="{{name_input}}"
+          formControlName="name"
+          required
+          autocomplete="off"
+        />
+        <mat-error class="text-xs">กรุณากรอก{{name_input}}</mat-error>
+      </mat-form-field>
     </div>
 
       <!-- button -->
@@ -28,7 +32,7 @@
       </button>
         <button type="button"
         class="mx-2 items-center h-9 w-28 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out"
-        mat-dialog-close
+        (click)="onCancel()"
         >
         ยกเลิก
       </button>

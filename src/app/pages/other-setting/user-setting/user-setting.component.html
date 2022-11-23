@@ -1,0 +1,80 @@
+<!-- user-setting -->
+<label class="text-xl font-bold">หมวดหมู่ผู้ใช้งาน</label>
+<div class="flex flex-row flex-wrap ">
+  <!-- สังกัด -->
+  <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+    <label class="text-lg font-bold ">สังกัด</label>
+    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+      <div *ngFor="let userAffiliation of userAffiliationList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+        <label for=""class="text-base text-white break-words">{{userAffiliation.user_affiliation_name}}</label>
+        <div class="flex flex-row">
+          <i (click)="updateUserAffiliation(userAffiliation)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+          <i (click)="removeUserAffiliation(userAffiliation.user_affiliation_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+        </div>
+      </div>
+    </div >
+      <mat-icon (click)="onAddUserAffiliation()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+  </div>
+
+  <!-- ตำแหน่ง -->
+  <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+   <label class="text-lg font-bold ">ตำแหน่ง</label>
+   <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+     <div *ngFor="let userPosition of userPositionList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+       <label for=""class="text-base text-white break-words">{{userPosition.user_position_name}}</label>
+       <div class="flex flex-row">
+         <i (click)="updateUserPosition(userPosition)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+         <i (click)="removeUserPosition(userPosition.user_position_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+       </div>
+     </div>
+   </div >
+     <mat-icon (click)="onAddUserPosition()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+ </div>
+
+  <!-- ระดับ -->
+  <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+   <label class="text-lg font-bold ">ระดับ</label>
+   <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+     <div *ngFor="let userRank of userRankList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+       <label for=""class="text-base text-white break-words">{{userRank.user_rank_name}}</label>
+       <div class="flex flex-row">
+         <i (click)="updateUserRank(userRank)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+         <i (click)="removeUserRank(userRank.user_rank_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+       </div>
+     </div>
+   </div >
+     <mat-icon (click)="onAddUserRank()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+ </div>
+
+  <!-- ประเภทบรรจุ -->
+  <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+   <label class="text-lg font-bold ">ประเภทบรรจุ</label>
+   <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+     <div *ngFor="let userType of userTypeList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+       <label for=""class="text-base text-white break-words">{{userType.user_type_name}}</label>
+       <div class="flex flex-row">
+         <i (click)="updateUserType(userType)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+         <i (click)="removeUserType(userType.user_type_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+       </div>
+     </div>
+   </div >
+     <mat-icon (click)="onAddUserType()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+ </div>
+
+  <!-- บทบาท -->
+  <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+   <label class="text-lg font-bold ">บทบาท</label>
+   <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+     <div *ngFor="let userRole of userRoleList"  class="flex flex-row place-content-between bg-secondary my-0.5 px-2 py-2 rounded snap-start">
+      <label for=""class="text-base text-white break-words">{{userRole.user_role_name}}</label>
+       <div class="flex flex-row">
+         <i (click)="updateUserRole(userRole)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+         <i (click)="removeUserRole(userRole.user_role_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+       </div>
+     </div>
+   </div >
+     <mat-icon (click)="onAddUserRole()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+ </div>
+
+</div>
+

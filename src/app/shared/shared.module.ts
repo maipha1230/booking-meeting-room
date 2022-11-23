@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [
     NavBarComponent,

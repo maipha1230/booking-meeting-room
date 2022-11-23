@@ -12,6 +12,8 @@ export class OtherSettingModalComponent implements OnInit {
   form: FormGroup;
   public title: string = ""
   public name_input: string = ""
+  public name_value: string = ""
+
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<OtherSettingModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -25,6 +27,10 @@ export class OtherSettingModalComponent implements OnInit {
       if (this.data.name_input) {
         this.name_input = this.data.name_input
       }
+      if (this.data.name_value) {
+        this.name_value = this.data.name_value
+        this.pathForm();
+      }
     }
   }
 
@@ -34,10 +40,20 @@ export class OtherSettingModalComponent implements OnInit {
     })
   }
 
+  pathForm(){
+    this.form.patchValue({
+      name: this.name_value
+    })
+  }
+
   onSave(){
     if (this.form.valid) {
       this.dialogRef.close({ data: this.form.controls['name'].value })
     }
+  }
+
+  onCancel(){
+    this.dialogRef.close();
   }
 
 }

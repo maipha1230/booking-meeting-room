@@ -1,7 +1,7 @@
+import { MeetingRoomService } from './../../services/meeting-room.service';
 import { OtherSettingModalComponent } from './../../shared/other-setting-modal/other-setting-modal.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-other-setting',
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class OtherSettingComponent implements OnInit {
 
   public meetingRoomSizeList: any = []
-  constructor(private dialog: MatDialog, private http: HttpClient) { }
+  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService) { }
 
   ngOnInit(): void {
     this.getMeetingRoomSize();
@@ -19,7 +19,7 @@ export class OtherSettingComponent implements OnInit {
 
 
   getMeetingRoomSize() {
-    this.http.get(`http://localhost:3000/api/admin/getMeetingRoomSize`).subscribe((res: any) => {
+    this.meetingRoomService.getMeetingRoomSize().subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
           this.meetingRoomSizeList = res.data
@@ -43,10 +43,41 @@ export class OtherSettingComponent implements OnInit {
       if (res) {
         if (res.data) {
           let name = res.data
-          this.http.post(`http://localhost:3000/api/admin/createMeetingRoomSize`, { name: name }).subscribe((res: any) => {
-            if (res) {
-              if (res.status == 1) {
+          this.meetingRoomService.createMeetingRoomSize(name).subscribe((response: any) => {
+            if (response) {
+              if (response.status == 1) {
                 console.log(res.msg);
+                this.getMeetingRoomSize()
+              }
+            }
+          })
+        }
+      }
+
+    })
+  }
+
+  updateMeetingRoomSize(meetingRoomSize: any){
+    let id = meetingRoomSize.room_size_id
+    let dialogRef = this.dialog.open(OtherSettingModalComponent, {
+      width: '50%',
+      minWidth: '400px',
+      height: 'auto',
+      data: {
+        title_modal: 'แก้ไขขนาดห้องประชุม',
+        name_input: 'ขนาดห้องประชุม',
+        name_value: meetingRoomSize.name
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        if (res.data) {
+          let name = res.data
+          this.meetingRoomService.updateMeetingRoomSize(id, name).subscribe((response: any) => {
+            if (response) {
+              if (response.status == 1) {
+                console.log(response.msg);
                 this.getMeetingRoomSize();
               }
             }
@@ -54,6 +85,17 @@ export class OtherSettingComponent implements OnInit {
         }
       }
 
+    })
+  }
+
+  removeMeetingRoomSize(id: number) {
+    this.meetingRoomService.removeMeetingRoomSize(id).subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          console.log(res.msg);
+          this.getMeetingRoomSize();
+        }
+      }
     })
   }
 

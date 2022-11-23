@@ -12,6 +12,8 @@ import { BookingRoomComponent } from './pages/booking-room/booking-room.componen
 import { OtherSettingComponent } from './pages/other-setting/other-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OtherSettingModule } from './pages/other-setting/other-setting.module';
+
 
 @NgModule({
   declarations: [
@@ -22,13 +24,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     UserComponent,
     AdminstratorComponent,
     BookingRoomComponent,
-    OtherSettingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
+    OtherSettingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

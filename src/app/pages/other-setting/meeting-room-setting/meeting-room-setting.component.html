@@ -1,0 +1,34 @@
+ <!-- meeting-room-setting -->
+ <label class="text-xl font-bold">หมวดหมู่ห้องประชุม</label>
+ <div class="flex flex-row">
+   <!-- ขนาดห้องประชุม -->
+   <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+     <label class="text-lg font-bold ">ขนาดห้องประชุม</label>
+     <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+       <div *ngFor="let meetingRoomSize of meetingRoomSizeList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+         <label for=""class="text-base text-white break-words">{{meetingRoomSize.name}}</label>
+         <div class="flex flex-row">
+           <i (click)="updateMeetingRoomSize(meetingRoomSize)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+           <i (click)="removeMeetingRoomSize(meetingRoomSize.room_size_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+         </div>
+       </div>
+     </div >
+       <mat-icon (click)="onAddMeetingRoomSize()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+   </div>
+
+   <!-- สถานะห้องประชุม -->
+   <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+    <label class="text-lg font-bold ">สถานะห้องประชุม</label>
+    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+      <div *ngFor="let meetingRoomStatus of meetingRoomStatusList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+        <label for=""class="text-base text-white break-words">{{meetingRoomStatus.name}}</label>
+        <div class="flex flex-row">
+          <i (click)="updateMeetingRoomStatus(meetingRoomStatus)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+          <i (click)="removeMeetingRoomStatus(meetingRoomStatus.room_size_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+        </div>
+      </div>
+    </div >
+      <mat-icon (click)="onAddMeetingRoomStatus()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+  </div>
+
+ </div>

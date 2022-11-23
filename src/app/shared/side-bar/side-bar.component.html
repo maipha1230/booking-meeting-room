@@ -1,13 +1,20 @@
-<div class= "w-80 h-full bg-primary flex flex-col items-center p-10">
-    <img
+<div class="w-80 h-screen bg-primary flex flex-col items-center p-10">
+  <img
     src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/1/0/e/10e6c0a439e17280a6f3fa6ae059819af5517efd.png"
     alt=""
     class="rounded-full border-solid border-8 border-third w-32"
+  />
+  <label class="my-4 text-lg text-white">ปฐมพงษ์ สีพลแสน</label>
+  <div class="flex flex-col w-full">
+    <label for="" class="text-white text-base my-2">เมนู</label>
+    <div
+      *ngFor="let menu of menu_list"
+      (click)="route(menu.link)"
+      class="my-0 px-2 w-full h-12 bg-primary rounded flex items-center hover:bg-secondary hover:cursor-pointer active:bg-secondary focus:bg-secondary ease-in duration-300"
     >
-    <label class="my-4 text-lg text-white">ปฐมพงษ์ สีพลแสน</label>
-    <div class="flex flex-col w-full">
-      <label for="" class="text-white text-base my-2">เมนู</label>
-      <div *ngFor="let menu of menu_list" (click)="route(menu.link)" class="my-0 px-2 w-full h-12 bg-primary rounded flex items-center hover:bg-secondary hover:cursor-pointer ease-in duration-300">
-        <label for=""class="text-white text-base hover:cursor-pointer">{{menu.name}}</label>
-      </div>
+      <label for="" class="text-white text-base hover:cursor-pointer">{{
+        menu.name
+      }}</label>
+    </div>
+  </div>
 </div>

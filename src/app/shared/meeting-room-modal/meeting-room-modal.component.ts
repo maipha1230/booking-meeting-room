@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class MeetingRoomModalComponent implements OnInit {
 
   public formMeeting: FormGroup;
-  // public room: MeetingRoomModel;
+
 
   constructor(private dialogRef: MatDialogRef<MeetingRoomModalComponent>,
     private formBuilder: FormBuilder) { }
