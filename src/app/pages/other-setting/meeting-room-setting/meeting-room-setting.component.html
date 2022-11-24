@@ -1,8 +1,8 @@
  <!-- meeting-room-setting -->
  <label class="text-xl font-bold">หมวดหมู่ห้องประชุม</label>
- <div class="flex flex-row">
+ <div class="flex flex-row flex-wrap gap-8">
    <!-- ขนาดห้องประชุม -->
-   <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+   <div class="flex flex-col my-4 p-3 rounded-lg bg-white w-64 shadow-lg">
      <label class="text-lg font-bold ">ขนาดห้องประชุม</label>
      <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
        <div *ngFor="let meetingRoomSize of meetingRoomSizeList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
@@ -17,7 +17,7 @@
    </div>
 
    <!-- สถานะห้องประชุม -->
-   <div class="flex flex-col my-4 mx-1 p-3 rounded-lg bg-white w-72 shadow-lg">
+   <div class="flex flex-col my-4 p-3 rounded-lg bg-white w-64 shadow-lg">
     <label class="text-lg font-bold ">สถานะห้องประชุม</label>
     <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
       <div *ngFor="let meetingRoomStatus of meetingRoomStatusList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">

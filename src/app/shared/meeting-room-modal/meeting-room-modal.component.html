@@ -1,11 +1,11 @@
 <div class="flex flex-col items-center ">
-  <label class="text-2xl font-bold my-2" for="">ห้องประชุม</label>
+  <label class="text-xl font-bold my-2" for="">ห้องประชุม</label>
 
-  <form class="py-3" [formGroup]="formMeeting">
+  <form [formGroup]="formMeeting">
     <!-- room name -->
-    <div class="mb-3 w-96">
-      <label class="text-base mb-2 text-gray-700">ชื่อห้องประชุม</label>
-      <mat-form-field appearance="outline" class="w-full">
+    <div class="mb-1 w-96">
+      <label class="text-base  text-gray-700">ชื่อห้องประชุม</label>
+      <mat-form-field appearance="outline" class="w-full" >
         <input
           matInput
           type="text"
@@ -20,8 +20,8 @@
     </div>
 
     <!-- room size -->
-    <div class="mb-3 w-96">
-      <label class="text-base mb-2 text-gray-700">ขนาดห้องประชุม</label>
+    <div class="mb-1 w-96">
+      <label class="text-base  text-gray-700">ขนาดห้องประชุม</label>
       <mat-form-field appearance="outline" class="w-full">
         <mat-select
           class="w-full text-base"
@@ -34,8 +34,8 @@
       </mat-form-field>
     </div>
     <!-- room capacity -->
-    <div class="mb-3 w-96">
-      <label class="text-base mb-2 text-gray-700"
+    <div class="mb-1 w-96">
+      <label class="text-base  text-gray-700"
         >ความจุห้องประชุม(จำนวนคน)</label
       >
       <mat-form-field appearance="outline" class="w-full">
@@ -53,8 +53,8 @@
       </mat-form-field>
     </div>
     <!-- room status -->
-    <div class="mb-3 w-96">
-      <label class="text-base mb-2 text-gray-700">สถานะห้องประชุม</label>
+    <div class="mb-1 w-96">
+      <label class="text-base  text-gray-700">สถานะห้องประชุม</label>
       <mat-form-field appearance="outline" class="w-full">
         <mat-select
           class="w-full text-base"
@@ -67,7 +67,7 @@
       </mat-form-field>
     </div>
     <div class="flex flex-col">
-      <label class="text-lg form-label inline-block mb-2 text-gray-700"
+      <label class="text-base form-label inline-block  text-gray-700"
         >รูปภาพ(มากสุด 3 รูปภาพ)</label
       >
       <label class="" for=""></label>
@@ -86,7 +86,7 @@
           />
         </label>
 
-        <label class="w-1/3" *ngIf="gallery.length < 3" for="uploadFile">
+        <label class="w-1/3" *ngIf="formMeeting.controls['roomGallery']?.value?.length < 3 " for="uploadFile">
           <div
             class="bg-gray-300 hover:bg-gray-400 hover:cursor-pointer w-full h-full rounded-lg flex justify-center items-center"
           >
@@ -98,7 +98,7 @@
     </div>
 
     <!-- button -->
-    <div class="my-3 flex flex-row justify-center">
+    <div class="my-2 flex flex-row justify-center">
       <button
         type="submit"
         class="mx-2 items-center h-9 w-28 bg-green-500 text-white rounded hover:bg-green-600 transition duration-150 ease-in-out"

@@ -1,5 +1,7 @@
+import { MeetingRoomService } from './../../services/meeting-room.service';
+import { MeetingRoomModel } from './../../model/meeting-room.model';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MeetingRoomModalComponent } from 'src/app/shared/meeting-room-modal/meeting-room-modal.component';
 
 @Component({
@@ -9,9 +11,22 @@ import { MeetingRoomModalComponent } from 'src/app/shared/meeting-room-modal/mee
 })
 export class MeetingRoomComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) { }
+  public meeting_room_list: MeetingRoomModel[] = []
+
+  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService) { }
 
   ngOnInit(): void {
+    this.getMeetingRoom();
+  }
+
+  getMeetingRoom(){
+    this.meetingRoomService.getMeetingRoom().subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.meeting_room_list = res.data
+        }
+      }
+    })
   }
 
   public onAddRoom(){
@@ -19,6 +34,34 @@ export class MeetingRoomComponent implements OnInit {
       height: '95%',
       width: '50%',
       minWidth: '400px'
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        this.getMeetingRoom();
+      }
+    })
+  }
+
+  public onEditRoom(room: MeetingRoomModel){
+    let room_id = room.room_id
+
+    let dialogRef = this.dialog.open(MeetingRoomModalComponent, {
+      height: '95%',
+      width: '50%',
+      minWidth: '400px',
+      data: {
+        room_name: room.room_name,
+        room_size_id: room.room_size_id,
+        room_capacity: room.room_capacity,
+        room_status_id: room.room_status_id,
+        room_gallery: room.room_gallery,
+        room_img_name: room.room_img_name
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+
     })
   }
 

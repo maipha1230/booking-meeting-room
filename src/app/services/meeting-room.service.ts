@@ -11,6 +11,14 @@ export class MeetingRoomService {
   constructor(private http: HttpClient) { }
 
 
+  createMeetingRoom(formData: FormData): Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/createMeetingRoom`, formData)
+  }
+
+  getMeetingRoom():Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoom`)
+  }
+
   getMeetingRoomSize(): Observable<any>{
     return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoomSize`)
   }
