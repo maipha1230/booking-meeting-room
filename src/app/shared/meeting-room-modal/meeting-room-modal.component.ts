@@ -5,6 +5,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { base64ToFile } from 'ngx-image-cropper';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-meeting-room-modal',
@@ -17,8 +18,7 @@ export class MeetingRoomModalComponent implements OnInit {
   public meetingRoomSizeList: any = [];
   public meetingRoomStatusList: any = [];
 
-  public meetingRoom: any = [];
-  public preview_img: any = [];
+  public meetingRoom: MeetingRoomModel;
 
   constructor(
     private dialogRef: MatDialogRef<MeetingRoomModalComponent>,
@@ -33,7 +33,9 @@ export class MeetingRoomModalComponent implements OnInit {
     this.getMeetingRoomStatus();
     this.createMeetingForm();
     if (this.data) {
-      this.pathMeetingForm(this.data);
+      if (this.data.room_id) {
+        this.getMeetingRoomById(this.data.room_id);
+      }
     }
   }
 
@@ -57,13 +59,26 @@ export class MeetingRoomModalComponent implements OnInit {
     });
   }
 
+  getMeetingRoomById(room_id: any) {
+    this.meetingRoomService
+      .getMeetingRoomById(room_id)
+      .subscribe((res: any) => {
+        if (res) {
+          if (res.status == 1) {
+            this.meetingRoom = res.data;
+            this.pathMeetingForm(this.meetingRoom);
+          }
+        }
+      });
+  }
+
   createMeetingForm() {
     this.formMeeting = this.formBuilder.group({
       roomName: ['', Validators.required],
       roomSize: [null, Validators.required],
       roomCapacity: [null, Validators.required],
       roomStatus: [null, Validators.required],
-      roomGallery: [null, Validators.required],
+      roomGallery: [[], Validators.required],
     });
   }
 
@@ -75,35 +90,34 @@ export class MeetingRoomModalComponent implements OnInit {
       roomStatus: room.room_status_id,
     });
 
-    let gallery:any  = []
+    let gallery: any = [];
     for (let i = 0; i < room.room_gallery.length; i++) {
-      // let file: any = room.room_gallery[i];
-      // if (file) {
-      //   let reader = new FileReader();
-      //   reader.readAsDataURL(file); // read file as data url
-      //   reader.onload = (event) => {
-      //     // called once readAsDataURL is completed
-      //     gallery.push(event.target?.result);
-      //   };
-      // }
-      this.toDataUrl(room.room_gallery[i], function(myBase64: any) {
-        // console.log(myBase64); // myBase64 is the base64 string
-        gallery.push(myBase64)
-    });
+      this.toDataUrl(room.room_gallery[i].img_path, function (myBase64: any) {
+        gallery.push(myBase64);
+      });
     }
     this.formMeeting.controls['roomGallery'].setValue(gallery);
+    console.log(this.formMeeting.controls['roomGallery'].value);
   }
 
   fileChangeEvent(event: any) {
-    let gallery: any = [];
+    let gallery: any[] = [];
+    if (this.formMeeting.controls['roomGallery'].value.length > 0) {
+      for (
+        let i = 0;
+        i < this.formMeeting.controls['roomGallery'].value.length;
+        i++
+      ) {
+        gallery.push(this.formMeeting.controls['roomGallery'].value[i]);
+      }
+    }
     if (event.target.files.length + gallery.length <= 3) {
       for (let i = 0; i < event.target.files.length; i++) {
         let file: File = event.target.files[i];
         if (file) {
           let reader = new FileReader();
-          reader.readAsDataURL(file); // read file as data url
+          reader.readAsDataURL(file);
           reader.onload = (event) => {
-            // called once readAsDataURL is completed
             gallery.push(event.target?.result);
           };
         }
@@ -116,40 +130,59 @@ export class MeetingRoomModalComponent implements OnInit {
 
   public toDataUrl(url: any, callback: any) {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        var reader = new FileReader();
-        reader.onloadend = function() {
-            callback(reader.result);
-        }
-        reader.readAsDataURL(xhr.response);
+    xhr.onload = function () {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        callback(reader.result);
+      };
+      reader.readAsDataURL(xhr.response);
     };
     xhr.open('GET', url);
     xhr.responseType = 'blob';
     xhr.send();
-}
+  }
 
   onSave() {
-    const room = this.prepareForm();
-    let formData = new FormData();
-    formData.append('room_name', room.room_name);
-    formData.append('room_size_id', String(room.room_size_id));
-    formData.append('room_capacity', String(room.room_capacity));
-    formData.append('room_status_id', String(room.room_status_id));
-
-    for (let i = 0; i < room.room_gallery.length; i++) {
-      formData.append('gallery', base64ToFile(room.room_gallery[i]));
-    }
-
-    this.meetingRoomService
-      .createMeetingRoom(formData)
-      .subscribe((res: any) => {
-        if (res) {
-          if (res.status == 1) {
-            this.alertService.successAlert(res.msg);
-            this.dialogRef.close(true);
+    if (this.formMeeting.controls['roomGallery'].value.length <= 0) {
+      this.alertService.warningAlert('กรุณาเพิ่มรูปภาพอย่างน้อย 1 รูปภาพ');
+    } else {
+      if (this.data) {
+        this.formMeeting.controls['roomGallery'].value.splice(
+          0,
+          this.meetingRoom.room_gallery.length
+        );
+      }
+      const room = this.prepareForm();
+      let formData = new FormData();
+      formData.append('room_name', room.room_name);
+      formData.append('room_size_id', String(room.room_size_id));
+      formData.append('room_capacity', String(room.room_capacity));
+      formData.append('room_status_id', String(room.room_status_id));
+      for (let i = 0; i < room.room_gallery.length; i++) {
+        formData.append('gallery', base64ToFile(room.room_gallery[i]));
+      }
+      if (this.data) {
+        this.meetingRoomService.updateMeetingRoom( Number(this.meetingRoom.room_id), formData).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.dialogRef.close(true);
+            }
           }
-        }
-      });
+        })
+      } else {
+        this.meetingRoomService
+          .createMeetingRoom(formData)
+          .subscribe((res: any) => {
+            if (res) {
+              if (res.status == 1) {
+                this.alertService.successAlert(res.msg);
+                this.dialogRef.close(true);
+              }
+            }
+          });
+      }
+    }
   }
 
   prepareForm(): MeetingRoomModel {
@@ -161,5 +194,48 @@ export class MeetingRoomModalComponent implements OnInit {
     room.room_status_id = this.formMeeting.controls['roomStatus'].value;
 
     return room;
+  }
+
+  onRemoveImage(index: number) {
+    console.log(index);
+    if (this.formMeeting.controls['roomGallery'].value.length == 1) {
+      this.alertService.warningAlert("ไม่สามารถลบรูปภาพออกทั้งหมด");
+    } else {
+      if (this.data) {
+        if (index > this.meetingRoom.room_gallery.length - 1) {
+          this.alertService
+            .ensureDeleteAlert('ต้องการลบรูปภาพใช่หรือไม่')
+            .subscribe((res: any) => {
+              if (res) {
+                this.formMeeting.controls['roomGallery'].value.splice(index, 1);
+              }
+            });
+        } else {
+          this.alertService
+            .ensureDeleteAlert('ต้องการลบรูปภาพใช่หรือไม่')
+            .subscribe((res: any) => {
+              if (res) {
+                this.meetingRoomService
+                  .removeMeetingRoomImage(
+                    this.meetingRoom.room_gallery[index].img_name
+                  )
+                  .subscribe((response: any) => {
+                    if (response) {
+                      if (response.status == 1) {
+                        console.log(response.msg);
+                        this.meetingRoom.room_gallery.splice(index, 1);
+                        this.formMeeting.controls['roomGallery'].value.splice(
+                          index,
+                          1
+                        );
+                      }
+                    }
+                  });
+              }
+            });
+        }
+      }
+    }
+
   }
 }

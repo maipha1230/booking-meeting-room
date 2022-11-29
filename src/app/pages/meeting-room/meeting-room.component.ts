@@ -43,25 +43,21 @@ export class MeetingRoomComponent implements OnInit {
     })
   }
 
-  public onEditRoom(room: MeetingRoomModel){
-    let room_id = room.room_id
-
+  public onEditRoom(id: any){
+    let room_id:number = id
     let dialogRef = this.dialog.open(MeetingRoomModalComponent, {
       height: '95%',
       width: '50%',
       minWidth: '400px',
       data: {
-        room_name: room.room_name,
-        room_size_id: room.room_size_id,
-        room_capacity: room.room_capacity,
-        room_status_id: room.room_status_id,
-        room_gallery: room.room_gallery,
-        room_img_name: room.room_img_name
+        room_id: room_id
       }
     })
 
     dialogRef.afterClosed().subscribe((res: any) => {
-
+      if (res) {
+        this.getMeetingRoom();
+      }
     })
   }
 

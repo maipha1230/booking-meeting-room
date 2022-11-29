@@ -19,6 +19,18 @@ export class MeetingRoomService {
     return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoom`)
   }
 
+  getMeetingRoomById(room_id: number): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoomById/${room_id}`)
+  }
+
+  updateMeetingRoom(room_id: number, formData: FormData) :Observable<any> {
+    return this.http.put<any>(`${environment.api_url}/admin/updateMeetingRoom/${room_id}`, formData)
+  }
+
+  removeMeetingRoomImage(image_name: string): Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/removeMeetingRoomImage`, { image_name: image_name })
+  }
+
   getMeetingRoomSize(): Observable<any>{
     return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoomSize`)
   }
