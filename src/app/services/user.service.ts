@@ -26,13 +26,18 @@ export class UserService {
   }
 
   //update user
-  updateUser(user_id: number, formData: any): Observable<any> {
+  updateUser(user_id: number, formData: FormData): Observable<any> {
     return this.http.put<any>(`${environment.api_url}/admin/updateUser/${user_id}`, formData)
   }
 
   //remove user
   removeUser(user_id: number): Observable<any> {
     return this.http.delete<any>(`${environment.api_url}/admin/removeUser/${user_id}`)
+  }
+
+  //reset user password
+  resetUserPassword(user_id: number, password: string): Observable<any> {
+    return this.http.put<any>(`${environment.api_url}/admin/resetUserPassword/${user_id}`, { password: password })
   }
 
   //user role api

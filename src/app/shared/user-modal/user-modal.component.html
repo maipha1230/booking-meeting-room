@@ -1,10 +1,7 @@
 <div class="flex flex-col items-center">
-  <label class="text-xl font-bold my-2" for="">ห้องประชุม</label>
+  <label class="text-xl font-bold my-2" for="">ผู้ใช้งาน</label>
 
   <div class="flex flex-col items-center">
-    <label class="text-base form-label inline-block my-1 text-gray-700"
-      >รูปประจำตัว</label
-    >
     <div class="flex bg-white h-40 w-40 rounded-lg px-2 py-2 shadow-xl">
       <label class="w-full hover:cursor-pointer">
         <img
@@ -96,6 +93,8 @@
           </mat-form-field>
           <button
           type="button"
+          [disabled]="!data?.user_id"
+          (click)="onResetPassword()"
           class="mx-2 mt-2 items-center h-12 w-28 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition duration-150 ease-in-out"
         >
           รีเซ็ทรหัสผ่าน

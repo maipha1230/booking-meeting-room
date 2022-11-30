@@ -13,6 +13,7 @@ import { OtherSettingComponent } from './pages/other-setting/other-setting.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OtherSettingModule } from './pages/other-setting/other-setting.module';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { OtherSettingModule } from './pages/other-setting/other-setting.module';
     UserComponent,
     AdminstratorComponent,
     BookingRoomComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

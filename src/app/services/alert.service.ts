@@ -10,8 +10,7 @@ export class AlertService {
   successAlert(msg: string) {
     Swal.fire({
       icon: 'success',
-      title: 'สำเร็จ',
-      text: msg,
+      title: msg,
       timer: 2000,
       showConfirmButton: false,
     });
@@ -20,13 +19,36 @@ export class AlertService {
   warningAlert(msg: string) {
     Swal.fire({
       icon: 'warning',
-      title: 'คำเตือน',
-      text: msg,
-      showConfirmButton: true
+      title: msg,
+      showConfirmButton: true,
+      confirmButtonText: "ตกลง"
     })
   }
 
   ensureDeleteAlert(msg: string) {
+    return new Observable<any>((observer) => {
+      Swal.fire({
+        icon: 'question',
+        title: msg,
+        showCancelButton: true,
+        cancelButtonText: 'ไม่',
+        cancelButtonColor: 'rgb(239, 68, 68)',
+        showConfirmButton: true,
+        confirmButtonText: 'ใช่',
+      }).then((result) => {
+        if (result) {
+          if (result.isConfirmed) {
+            if (result.isConfirmed === true) {
+              observer.next(result.isConfirmed)
+            } else {
+              observer.next(result.isConfirmed)
+            }
+          }
+        }
+      })
+    });
+  }
+  ensureResetPasswordAlert(msg: string) {
     return new Observable<any>((observer) => {
       Swal.fire({
         icon: 'question',

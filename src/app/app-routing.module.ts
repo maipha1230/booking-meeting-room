@@ -1,3 +1,4 @@
+import { LoginComponent } from './pages/login/login.component';
 import { OtherSettingComponent } from './pages/other-setting/other-setting.component';
 import { BookingRoomComponent } from './pages/booking-room/booking-room.component';
 import { AdminstratorComponent } from './pages/adminstrator/adminstrator.component';
@@ -36,7 +37,12 @@ const routes: Routes = [
   {
     path: 'other-setting',
     component: OtherSettingComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
+
 ];
 
 @NgModule({

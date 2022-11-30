@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'booking-meeting-room';
+
+  public page = ""
+
+  ngOnInit(): void {
+    this.page = window.location.pathname
+    console.log(this.page);
+
+
+  }
+
 }

@@ -1,4 +1,4 @@
-<mat-drawer-container>
+<mat-drawer-container *ngIf="page != '/login'">
   <mat-drawer mode="side" opened>
     <app-side-bar></app-side-bar>
   </mat-drawer>
@@ -7,3 +7,5 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+<router-outlet *ngIf="page == '/login'"></router-outlet>
+
