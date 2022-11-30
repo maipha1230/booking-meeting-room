@@ -15,6 +15,7 @@ export class UserSettingComponent implements OnInit {
   public userRankList: any = []
   public userTypeList: any = []
   public userRoleList: any = []
+  public userStatusList: any = []
 
   constructor(private userService: UserService, private dialog: MatDialog) { }
 
@@ -24,6 +25,7 @@ export class UserSettingComponent implements OnInit {
     this.getUserRank();
     this.getUserType();
     this.getUserRole();
+    this.getUserStatus();
   }
 
 
@@ -427,6 +429,89 @@ export class UserSettingComponent implements OnInit {
         if (res.status == 1) {
           console.log(res.msg);
           this.getUserRole();
+        } else if (res.status == 2) {
+          console.log(res.msg);
+
+        }
+      }
+    })
+  }
+  getUserStatus() {
+    this.userService.getUserStatus().subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.userStatusList = res.data
+        }
+      }
+    })
+  }
+
+  onAddUserStatus(){
+    let dialogRef = this.dialog.open(OtherSettingModalComponent, {
+      width: '50%',
+      minWidth: '400px',
+      height: 'auto',
+      data: {
+        title_modal: 'เพิ่มสถานะผู้ใช้งาน',
+        name_input: 'สถานะผู้ใช้งาน'
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        if (res.data) {
+          let name = res.data
+          this.userService.createUserStatus(name).subscribe((response: any) => {
+            if (response) {
+              if (response.status == 1) {
+                console.log(response.msg);
+                this.getUserStatus()
+              }
+            }
+          })
+        }
+      }
+
+    })
+  }
+
+ updateUserStatus(userStatus: any){
+    let id = userStatus.user_status_id
+    let dialogRef = this.dialog.open(OtherSettingModalComponent, {
+      width: '50%',
+      minWidth: '400px',
+      height: 'auto',
+      data: {
+        title_modal: 'แก้ไขสถานะผู้ใช้งาน',
+        name_input: 'สถานะผู้ใช้งาน',
+        name_value: userStatus.user_status_name
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        if (res.data) {
+          let name = res.data
+          this.userService.updateUserStatus(id, name).subscribe((response: any) => {
+            if (response) {
+              if (response.status == 1) {
+                console.log(response.msg);
+                this.getUserStatus();
+              }
+            }
+          })
+        }
+      }
+
+    })
+  }
+
+  removeUserStatus(id: number) {
+    this.userService.removeUserStatus(id).subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          console.log(res.msg);
+          this.getUserStatus();
         } else if (res.status == 2) {
           console.log(res.msg);
 

@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { MeetingRoomService } from './../../services/meeting-room.service';
 import { MeetingRoomModel } from './../../model/meeting-room.model';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ export class MeetingRoomComponent implements OnInit {
 
   public meeting_room_list: MeetingRoomModel[] = []
 
-  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService) { }
+  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.getMeetingRoom();
@@ -57,6 +58,21 @@ export class MeetingRoomComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res) {
         this.getMeetingRoom();
+      }
+    })
+  }
+
+  public onRemoveMeetingRoom(room_id: any) {
+    this.alertService.ensureDeleteAlert("คุณต้องการลบห้องประชุมใช่หรือไม่?").subscribe((res: any) => {
+      if (res) {
+        this.meetingRoomService.removeMeetingRoom(Number(room_id)).subscribe((response: any) => {
+          if (response) {
+            if (response.status == 1) {
+              this.alertService.successAlert(response.msg)
+              this.getMeetingRoom();
+            }
+          }
+        })
       }
     })
   }

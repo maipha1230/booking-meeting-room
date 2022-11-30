@@ -27,6 +27,10 @@ export class MeetingRoomService {
     return this.http.put<any>(`${environment.api_url}/admin/updateMeetingRoom/${room_id}`, formData)
   }
 
+  removeMeetingRoom(room_id: number): Observable<any> {
+    return this.http.delete(`${environment.api_url}/admin/removeMeetingRoom/${room_id}`)
+  }
+
   removeMeetingRoomImage(image_name: string): Observable<any> {
     return this.http.post(`${environment.api_url}/admin/removeMeetingRoomImage`, { image_name: image_name })
   }

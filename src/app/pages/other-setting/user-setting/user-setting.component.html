@@ -76,5 +76,20 @@
      <mat-icon (click)="onAddUserRole()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
  </div>
 
+ <!-- สถานะ -->
+  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+   <label class="text-lg font-bold ">สถานะ</label>
+   <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+     <div *ngFor="let userStatus of userStatusList"  class="flex flex-row place-content-between bg-secondary my-0.5 px-2 py-2 rounded snap-start">
+      <label for=""class="text-base text-white break-words">{{userStatus.user_status_name}}</label>
+       <div class="flex flex-row">
+         <i (click)="updateUserStatus(userStatus)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+         <i (click)="removeUserStatus(userStatus.user_status_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+       </div>
+     </div>
+   </div >
+     <mat-icon (click)="onAddUserStatus()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+ </div>
+
 </div>
 

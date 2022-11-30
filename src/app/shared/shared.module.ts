@@ -8,6 +8,7 @@ import { MeetingRoomModalComponent } from './meeting-room-modal/meeting-room-mod
 import { ReactiveFormsModule } from '@angular/forms';
 import { OtherSettingModalComponent } from './other-setting-modal/other-setting-modal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserModalComponent } from './user-modal/user-modal.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     SideBarComponent,
     NavBarComponent,
     MeetingRoomModalComponent,
-    OtherSettingModalComponent
+    OtherSettingModalComponent,
+    UserModalComponent
   ],
   imports: [
     CommonModule,

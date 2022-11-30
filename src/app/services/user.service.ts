@@ -10,6 +10,30 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  //create user
+  createUser(data: any): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}/admin/createUser`, data)
+  }
+
+  //get users
+  getUsers(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getUsers`)
+  }
+
+  //get user by id
+  getUserById(user_id: number): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getUserById/${user_id}`)
+  }
+
+  //update user
+  updateUser(user_id: number, formData: any): Observable<any> {
+    return this.http.put<any>(`${environment.api_url}/admin/updateUser/${user_id}`, formData)
+  }
+
+  //remove user
+  removeUser(user_id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.api_url}/admin/removeUser/${user_id}`)
+  }
 
   //user role api
   createUserRole(name: string): Observable<any>{
@@ -79,6 +103,20 @@ export class UserService {
   }
   removeUserType(id: number): Observable<any> {
     return this.http.delete(`${environment.api_url}/admin/removeUserType/${id}`)
+  }
+
+  //user status api
+  createUserStatus(name: string): Observable<any>{
+    return this.http.post(`${environment.api_url}/admin/createUserStatus`, { name: name })
+  }
+  getUserStatus(): Observable<any>{
+    return this.http.get(`${environment.api_url}/admin/getUserStatus`)
+  }
+  updateUserStatus(id: number, name: string): Observable<any> {
+    return this.http.put(`${environment.api_url}/admin/updateUserStatus/${id}`, { name: name })
+  }
+  removeUserStatus(id: number): Observable<any> {
+    return this.http.delete(`${environment.api_url}/admin/removeUserStatus/${id}`)
   }
 
 }

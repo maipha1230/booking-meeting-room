@@ -1,0 +1,247 @@
+<div class="flex flex-col items-center">
+  <label class="text-xl font-bold my-2" for="">ห้องประชุม</label>
+
+  <div class="flex flex-col items-center">
+    <label class="text-base form-label inline-block my-1 text-gray-700"
+      >รูปประจำตัว</label
+    >
+    <div class="flex bg-white h-40 w-40 rounded-lg px-2 py-2 shadow-xl">
+      <label class="w-full hover:cursor-pointer">
+        <img
+          *ngIf="!image_profile && !image_upload_status"
+          alt="gallery"
+          class="block object-cover object-center w-full h-full rounded-lg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgTgK1EYhwitE3CCCdbK1bNwFIu-vo2B5dnA&usqp=CAU"
+        />
+        <img
+          *ngIf="image_profile && image_upload_status"
+          alt="gallery"
+          class="block object-cover object-center w-full h-full rounded-lg"
+          [src]="image_profile"
+        />
+        <img
+          *ngIf="image_profile && !image_upload_status"
+          alt="gallery"
+          class="block object-cover object-center w-full h-full rounded-lg"
+          [src]="image_profile"
+        />
+      </label>
+    </div>
+    <label class="w-full flex flex-col items-center" for="uploadFile">
+      <div
+        class="mx-2 my-2 flex flex-col items-center justify-center h-9 w-48 bg-blue-500 text-white rounded hover:bg-blue-600 hover:cursor-pointer transition duration-150 ease-in-out"
+      >
+        อัพโหลดหรือแก้ไขรูปประจำตัว
+      </div>
+      <input
+        type="file"
+        class="invisible"
+        id="uploadFile"
+        accept="image/png, image/jpg, image/jpeg"
+        (change)="fileChangeEvent($event)"
+      />
+    </label>
+  </div>
+
+  <form [formGroup]="formUser">
+    <div class="flex flex-row">
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">ชื่อ</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base pl-2"
+            placeholder="ชื่อ"
+            formControlName="fname"
+            required
+            autocomplete="off"
+          />
+          <mat-error class="text-xs">กรุณากรอกชื่อ</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">นามสกุล</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base pl-2"
+            placeholder="นามสกุล"
+            formControlName="lname"
+            required
+            autocomplete="off"
+          />
+          <mat-error class="text-xs">กรุณากรอกนามสกุล</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="mb-1 mx-2">
+        <label class="text-base text-gray-700">รหัสผ่าน</label>
+        <div class="w-96 flex flex-row">
+          <mat-form-field appearance="outline" class="w-64">
+            <input
+              matInput
+              type="password"
+              class="w-full text-base pl-2"
+              placeholder="รหัสผ่าน"
+              formControlName="password"
+              required
+              readonly="true"
+              autocomplete="off"
+            />
+            <mat-error class="text-xs">กรุณากรอกรหัสผ่าน</mat-error>
+          </mat-form-field>
+          <button
+          type="button"
+          class="mx-2 mt-2 items-center h-12 w-28 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition duration-150 ease-in-out"
+        >
+          รีเซ็ทรหัสผ่าน
+        </button>
+        </div>
+      </div>
+
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">เบอร์โทร</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base pl-2"
+            placeholder="เบอร์โทร"
+            formControlName="phone"
+            autocomplete="off"
+          />
+          <!-- <mat-error class="text-xs">กรุณากรอกเบอร์โทร</mat-error> -->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">อีเมลล์</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base pl-2"
+            placeholder="อีเมลล์"
+            formControlName="email"
+            autocomplete="off"
+          />
+          <!-- <mat-error class="text-xs">กรุณากรอกอีเมลล์</mat-error> -->
+        </mat-form-field>
+      </div>
+
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">สังกัด</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-select
+            class="w-full text-base"
+            placeholder="สังกัด"
+            formControlName="affiliation"
+          >
+            <mat-option
+              *ngFor="let affiliation of userAffiliationList"
+              [value]="affiliation.user_affiliation_id"
+              >{{ affiliation.user_affiliation_name }}</mat-option
+            >
+          </mat-select>
+          <mat-error class="text-xs">กรุณาระบุสังกัด</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">ตำแหน่ง</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-select
+            class="w-full text-base"
+            placeholder="ตำแหน่ง"
+            formControlName="position"
+          >
+            <mat-option
+              *ngFor="let position of userPositionList"
+              [value]="position.user_position_id"
+              >{{ position.user_position_name }}</mat-option
+            >
+          </mat-select>
+          <mat-error class="text-xs">กรุณาระบุตำแหน่ง</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">ระดับ</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-select
+            class="w-full text-base"
+            placeholder="ระดับ"
+            formControlName="rank"
+          >
+            <mat-option
+              *ngFor="let rank of userRankList"
+              [value]="rank.user_rank_id"
+              >{{ rank.user_rank_name }}</mat-option
+            >
+          </mat-select>
+          <mat-error class="text-xs">กรุณาระบุระดับ</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">ประเภทบรรจุ</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-select
+            class="w-full text-base"
+            placeholder="ประเภทบรรจุ"
+            formControlName="type"
+          >
+            <mat-option
+              *ngFor="let type of userTypeList"
+              [value]="type.user_type_id"
+              >{{ type.user_type_name }}</mat-option
+            >
+          </mat-select>
+          <mat-error class="text-xs">กรุณาระบุประเภทบรรจุ</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">สถานะผู้ใช้งาน</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-select class="w-full text-base" placeholder="สถานะผู้ใช้งาน" formControlName="status">
+            <mat-option
+              *ngFor="let status of userStatusList"
+              [value]="status.user_status_id"
+              >{{ status.user_status_name }}</mat-option
+            >
+          </mat-select>
+          <mat-error class="text-xs">กรุณาระบุสถานะผู้ใช้งาน</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- button -->
+    <div class="my-2 flex flex-row justify-center">
+      <button
+        type="submit"
+        class="mx-2 items-center h-9 w-28 bg-green-500 text-white rounded hover:bg-green-600 transition duration-150 ease-in-out"
+        (click)="onSaveUser()"
+      >
+        บันทึก
+      </button>
+      <button
+        mat-dialog-close
+        type="button"
+        class="mx-2 items-center h-9 w-28 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out"
+      >
+        ยกเลิก
+      </button>
+    </div>
+  </form>
+</div>
