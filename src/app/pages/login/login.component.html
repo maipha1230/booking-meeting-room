@@ -1,1 +1,104 @@
-<p>login works!</p>
+<div
+  class="min-h-screen h-auto bg-slate-300 w-full flex flex-col justify-center items-center"
+>
+  <div
+    class="w-2/5 min-w-fit h-auto bg-white rounded-lg shadow-lg flex flex-col content-start items-center p-6"
+  >
+    <img src="../../../assets/images//logo.png" alt="logo" class="w-40 h-40" />
+    <label class="my-2 text-xl font-bold"
+      >ระบบจองห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ 7</label
+    >
+    <mat-tab-group class="items-center">
+      <mat-tab label="ผู้ใช้งาน" class="text-base font-bold">
+        <form [formGroup]="formUser">
+          <div class="flex flex-col items-center py-2">
+            <div class="mb-1 w-96 mx-2">
+              <label class="text-base text-gray-700">ชื่อ-นามสกุล</label>
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-select class="w-full text-base pl-2" placeholder="ชื่อ-นามสกุล" formControlName="username">
+                  <mat-option *ngFor="let user of user_list" [value]="user.user_id">{{user.f_name}} {{user.l_name}}</mat-option>
+                </mat-select>
+                <mat-error class="text-xs">กรุณาระบุชื่อ-นามสกุล</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-1 w-96 mx-2">
+              <label class="text-base text-gray-700">รหัสผ่าน</label>
+              <mat-form-field appearance="outline" class="w-full">
+                <input
+                  matInput
+                  type="password"
+                  class="w-full text-base pl-2"
+                  placeholder="รหัสผ่าน"
+                  formControlName="password"
+                  required
+                  autocomplete="off"
+                />
+                <mat-error class="text-xs">กรุณากรอกรหัสผ่าน</mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <button
+              (click)="onLoginUser()"
+              type="submit"
+              class="mx-2 items-center h-12 w-28 bg-green-500 text-white rounded hover:bg-green-600 transition duration-150 ease-in-out"
+            >
+              เข้าสู่ระบบ
+            </button>
+              <button
+              type="button"
+              class="mx-2 items-center h-12 w-28 bg-gray-400 text-white rounded hover:bg-gray-500 transition duration-150 ease-in-out"
+            >
+              กลับสู่หน้าหลัก
+            </button>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="ผู้ดูแลระบบ" class="text-base font-bold">
+        <form action="" [formGroup]="formAdmin">
+          <div class="flex flex-col items-center py-2">
+            <div class="mb-1 w-96 mx-2">
+              <label class="text-base text-gray-700">ชื่อ-นามสกุล</label>
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-select class="w-full text-base pl-2" placeholder="ชื่อ-นามสกุล" formControlName="username">
+                  <mat-option *ngFor="let admin of admin_list" [value]="admin.user_id">{{admin.f_name}} {{admin.l_name}}</mat-option>
+                </mat-select>
+                <mat-error class="text-xs">กรุณาระบุชื่อ-นามสกุล</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="mb-1 w-96 mx-2">
+              <label class="text-base text-gray-700">รหัสผ่าน</label>
+              <mat-form-field appearance="outline" class="w-full">
+                <input
+                  matInput
+                  type="password"
+                  class="w-full text-base pl-2"
+                  placeholder="รหัสผ่าน"
+                  formControlName="password"
+                  required
+                  autocomplete="off"
+                />
+                <mat-error class="text-xs">กรุณากรอกรหัสผ่าน</mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <button
+              (click)="onLoginAdmin()"
+              type="submit"
+              class="mx-2 items-center h-12 w-28 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out"
+            >
+              เข้าสู่ระบบ
+            </button>
+              <button
+              type="button"
+              class="mx-2 items-center h-12 w-28 bg-gray-400 text-white rounded hover:bg-gray-500 transition duration-150 ease-in-out"
+            >
+              กลับสู่หน้าหลัก
+            </button>
+            </div>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

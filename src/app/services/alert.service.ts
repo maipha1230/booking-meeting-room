@@ -71,4 +71,13 @@ export class AlertService {
       })
     });
   }
+
+  bannedUserAlert(msg: string){
+    Swal.fire({
+      icon: 'error',
+      title: msg,
+      showConfirmButton: false,
+      timer: 3000
+    })
+  }
 }

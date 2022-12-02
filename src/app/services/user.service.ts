@@ -10,6 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  /////////////////////////////////// admin ////////////////////
   //create user
   createUser(data: any): Observable<any>{
     return this.http.post<any>(`${environment.api_url}/admin/createUser`, data)
@@ -122,6 +123,27 @@ export class UserService {
   }
   removeUserStatus(id: number): Observable<any> {
     return this.http.delete(`${environment.api_url}/admin/removeUserStatus/${id}`)
+  }
+  // get admin login form
+  getAdminLoginForm(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getAdminLoginForm`)
+  }
+
+  //admin login
+  adminLogin(user_id: number, password: string): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}/admin/adminLogin`, { user_id: user_id, password: password })
+  }
+
+  ////////////////////////////// users //////////////////////
+
+  //get users login form
+  getUserLoginForm(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/users/getUserLoginForm`)
+  }
+
+  //user login
+  userLogin(user_id: number, password: string): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}/users/userLogin`, { user_id: user_id, password: password })
   }
 
 }

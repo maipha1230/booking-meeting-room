@@ -15,6 +15,7 @@ module.exports = {
         secondary: "#3A8891",
         third: "#F2DEBA",
         fourth: "#FFEFD6",
+        prettyplease: "#ffcccc"
       },
       fontFamily: {
         sans: ["Sarabun", "sans-serif"],

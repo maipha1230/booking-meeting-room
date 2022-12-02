@@ -32,7 +32,8 @@ import { LoginComponent } from './pages/login/login.component';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
-    OtherSettingModule
+    OtherSettingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
