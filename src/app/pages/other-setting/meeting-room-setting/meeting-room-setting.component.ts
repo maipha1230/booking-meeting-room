@@ -1,3 +1,4 @@
+import { AlertService } from './../../../services/alert.service';
 import { OtherSettingModalComponent } from './../../../shared/other-setting-modal/other-setting-modal.component';
 import { MeetingRoomService } from './../../../services/meeting-room.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +13,7 @@ export class MeetingRoomSettingComponent implements OnInit {
 
   public meetingRoomSizeList: any = []
   public meetingRoomStatusList: any = []
-  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService) { }
+  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.getMeetingRoomSize();
@@ -48,7 +49,7 @@ export class MeetingRoomSettingComponent implements OnInit {
           this.meetingRoomService.createMeetingRoomSize(name).subscribe((response: any) => {
             if (response) {
               if (response.status == 1) {
-                console.log(res.msg);
+                this.alertService.successAlert(response.msg)
                 this.getMeetingRoomSize()
               }
             }
@@ -79,7 +80,7 @@ export class MeetingRoomSettingComponent implements OnInit {
           this.meetingRoomService.updateMeetingRoomSize(id, name).subscribe((response: any) => {
             if (response) {
               if (response.status == 1) {
-                console.log(response.msg);
+                this.alertService.successAlert(response.msg)
                 this.getMeetingRoomSize();
               }
             }
@@ -91,12 +92,16 @@ export class MeetingRoomSettingComponent implements OnInit {
   }
 
   removeMeetingRoomSize(id: number) {
-    this.meetingRoomService.removeMeetingRoomSize(id).subscribe((res: any) => {
-      if (res) {
-        if (res.status == 1) {
-          console.log(res.msg);
-          this.getMeetingRoomSize();
-        }
+    this.alertService.ensureDeleteAlert("ต้องการลบใช่หรือไม่ หากคุณลบห้องประชุมที่ใช้ขนาดนี้จะถูกลบไปด้วย").subscribe((result: any) => {
+      if (result) {
+        this.meetingRoomService.removeMeetingRoomSize(id).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.getMeetingRoomSize();
+            }
+          }
+        })
       }
     })
   }
@@ -128,7 +133,7 @@ export class MeetingRoomSettingComponent implements OnInit {
           this.meetingRoomService.createMeetingRoomStatus(name).subscribe((response: any) => {
             if (response) {
               if (response.status == 1) {
-                console.log(res.msg);
+                this.alertService.successAlert(response.msg)
                 this.getMeetingRoomStatus()
               }
             }
@@ -159,7 +164,7 @@ export class MeetingRoomSettingComponent implements OnInit {
           this.meetingRoomService.updateMeetingRoomStatus(id, name).subscribe((response: any) => {
             if (response) {
               if (response.status == 1) {
-                console.log(response.msg);
+                this.alertService.successAlert(response.msg)
                 this.getMeetingRoomStatus();
               }
             }
@@ -171,12 +176,16 @@ export class MeetingRoomSettingComponent implements OnInit {
   }
 
   removeMeetingRoomStatus(id: number) {
-    this.meetingRoomService.removeMeetingRoomStatus(id).subscribe((res: any) => {
-      if (res) {
-        if (res.status == 1) {
-          console.log(res.msg);
-          this.getMeetingRoomStatus();
-        }
+    this.alertService.ensureDeleteAlert("ต้องการลบใช่หรือไม่ หากคุณลบห้องประชุมที่ใช้สถานะนี้จะถูกลบไปด้วย").subscribe((result: any) => {
+      if (result) {
+        this.meetingRoomService.removeMeetingRoomStatus(id).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.getMeetingRoomStatus();
+            }
+          }
+        })
       }
     })
   }

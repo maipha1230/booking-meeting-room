@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OtherSettingModalComponent } from './other-setting-modal/other-setting-modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserModalComponent } from './user-modal/user-modal.component';
+import { AdminModalComponent } from './admin-modal/admin-modal.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { UserModalComponent } from './user-modal/user-modal.component';
     NavBarComponent,
     MeetingRoomModalComponent,
     OtherSettingModalComponent,
-    UserModalComponent
+    UserModalComponent,
+    AdminModalComponent
   ],
   imports: [
     CommonModule,

@@ -41,6 +41,36 @@ export class UserService {
     return this.http.put<any>(`${environment.api_url}/admin/resetUserPassword/${user_id}`, { password: password })
   }
 
+  //create admin
+  createAdmin(data: any): Observable<any>{
+    return this.http.post<any>(`${environment.api_url}/admin/createAdmin`, data)
+  }
+
+  //get admins
+  getAdmins(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getAdmins`)
+  }
+
+  //get admin by id
+  getAdminById(user_id: number): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getAdminById/${user_id}`)
+  }
+
+  //update admin
+  updateAdmin(user_id: number, formData: FormData): Observable<any> {
+    return this.http.put<any>(`${environment.api_url}/admin/updateAdmin/${user_id}`, formData)
+  }
+
+  //remove admin
+  removeAdmin(user_id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.api_url}/admin/removeAdmin/${user_id}`)
+  }
+
+  //reset admin password
+  resetAdminPassword(user_id: number, password: string): Observable<any> {
+    return this.http.put<any>(`${environment.api_url}/admin/resetAdminPassword/${user_id}`, { password: password })
+  }
+
   //user role api
   createUserRole(name: string): Observable<any>{
     return this.http.post(`${environment.api_url}/admin/createUserRole`, { name: name })
