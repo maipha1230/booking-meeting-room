@@ -1,3 +1,5 @@
+import { AuthService } from './services/auth.service';
+import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,12 +10,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'booking-meeting-room';
 
-  public page = ""
+  constructor(private authService: AuthService){
 
+  }
+
+  isAdminLoggedIn$: Observable<boolean>;
   ngOnInit(): void {
-    this.page = window.location.pathname
-    console.log(this.page);
-
 
   }
 

@@ -228,9 +228,9 @@ export class AdminModalComponent implements OnInit {
 
   onResetPassword(){
     if (this.data) {
-      this.alertService.ensureResetPasswordAlert("ต้องการรีเซ็ทรหัสผ่านผู้ใช้งานนี้ใช่หรือไม่").subscribe((result) => {
+      this.alertService.ensureResetPasswordAlert("ต้องการเปลี่ยนรหัสผ่านผู้ใช้งานนี้ใช่หรือไม่").subscribe((result) => {
         if (result) {
-          const password = this.default_password
+          const password = this.formAdmin.controls['password'].value
           this.userService.resetAdminPassword(this.data.user_id, password).subscribe((res: any) => {
             if (res) {
               if (res.status == 1) {

@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
 import { AlertService } from './../../services/alert.service';
 import { environment } from './../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,10 +21,20 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+
+    if (this.authService.isAdminLogin()) {
+      this.router.navigate(['/admin'])
+    }
+
+    if (this.authService.isUserLogin()){
+      this.router.navigate(['/'])
+    }
     this.getUsers();
     this.getAdmin();
     this.createFormUser();
@@ -97,8 +109,9 @@ export class LoginComponent implements OnInit {
           if (res.status == 1) {
             if (res.token) {
               localStorage.setItem(environment.login_token, res.token);
+              this.router.navigate(['/admin'])
+              // this.alertService.successAlert(res.msg);
             }
-            this.alertService.successAlert(res.msg);
           } else if (res.status == 2) {
             this.alertService.bannedUserAlert(res.msg);
           } else if (res.status == 3) {

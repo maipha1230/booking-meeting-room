@@ -1,4 +1,19 @@
 <div class="w-full h-10 bg-secondary flex flex-row items-center px-2 place-content-between ">
   <p class="font-medium text-fourth mt-2">ระบบจองห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ 7 </p>
-  <mat-icon class="text-white text-2xl hover:cursor-pointer mb-2">arrow_drop_down</mat-icon>
+  <div class="flex flex-row">
+    <div class="flex flex-row justify-center">
+      <img [src]="user?.picture_url" alt="name" class="w-8 h-8 rounded-full mt-0.5 mx-2">
+        <p class="m-0 justify-center text-white mt-2">{{user?.f_name}}  {{user?.l_name}}</p>
+    </div>
+    <a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger">
+      <mat-icon class="mat-icon-sm text-white">keyboard_arrow_down</mat-icon>
+  </a>
+  </div>
+<mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-menu-panel user-menu px-3">
+    <span (mouseleave)="userMenuTrigger.closeMenu()">
+    <a class="my-2 flex flex-row justify-center items-center hover:cursor-pointer">
+      <p (click)="onLogout()"  class="hover: cursor-pointer hover:text-slate-400 duration-150">ออกจากระบบ</p>
+    </a>
+    </span>
+</mat-menu>
 </div>

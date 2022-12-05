@@ -1,3 +1,6 @@
+import { ThemeModule } from './theme/theme.module';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OtherSettingModule } from './pages/other-setting/other-setting.module';
 import { LoginComponent } from './pages/login/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JWT_OPTIONS } from '@auth0/angular-jwt';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -26,6 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
     AdminstratorComponent,
     BookingRoomComponent,
     LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,9 +40,14 @@ import { LoginComponent } from './pages/login/login.component';
     SharedModule,
     BrowserAnimationsModule,
     OtherSettingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ThemeModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

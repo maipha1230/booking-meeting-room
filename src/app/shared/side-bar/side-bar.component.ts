@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { AuthService } from './../../services/auth.service';
 import { Router} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,46 +14,46 @@ export class SideBarComponent implements OnInit {
     {
       id: 1,
       name: "แดชบอร์ด",
-      link: ""
+      link: "/admin"
     },
     {
       id: 2,
       name: "คำร้องขอการใช้ห้องประชุม",
-      link: "/booking-room"
+      link: "/admin/booking-room"
     },
     {
       id: 3,
       name: "ห้องประชุม",
-      link: "/meeting-room"
+      link: "/admin/meeting-room"
     },
     {
       id: 4,
       name: "อุปกรณ์การใช้งาน",
-      link: "/device"
+      link: "/admin/device"
     },
     {
       id: 5,
       name: "ผู้ใช้งาน",
-      link: "/user"
+      link: "/admin/user"
     },
     {
       id: 6,
       name: "ผู้ดูแลระบบ",
-      link: "/adminstrator"
+      link: "/admin/adminstrator"
     },
     {
       id: 7,
       name: "ประวัติการใช้งานห้องประชุม",
-      link: "/history"
+      link: "/admin/history"
     },
     {
       id: 8,
       name: "การตั้งค่าอื่นๆ",
-      link: "/other-setting"
+      link: "/admin/other-setting"
 
     }
   ]
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }

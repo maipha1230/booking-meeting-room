@@ -1,3 +1,6 @@
+import { AdminGuard } from './services/admin.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AdminBaseComponent } from './theme/admin-base/admin-base.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OtherSettingComponent } from './pages/other-setting/other-setting.component';
 import { BookingRoomComponent } from './pages/booking-room/booking-room.component';
@@ -10,33 +13,46 @@ import { RouterModule, Routes } from '@angular/router';
 import { DeviceComponent } from './pages/device/device.component';
 
 const routes: Routes = [
+
+
   {
     path: "",
     component: HomeComponent
   },
   {
-    path: "booking-room",
-    component: BookingRoomComponent
-  },
-  {
-    path: 'meeting-room',
-    component: MeetingRoomComponent
-  },
-  {
-    path: 'device',
-    component: DeviceComponent
-  },
-  {
-    path: 'user',
-    component: UserComponent
-  },
-  {
-    path: 'adminstrator',
-    component: AdminstratorComponent
-  },
-  {
-    path: 'other-setting',
-    component: OtherSettingComponent
+    path: "admin",
+    component: AdminBaseComponent,
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: "",
+        component: DashboardComponent
+      },
+      {
+        path: "booking-room",
+        component: BookingRoomComponent
+      },
+      {
+        path: 'meeting-room',
+        component: MeetingRoomComponent
+      },
+      {
+        path: 'device',
+        component: DeviceComponent
+      },
+      {
+        path: 'user',
+        component: UserComponent
+      },
+      {
+        path: 'adminstrator',
+        component: AdminstratorComponent
+      },
+      {
+        path: 'other-setting',
+        component: OtherSettingComponent
+      },
+    ]
   },
   {
     path: 'login',
@@ -47,6 +63,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    AdminGuard
+  ]
 })
 export class AppRoutingModule { }
