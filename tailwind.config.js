@@ -15,7 +15,10 @@ module.exports = {
         secondary: "#3A8891",
         third: "#F2DEBA",
         fourth: "#FFEFD6",
-        prettyplease: "#ffcccc"
+        youngsalmon: "#ffb8b8",
+        prettyplease: "#ffcccc",
+        lightred: "#ff4d4d",
+        brightlilac: "#cd84f1"
       },
       fontFamily: {
         sans: ["Sarabun", "sans-serif"],

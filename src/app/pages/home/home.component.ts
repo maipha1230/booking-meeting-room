@@ -18,34 +18,24 @@ export class HomeComponent implements OnInit {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+        right: 'dayGridMonth,listWeek',
       },
       initialView: 'dayGridMonth',
       events: [
         {
           title: 'ห้องประชุม 1',
-          start: '2022-12-06T02:00:00',
-          end: '2022-12-06T23:00:00',
+          start: '2022-12-06T09:00:00',
+          end: '2022-12-06T10:00:00',
         },
         {
           title: 'ห้องประชุม 1',
-          start: '2022-12-06T02:00:00',
-          end: '2022-12-06T23:00:00',
+          start: '2022-12-06T09:00:00',
+          end: '2022-12-06T10:00:00',
         },
         {
           title: 'ห้องประชุม 1',
-          start: '2022-12-06T02:00:00',
-          end: '2022-12-06T23:00:00',
-        },
-        {
-          title: 'ห้องประชุม 1',
-          start: '2022-12-06T02:00:00',
-          end: '2022-12-06T23:00:00',
-        },
-        {
-          title: 'ห้องประชุม 1',
-          start: '2022-12-06T02:00:00',
-          end: '2022-12-06T23:00:00',
+          start: '2022-12-07T09:00:00',
+          end: '2022-12-07T10:00:00',
         },
       ],
       locale: 'th',
@@ -56,6 +46,25 @@ export class HomeComponent implements OnInit {
         minute: '2-digit',
         meridiem: false,
       },
+      displayEventEnd: true,
+      buttonText: {
+        prev: '< ก่อนหน้า',
+        next: 'ข้างหน้า >',
+        today: 'วันนี้',
+        month: 'เดือน',
+        week: 'รายการ',
+
+      },
+      aspectRatio: 1.75,
+      contentHeight: 540,
+      dateClick: this.onDateClick.bind(this)
+
     };
+  }
+
+  onDateClick(date: any){
+    console.log(typeof(date));
+    console.log(date.dateStr);
+
   }
 }

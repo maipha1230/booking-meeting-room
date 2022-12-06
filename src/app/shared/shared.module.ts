@@ -10,6 +10,7 @@ import { OtherSettingModalComponent } from './other-setting-modal/other-setting-
 import { HttpClientModule } from '@angular/common/http';
 import { UserModalComponent } from './user-modal/user-modal.component';
 import { AdminModalComponent } from './admin-modal/admin-modal.component';
+import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AdminModalComponent } from './admin-modal/admin-modal.component';
     MeetingRoomModalComponent,
     OtherSettingModalComponent,
     UserModalComponent,
-    AdminModalComponent
+    AdminModalComponent,
+    UserToolbarComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { AdminModalComponent } from './admin-modal/admin-modal.component';
     NavBarComponent,
     SideBarComponent,
     FontAwesomeModule,
-    MaterialModule
+    MaterialModule,
+    UserToolbarComponent
 
   ]
 })

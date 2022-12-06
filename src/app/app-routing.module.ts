@@ -1,3 +1,4 @@
+import { UserBaseComponent } from './theme/user-base/user-base.component';
 import { AdminGuard } from './services/admin.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AdminBaseComponent } from './theme/admin-base/admin-base.component';
@@ -17,7 +18,13 @@ const routes: Routes = [
 
   {
     path: "",
-    component: HomeComponent
+    component: UserBaseComponent,
+    children: [
+      {
+        path: "",
+        component: HomeComponent
+      }
+    ]
   },
   {
     path: "admin",

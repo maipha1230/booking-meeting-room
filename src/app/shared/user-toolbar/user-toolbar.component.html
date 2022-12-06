@@ -1,0 +1,21 @@
+<div class="w-full h-14 bg-prettyplease flex flex-row items-center place-content-between">
+  <div class="flex flex-row items-center mx-3">
+    <img src="../../../assets//images/logo.png" class="w-14 h-14">
+    <p class="text-black text-base font-bold mt-2 mx-2">ระบบจองห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ 7</p>
+  </div>
+  <div class="flex flex-row">
+    <a><p class="text-baes text-black font-bold mt-2 mx-2 hover:cursor-pointer hover:text-lightred duration-150">หน้าแรก</p></a>
+    <a><p class="text-baes text-black font-bold mt-2 mx-2 hover:cursor-pointer hover:text-lightred duration-150">จองห้องประชุม</p></a>
+    <a><p class="text-baes text-black font-bold mt-2 mx-2 hover:cursor-pointer hover:text-lightred duration-150">จัดการโปรไฟล์</p></a>
+    <a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger">
+      <mat-icon class="mat-icon-sm text-black hover:text-lightred duration-150">keyboard_arrow_down</mat-icon>
+    </a>
+  </div>
+  <mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-menu-panel user-menu px-3">
+    <span (mouseleave)="userMenuTrigger.closeMenu()">
+    <a class="my-2 flex flex-row justify-center items-center hover:cursor-pointer">
+      <p class="hover: cursor-pointer hover:text-slate-400 duration-150">ออกจากระบบ</p>
+    </a>
+    </span>
+</mat-menu>
+</div>
