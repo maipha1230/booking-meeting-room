@@ -20,6 +20,18 @@ import { LoginComponent } from './pages/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JWT_OPTIONS } from '@auth0/angular-jwt';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin,
+  listPlugin
+])
 
 
 @NgModule({
@@ -41,7 +53,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     BrowserAnimationsModule,
     OtherSettingModule,
     ReactiveFormsModule,
-    ThemeModule
+    ThemeModule,
+    FullCalendarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
