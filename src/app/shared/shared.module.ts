@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './side-bar/side-bar.component';
@@ -11,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserModalComponent } from './user-modal/user-modal.component';
 import { AdminModalComponent } from './admin-modal/admin-modal.component';
 import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
+import { DeviceModalComponent } from './device-modal/device-modal.component';
 
 
 @NgModule({
@@ -21,13 +23,15 @@ import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
     OtherSettingModalComponent,
     UserModalComponent,
     AdminModalComponent,
-    UserToolbarComponent
+    UserToolbarComponent,
+    DeviceModalComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule
   ],
   exports: [
     NavBarComponent,

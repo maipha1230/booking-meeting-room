@@ -1,0 +1,96 @@
+<div class="flex flex-col items-center">
+  <label class="text-xl font-bold my-2" for="">อุปกรณ์ห้องประชุม</label>
+
+  <div class="flex flex-col items-center">
+    <div class="flex bg-white h-40 w-40 rounded-lg px-2 py-2 shadow-xl">
+      <label class="w-full hover:cursor-pointer">
+        <img
+          *ngIf="!image_device && !image_upload_status"
+          alt="gallery"
+          class="block object-cover object-center w-full h-full rounded-lg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgTgK1EYhwitE3CCCdbK1bNwFIu-vo2B5dnA&usqp=CAU"
+        />
+        <img
+          *ngIf="image_device && image_upload_status"
+          alt="gallery"
+          class="block object-cover object-center w-full h-full rounded-lg"
+          [src]="image_device"
+        />
+        <img
+          *ngIf="image_device && !image_upload_status"
+          alt="gallery"
+          class="block object-cover object-center w-full h-full rounded-lg"
+          [src]="image_device"
+        />
+      </label>
+    </div>
+    <label class="w-full flex flex-col items-center" for="uploadFile">
+      <div
+        class="mx-2 my-2 flex flex-col items-center justify-center h-9 w-48 bg-blue-500 text-white rounded hover:bg-blue-600 hover:cursor-pointer transition duration-150 ease-in-out"
+      >
+        อัพโหลดหรือแก้ไขรูปอุปกรณ์
+      </div>
+      <input
+        type="file"
+        class="invisible"
+        id="uploadFile"
+        accept="image/png, image/jpg, image/jpeg"
+        (change)="fileChangeEvent($event)"
+      />
+    </label>
+  </div>
+
+  <form [formGroup]="formDevice">
+    <div class="flex flex-col">
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">ชื่ออุปกรณ์</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base pl-2"
+            placeholder="ชื่ออุปกรณ์"
+            formControlName="name"
+            required
+            autocomplete="off"
+          />
+          <mat-error class="text-xs">กรุณากรอกชื่ออุปกรณ์</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-1 w-96 mx-2">
+        <label class="text-base text-gray-700">จำนวนอุปกรณ์</label>
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base pl-2"
+            placeholder="จำนวนอุปกรณ์"
+            formControlName="quantity"
+            required
+            autocomplete="off"
+          />
+          <mat-error class="text-xs">กรุณากรอกจำนวนอุปกรณ์</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- button -->
+    <div class="my-2 flex flex-row justify-center">
+      <button
+        type="submit"
+        class="mx-2 items-center h-9 w-28 bg-green-500 text-white rounded hover:bg-green-600 transition duration-150 ease-in-out"
+        (click)="onSaveDevice()"
+      >
+        บันทึก
+      </button>
+      <button
+        mat-dialog-close
+        type="button"
+        class="mx-2 items-center h-9 w-28 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out"
+      >
+        ยกเลิก
+      </button>
+    </div>
+  </form>
+</div>
+

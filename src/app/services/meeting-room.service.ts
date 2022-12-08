@@ -68,5 +68,25 @@ export class MeetingRoomService {
     return this.http.delete(`${environment.api_url}/admin/removeMeetingRoomStatus/${id}`)
   }
 
+  createMeetingRoomDevice(data: any): Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/createMeetingRoomDevice`, data)
+  }
+
+  getMeetingRoomDevice(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoomDevice`)
+  }
+
+  getMeetingRoomDeviceById(room_device_id: number): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getMeetingRoomDeviceById/${room_device_id}`)
+  }
+
+  updateMeetingRoomDevice(room_device_id:number,  data: any): Observable<any> {
+    return this.http.put<any>(`${environment.api_url}/admin/updateMeetingRoomDevice/${room_device_id}`, data)
+  }
+
+  removeMeetingRoomDevice(room_device_id: number): Observable<any> {
+    return this.http.delete(`${environment.api_url}/admin/removeMeetingRoomDevice/${room_device_id}`)
+  }
+
 
 }

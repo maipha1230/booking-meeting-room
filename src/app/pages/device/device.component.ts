@@ -1,3 +1,7 @@
+import { DeviceModalComponent } from './../../shared/device-modal/device-modal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertService } from './../../services/alert.service';
+import { MeetingRoomService } from './../../services/meeting-room.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +11,68 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeviceComponent implements OnInit {
 
-  constructor() { }
+  device_list: any = []
+  constructor(private meetingRoomService: MeetingRoomService, private alertService: AlertService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getMeetingRoomDevice();
+  }
+
+  getMeetingRoomDevice(){
+    this.meetingRoomService.getMeetingRoomDevice().subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.device_list = res.data
+        }
+      }
+    })
+  }
+
+  onAddDevice(){
+    let dialogRef = this.dialog.open(DeviceModalComponent, {
+      width: "auto",
+      minWidth: "400px",
+      height: "95%",
+    })
+
+    dialogRef.afterClosed().subscribe((res:any) => {
+      if (res) {
+          this.getMeetingRoomDevice();
+      }
+    })
+  }
+
+  onEditDevice(room_device_id: number) {
+    let dialogRef = this.dialog.open(DeviceModalComponent, {
+      width: "auto",
+      minWidth: "400px",
+      height: "95%",
+      data: {
+        room_device_id: room_device_id
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res:any) => {
+      if (res) {
+          this.getMeetingRoomDevice();
+      }
+    })
+  }
+
+  onRemoveDevice(room_device_id: number) {
+
+    this.alertService.ensureDeleteAlert("ต้องการลบอุปกรณ์ใช่หรือไม่?").subscribe((result) => {
+      if (result) {
+        this.meetingRoomService.removeMeetingRoomDevice(room_device_id).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.getMeetingRoomDevice();
+            }
+          }
+        })
+      }
+    })
   }
 
 }

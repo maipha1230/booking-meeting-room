@@ -25,6 +25,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import { RoomListComponent } from './pages/room-list/room-list.component';
+import { BookingComponent } from './pages/booking/booking.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -45,6 +47,8 @@ FullCalendarModule.registerPlugins([
     BookingRoomComponent,
     LoginComponent,
     DashboardComponent,
+    RoomListComponent,
+    BookingComponent,
   ],
   imports: [
     BrowserModule,

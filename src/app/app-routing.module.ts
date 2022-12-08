@@ -1,3 +1,5 @@
+import { BookingComponent } from './pages/booking/booking.component';
+import { RoomListComponent } from './pages/room-list/room-list.component';
 import { UserBaseComponent } from './theme/user-base/user-base.component';
 import { AdminGuard } from './services/admin.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -23,6 +25,18 @@ const routes: Routes = [
       {
         path: "",
         component: HomeComponent
+      },
+      {
+        path: "home",
+        component: HomeComponent
+      },
+      {
+        path: "meeting-room",
+        component: RoomListComponent
+      },
+      {
+        path: "booking-meeting-room",
+        component: BookingComponent
       }
     ]
   },
