@@ -14,7 +14,7 @@ import { AdminstratorComponent } from './pages/adminstrator/adminstrator.compone
 import { BookingRoomComponent } from './pages/booking-room/booking-room.component';
 import { OtherSettingComponent } from './pages/other-setting/other-setting.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OtherSettingModule } from './pages/other-setting/other-setting.module';
 import { LoginComponent } from './pages/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -58,7 +58,8 @@ FullCalendarModule.registerPlugins([
     OtherSettingModule,
     ReactiveFormsModule,
     ThemeModule,
-    FullCalendarModule
+    FullCalendarModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

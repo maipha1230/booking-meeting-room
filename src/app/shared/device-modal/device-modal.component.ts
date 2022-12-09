@@ -4,7 +4,6 @@ import { AlertService } from './../../services/alert.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'app-device-modal',
@@ -36,14 +35,12 @@ export class DeviceModalComponent implements OnInit {
   createFormDevice(){
     this.formDevice = this.formBuilber.group({
       name: ['', Validators.required],
-      quantity: [null, Validators.required]
     })
   }
 
   pathFormDevice(data: any){
     this.formDevice.patchValue({
-      name: data.name,
-      quantity: data.quantity
+      name: data.name
     })
   }
 
@@ -89,11 +86,8 @@ export class DeviceModalComponent implements OnInit {
       this.alertService.warningAlert("กรุณาอัพโหลดรูปภาพ");
     } else {
       const name = this.formDevice.controls['name'].value
-      const quantity = this.formDevice.controls['quantity'].value
-
       const formData = new FormData();
       formData.append('name', name)
-      formData.append('quantity', String(quantity))
       if (this.image_device && this.image_upload_status) {
         formData.append('gallery', base64ToFile(this.image_device))
       }

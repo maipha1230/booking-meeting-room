@@ -10,6 +10,7 @@ export class MeetingRoomService {
 
   constructor(private http: HttpClient) { }
 
+  ////////////////// admin //////////////////////////////////////////////
 
   createMeetingRoom(formData: FormData): Observable<any> {
     return this.http.post(`${environment.api_url}/admin/createMeetingRoom`, formData)
@@ -86,6 +87,20 @@ export class MeetingRoomService {
 
   removeMeetingRoomDevice(room_device_id: number): Observable<any> {
     return this.http.delete(`${environment.api_url}/admin/removeMeetingRoomDevice/${room_device_id}`)
+  }
+
+  ///////////////////////////// users /////////////////////////
+
+  getRoomList(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/users/getRoomList`)
+  }
+
+  getBookingPurposeList(): Observable<any>{
+    return this.http.get<any>(`${environment.api_url}/users/getBookingPurposeList`)
+  }
+
+  getRoomDeviceList(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/users/getRoomDeviceList`)
   }
 
 

@@ -5,31 +5,22 @@
     class="w-4/5 h-auto bg-white rounded-lg shadow-lg my-5 p-3 flex flex-col items-center"
   >
     <label class="text-black text-xl font-bold my-5">จองห้องประชุม</label>
-    <form class="flex flex-col">
+    <form class="flex flex-col" [formGroup]="formBooking">
       <div class="mb-1 w-96 mx-2">
-        <label class="text-base text-gray-700">ห้องประชุม</label>
+        <label class="text-base text-gray-700 font-bold">ห้องประชุม</label>
         <mat-form-field appearance="outline" class="w-full">
-          <mat-select class="w-full text-base" placeholder="ห้องประชุม">
-            <mat-option>
+          <mat-select class="w-full text-base" placeholder="ห้องประชุม" formControlName="room">
+            <mat-option *ngFor="let room of room_list" [value]="room.room_id">
               <div class="flex flex-row gap-3 items-center">
                 <img
-                  src="https://i.pinimg.com/736x/31/8c/00/318c003ea7859af794926a595e3c1746.jpg"
+                  [src]="room.room_img"
                   class="w-10 h-10 rounded"
                 />
-                <p class="text-base">ห้องประชุม 1</p>
-              </div>
-            </mat-option>
-            <mat-option>
-              <div class="flex flex-row gap-3 items-center">
-                <img
-                  src="https://i.pinimg.com/736x/31/8c/00/318c003ea7859af794926a595e3c1746.jpg"
-                  class="w-10 h-10 rounded"
-                />
-                <p class="text-base">ห้องประชุม 2</p>
+                <p class="text-base">{{room.room_name}}</p>
               </div>
             </mat-option>
           </mat-select>
-          <mat-error class="text-xs">กรุณาระบุสังกัด</mat-error>
+          <mat-error class="text-xs">กรุณาเลือกห้องประชุม</mat-error>
         </mat-form-field>
       </div>
       <div class="mb-1 w-96 w- mx-2">
@@ -42,25 +33,16 @@
             placeholder="เรื่อง"
             required
             autocomplete="off"
+            formControlName="title"
           />
           <mat-error class="text-xs">กรุณากรอกเรื่อง</mat-error>
         </mat-form-field>
       </div>
       <div class="flex flex-col p-2 mb-1">
         <label class="text-base font-bold text-gray-700 mb-2">จุดประสงค์</label>
-        <mat-radio-group class="flex flex-row">
-          <mat-radio-button color="primary" class="mx-2"
-            >ประชุม</mat-radio-button
-          >
-          <mat-radio-button color="primary" class="mx-2"
-            >สัมมนา</mat-radio-button
-          >
-          <mat-radio-button color="primary" class="mx-2"
-            >ฝึกอบรบ</mat-radio-button
-          >
-          <mat-radio-button color="primary" class="mx-2"
-            >อื่นๆ</mat-radio-button
-          >
+        <mat-radio-group class="flex flex-row" formControlName="purpose">
+          <mat-radio-button color="primary" class="mx-2" *ngFor="let purpose of purpose_list" [value]="purpose.booking_purpose_id"
+            >{{purpose.name}}</mat-radio-button>
         </mat-radio-group>
       </div>
       <div class="mb-1 w-96 w- mx-2">
@@ -75,6 +57,7 @@
             placeholder="จำนวนผู้เข้าร่วม"
             required
             autocomplete="off"
+            formControlName="quantity"
           />
           <mat-error class="text-xs">กรุณากรอกจำนวนผู้เข้าร่วม</mat-error>
         </mat-form-field>
@@ -82,18 +65,13 @@
       <div class="flex flex-col w-96">
         <label class="text-base font-bold">อุปกรณ์ที่ใช้</label>
         <div class="flex flex-row flex-wrap gap-2 p-2">
-          <mat-checkbox color="primary">ไมโครโฟน</mat-checkbox>
-          <mat-checkbox color="primary">ไมโครโฟน</mat-checkbox>
-          <mat-checkbox color="primary">ไมโครโฟน</mat-checkbox>
-          <mat-checkbox color="primary">ไมโครโฟน</mat-checkbox>
-          <mat-checkbox color="primary">ไมโครโฟน</mat-checkbox>
-          <mat-checkbox color="primary">ไมโครโฟน</mat-checkbox>
+          <mat-checkbox color="primary" *ngFor="let device of device_list" [(ngModel)]="device.selected" [ngModelOptions]="{ standalone: true }">{{device.name}}</mat-checkbox>
         </div>
       </div>
       <div class="flex flex-col mb-2">
         <mat-form-field appearance="fill">
           <mat-label class="text-base font-bold text-gray-700">เลือกวันที่</mat-label>
-          <input matInput [matDatepicker]="picker" class="w-80 text-base">
+          <input matInput [matDatepicker]="picker" class="w-80 text-base" formControlName="date">
           <mat-hint>วัน/เดือน/ปี</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -103,21 +81,22 @@
         <label class="text-base font-bold text-gray-700 mb-2">เวลาในการใช้งานห้องประชุม</label>
         <div class="flex flex-row place-content-around">
           <label class="text-base">จาก</label>
-          <input type="time" class="w-20 text-base">
+          <input type="time" class="w-20 text-base" formControlName="time_from">
           <label class="text-base">ถึง</label>
-          <input type="time" class="w-20 text-base">
+          <input type="time" class="w-20 text-base" formControlName="time_to">
         </div>
       </div>
       <div class="flex flex-row my-5 place-content-around">
         <button
           type="submit"
-          class="w-32 h-12 text-base text-white rounded bg-green-500 justify-center items-center hover:bg-green-600 hover:cursor-pointer duration-150">
+          class="w-32 h-12 text-base text-white rounded bg-green-500 justify-center items-center hover:bg-green-600 hover:cursor-pointer duration-150"
+          (click)="onSubmitBookingForm()">
           จองห้องประชุม
         </button>
         <button
           type="button"
           class="w-32 h-12 text-base text-white rounded bg-red-500 justify-center items-center hover:bg-red-600 hover:cursor-pointer duration-150">
-          ยกเลิก
+          ล้างทั้งหมด
         </button>
       </div>
     </form>

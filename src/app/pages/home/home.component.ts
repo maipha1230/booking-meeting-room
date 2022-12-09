@@ -18,14 +18,14 @@ export class HomeComponent implements OnInit {
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,listWeek',
+        right: 'dayGridMonth,timeGridWeek',
       },
       initialView: 'dayGridMonth',
       events: [
         {
           title: 'ห้องประชุม 1',
           start: '2022-12-06T09:00:00',
-          end: '2022-12-06T10:00:00',
+          end: '2022-12-06T15:00:00',
         },
         {
           title: 'ห้องประชุม 1',
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
         next: 'ข้างหน้า >',
         today: 'วันนี้',
         month: 'เดือน',
-        week: 'รายการ',
+        week: 'สัปดาห์',
 
       },
       aspectRatio: 1.75,

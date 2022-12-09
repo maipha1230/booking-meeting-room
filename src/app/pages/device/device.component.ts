@@ -32,7 +32,7 @@ export class DeviceComponent implements OnInit {
     let dialogRef = this.dialog.open(DeviceModalComponent, {
       width: "auto",
       minWidth: "400px",
-      height: "95%",
+      height: "auto",
     })
 
     dialogRef.afterClosed().subscribe((res:any) => {
@@ -46,7 +46,7 @@ export class DeviceComponent implements OnInit {
     let dialogRef = this.dialog.open(DeviceModalComponent, {
       width: "auto",
       minWidth: "400px",
-      height: "95%",
+      height: "auto",
       data: {
         room_device_id: room_device_id
       }
@@ -60,7 +60,6 @@ export class DeviceComponent implements OnInit {
   }
 
   onRemoveDevice(room_device_id: number) {
-
     this.alertService.ensureDeleteAlert("ต้องการลบอุปกรณ์ใช่หรือไม่?").subscribe((result) => {
       if (result) {
         this.meetingRoomService.removeMeetingRoomDevice(room_device_id).subscribe((res: any) => {
