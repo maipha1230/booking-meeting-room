@@ -85,6 +85,8 @@ export class LoginComponent implements OnInit {
           if (res.status == 1) {
             if (res.token) {
               localStorage.setItem(environment.login_token, res.token);
+              this.alertService.successAlert(res.msg);
+              this.router.navigate(['/'])
             }
             this.alertService.successAlert(res.msg);
           } else if (res.status == 2) {
@@ -109,8 +111,10 @@ export class LoginComponent implements OnInit {
           if (res.status == 1) {
             if (res.token) {
               localStorage.setItem(environment.login_token, res.token);
+              setTimeout(() => {
+                this.alertService.successAlert(res.msg);
+              }, 2000)
               this.router.navigate(['/admin'])
-              // this.alertService.successAlert(res.msg);
             }
           } else if (res.status == 2) {
             this.alertService.bannedUserAlert(res.msg);

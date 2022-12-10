@@ -34,6 +34,7 @@
             required
             autocomplete="off"
             formControlName="title"
+            maxlength="50"
           />
           <mat-error class="text-xs">กรุณากรอกเรื่อง</mat-error>
         </mat-form-field>
@@ -58,6 +59,7 @@
             required
             autocomplete="off"
             formControlName="quantity"
+            maxlength="4"
           />
           <mat-error class="text-xs">กรุณากรอกจำนวนผู้เข้าร่วม</mat-error>
         </mat-form-field>
@@ -81,9 +83,9 @@
         <label class="text-base font-bold text-gray-700 mb-2">เวลาในการใช้งานห้องประชุม</label>
         <div class="flex flex-row place-content-around">
           <label class="text-base">จาก</label>
-          <input type="time" class="w-20 text-base" formControlName="time_from">
+          <input type="time" class="w-20 text-base" formControlName="time_start">
           <label class="text-base">ถึง</label>
-          <input type="time" class="w-20 text-base" formControlName="time_to">
+          <input type="time" class="w-20 text-base" formControlName="time_end">
         </div>
       </div>
       <div class="flex flex-row my-5 place-content-around">
@@ -95,7 +97,8 @@
         </button>
         <button
           type="button"
-          class="w-32 h-12 text-base text-white rounded bg-red-500 justify-center items-center hover:bg-red-600 hover:cursor-pointer duration-150">
+          class="w-32 h-12 text-base text-white rounded bg-red-500 justify-center items-center hover:bg-red-600 hover:cursor-pointer duration-150"
+          (click)="onClearBookingForm()">
           ล้างทั้งหมด
         </button>
       </div>

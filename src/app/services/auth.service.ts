@@ -37,11 +37,7 @@ export class AuthService {
     if (token) {
       if (!this.jwtHelper.isTokenExpired(token)) {
        let decode = this.jwtHelper.decodeToken(token);
-       if (decode.role_id == 2) {
-          return true;
-       } else {
-        return false;
-       }
+        return true;
       } else {
         localStorage.removeItem(environment.login_token)
         return false;
@@ -55,7 +51,7 @@ export class AuthService {
 
   onLogout(){
     localStorage.removeItem(environment.login_token);
-    this,this.router.navigate(['/login'])
+    this.router.navigate(['/login'])
   }
 
 }

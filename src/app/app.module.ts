@@ -1,3 +1,4 @@
+import { PipesModule } from './shared/pipes/pipes.module';
 import { ThemeModule } from './theme/theme.module';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './services/auth.interceptor';
@@ -27,6 +28,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { RoomListComponent } from './pages/room-list/room-list.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { BookingListComponent } from './pages/booking-list/booking-list.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -49,6 +51,7 @@ FullCalendarModule.registerPlugins([
     DashboardComponent,
     RoomListComponent,
     BookingComponent,
+    BookingListComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,7 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     ThemeModule,
     FullCalendarModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

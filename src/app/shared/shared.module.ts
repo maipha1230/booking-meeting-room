@@ -1,3 +1,5 @@
+import { PipesModule } from './pipes/pipes.module';
+import { ThaiDatePipe } from './pipes/thaiDate.pipe';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -31,14 +33,16 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    PipesModule
   ],
   exports: [
     NavBarComponent,
     SideBarComponent,
     FontAwesomeModule,
     MaterialModule,
-    UserToolbarComponent
+    UserToolbarComponent,
+    PipesModule
 
   ]
 })

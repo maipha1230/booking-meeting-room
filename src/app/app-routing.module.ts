@@ -1,3 +1,5 @@
+import { BookingListComponent } from './pages/booking-list/booking-list.component';
+import { UserGuard } from './services/user.guard';
 import { BookingComponent } from './pages/booking/booking.component';
 import { RoomListComponent } from './pages/room-list/room-list.component';
 import { UserBaseComponent } from './theme/user-base/user-base.component';
@@ -32,11 +34,23 @@ const routes: Routes = [
       },
       {
         path: "meeting-room",
+        canActivate: [UserGuard],
         component: RoomListComponent
       },
       {
         path: "booking-meeting-room",
+        canActivate: [UserGuard],
         component: BookingComponent
+      },
+      {
+        path: "booking-meeting-room/:booking_id",
+        canActivate: [UserGuard],
+        component: BookingComponent
+      },
+      {
+        path: "booking-list",
+        canActivate: [UserGuard],
+        component: BookingListComponent
       }
     ]
   },
@@ -86,7 +100,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [
-    AdminGuard
+    AdminGuard,
+    UserGuard
   ]
 })
 export class AppRoutingModule { }

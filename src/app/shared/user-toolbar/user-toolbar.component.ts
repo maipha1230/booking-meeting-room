@@ -1,3 +1,5 @@
+import { AlertService } from './../../services/alert.service';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserToolbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit(): void {
+  }
+
+  onLogout(){
+    this.authService.onLogout();
+    this.alertService.successAlert("ออกจากระบบสำเร็จ")
   }
 
 }
