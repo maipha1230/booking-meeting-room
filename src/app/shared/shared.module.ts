@@ -16,7 +16,6 @@ import { AdminModalComponent } from './admin-modal/admin-modal.component';
 import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 
-
 @NgModule({
   declarations: [
     SideBarComponent,
@@ -34,7 +33,7 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    PipesModule
+    PipesModule,
   ],
   exports: [
     NavBarComponent,

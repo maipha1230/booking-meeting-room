@@ -289,4 +289,14 @@ export class UserService {
   getUserBookingById(booking_id: number): Observable<any> {
     return this.http.get<any>(`${environment.api_url}/users/getUserBookingById/${booking_id}`)
   }
+
+  //user remove booking
+  userRemoveBooking(booking_id: number): Observable<any> {
+    return this.http.delete(`${environment.api_url}/users/userRemoveBooking/${booking_id}`)
+  }
+
+  //check user own booking
+  checkUserOwnBooking(booking_id: number): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/users/checkUserOwnBooking/${booking_id}`)
+  }
 }

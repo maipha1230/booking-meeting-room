@@ -35,4 +35,19 @@ export class BookingListComponent implements OnInit {
     })
   }
 
+  onRemoveBooking(booking_id: number) {
+    this.alertService.ensureDeleteAlert("คุณต้องการยกเลิกการจองใช่หรือไม่").subscribe((confirm: any) => {
+      if (confirm) {
+        this.userService.userRemoveBooking(booking_id).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.getBookingList();
+            }
+          }
+        })
+      }
+    })
+  }
+
 }

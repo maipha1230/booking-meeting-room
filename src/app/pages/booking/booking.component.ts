@@ -40,8 +40,20 @@ export class BookingComponent implements OnInit {
     this.createFormBooking();
     this.booking_id = this.activateRoute.snapshot.paramMap.get('booking_id');
     if (this.booking_id) {
-      this.getUserBookingById(Number(this.booking_id));
+      this.checkUserOwnBooking(Number(this.booking_id))
     }
+  }
+
+  checkUserOwnBooking(booking_id: number) {
+    this.userService.checkUserOwnBooking(booking_id).subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.getUserBookingById(booking_id);
+        } else if (res.status == 2) {
+          this.router.navigate(['/'])
+        }
+      }
+    })
   }
 
   createFormBooking() {
@@ -148,14 +160,8 @@ export class BookingComponent implements OnInit {
               this.userService.userEditBooking(this.booking_id, form).subscribe((res: any) => {
                 if (res) {
                   if (res.status == 1) {
-                    this.booking_id = null
-                    this.alertService.bookingSuccessAlert(res.msg).subscribe((confirm: any) => {
-                      if (confirm) {
-                        this.router.navigate(['/home'])
-                      } else {
-                        window.location.reload();
-                      }
-                    })
+                    this.alertService.successAlert(res.msg)
+                    this.router.navigate(['/booking-list'])
                   } else if (res.status == 2) {
                     if (res.booked) {
                       let msg = '';
