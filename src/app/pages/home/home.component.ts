@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 
 import { CalendarOptions } from '@fullcalendar/angular';
@@ -9,11 +10,26 @@ import { CalendarOptions } from '@fullcalendar/angular';
 export class HomeComponent implements OnInit {
   calendarOptions: CalendarOptions;
 
-  events = [];
+  events:any [] = [];
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.getBookingToCalendar();
+  }
+
+  getBookingToCalendar(){
+    this.userService.getBookingToCalendar().subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.events = res.data
+          this.initCalendar();
+        }
+      }
+    })
+  }
+
+  initCalendar(){
     this.calendarOptions = {
       headerToolbar: {
         left: 'prev,next today',
@@ -21,25 +37,11 @@ export class HomeComponent implements OnInit {
         right: 'dayGridMonth,timeGridWeek',
       },
       initialView: 'dayGridMonth',
-      events: [
-        {
-          title: 'ห้องประชุม 1',
-          start: '2022-12-06T09:00:00',
-          end: '2022-12-06T15:00:00',
-        },
-        {
-          title: 'ห้องประชุม 1',
-          start: '2022-12-06T09:00:00',
-          end: '2022-12-06T10:00:00',
-        },
-        {
-          title: 'ห้องประชุม 1',
-          start: '2022-12-07T09:00:00',
-          end: '2022-12-07T10:00:00',
-        },
-      ],
+      events: this.events,
       locale: 'th',
       firstDay: 1,
+      slotMinTime: "08:00",
+      slotMaxTime: "20:00",
       dayMaxEvents: true,
       eventTimeFormat: {
         hour: 'numeric',
@@ -55,6 +57,7 @@ export class HomeComponent implements OnInit {
         week: 'สัปดาห์',
 
       },
+      eventOverlap: true,
       aspectRatio: 1.75,
       contentHeight: 540,
       dateClick: this.onDateClick.bind(this)
@@ -63,8 +66,6 @@ export class HomeComponent implements OnInit {
   }
 
   onDateClick(date: any){
-    console.log(typeof(date));
-    console.log(date.dateStr);
 
   }
 }

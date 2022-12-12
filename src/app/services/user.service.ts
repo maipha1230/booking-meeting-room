@@ -299,4 +299,14 @@ export class UserService {
   checkUserOwnBooking(booking_id: number): Observable<any> {
     return this.http.get<any>(`${environment.api_url}/users/checkUserOwnBooking/${booking_id}`)
   }
+
+  //get Meeting room list
+  getMeetingRoomList(): Observable<any> {
+    return this.http.get(`${environment.api_url}/users/getMeetingRoomList`)
+  }
+
+  //get booking to calendar
+  getBookingToCalendar(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/users/getBookingToCalendar`)
+  }
 }

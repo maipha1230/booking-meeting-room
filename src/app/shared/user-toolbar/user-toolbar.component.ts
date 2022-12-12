@@ -9,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserToolbarComponent implements OnInit {
 
+  public adminLogin: boolean = false;
+
   constructor(private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit(): void {
+    this.adminLogin = this.authService.isAdminLogin();
   }
 
   onLogout(){

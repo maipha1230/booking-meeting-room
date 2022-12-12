@@ -150,7 +150,7 @@ export class BookingComponent implements OnInit {
 
   onSubmitBookingForm() {
     if (this.formBooking.valid) {
-      if (!this.timeCheck()) {
+      if (!this.timeCheck() || !this.dateCheck()) {
         this.alertService.warningAlert('กรุณาเลือกเวลาจากน้อยไปหามาก');
       } else {
         const form = this.prepareForm();
@@ -200,7 +200,7 @@ export class BookingComponent implements OnInit {
                       .bookingSuccessAlert(res.msg)
                       .subscribe((confirm: any) => {
                         if (confirm) {
-                          this.router.navigate(['/home']);
+                          this.router.navigate(['/booking-list']);
                         }
                       });
                     this.createFormBooking();
@@ -236,6 +236,7 @@ export class BookingComponent implements OnInit {
   }
 
   timeCheck() {
+
     let time_start = this.formBooking.controls['time_start'].value;
     let time_end = this.formBooking.controls['time_end'].value;
 
@@ -245,6 +246,22 @@ export class BookingComponent implements OnInit {
     };
 
     return getMinutes(time_start)  <= getMinutes(time_end) ;
+  }
+
+  dateCheck(){
+    let dateNow = new Date();
+    let datePicked = new Date(this.formBooking.controls['date'].value);
+    datePicked.getFullYear()
+    console.log(datePicked.getFullYear());
+
+    if (datePicked.getFullYear() >= dateNow.getFullYear()) {
+      if (datePicked.getMonth() >= dateNow.getMonth()) {
+        if (datePicked.getDate() >= dateNow.getDate()) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   onClearBookingForm() {

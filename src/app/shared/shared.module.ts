@@ -1,5 +1,4 @@
 import { PipesModule } from './pipes/pipes.module';
-import { ThaiDatePipe } from './pipes/thaiDate.pipe';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,6 +14,7 @@ import { UserModalComponent } from './user-modal/user-modal.component';
 import { AdminModalComponent } from './admin-modal/admin-modal.component';
 import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
     HttpClientModule,
     RouterModule,
     PipesModule,
+    SwiperModule
   ],
   exports: [
     NavBarComponent,
@@ -41,7 +42,8 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
     FontAwesomeModule,
     MaterialModule,
     UserToolbarComponent,
-    PipesModule
+    PipesModule,
+    SwiperModule
 
   ]
 })
