@@ -218,6 +218,26 @@ export class UserService {
     );
   }
 
+    //create line notify
+  createLineNotify(token: string): Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/createLineNotify`, { token: token })
+  }
+
+  //get line notify
+  getLineNotify():Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getLineNotify`)
+  }
+
+  //update line notify
+  updateLineNotify(line_notify_id: number, token: string):Observable<any> {
+    return this.http.put(`${environment.api_url}/admin/updateLineNotify/${line_notify_id}`, { token: token })
+  }
+
+  //remove line notify
+  removeLineNotify(line_notify_id: number):Observable<any> {
+    return this.http.delete(`${environment.api_url}/admin/removeLineNotify/${line_notify_id}`)
+  }
+
   ////////////////////////////// users //////////////////////
 
   //get users login form
@@ -309,4 +329,6 @@ export class UserService {
   getBookingToCalendar(): Observable<any> {
     return this.http.get<any>(`${environment.api_url}/users/getBookingToCalendar`)
   }
+
+
 }

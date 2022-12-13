@@ -31,4 +31,19 @@
       <mat-icon (click)="onAddMeetingRoomStatus()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
   </div>
 
+  <!-- token line notify -->
+  <div class="flex flex-col my-4 p-3 rounded-lg bg-white w-64 shadow-lg">
+    <label class="text-lg font-bold ">โทเคนการแจ้งเตือนไลน์ Notify</label>
+    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
+      <div *ngFor="let notify of line_token" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
+        <label for=""class="text-base text-white break-all">{{notify.token}}</label>
+        <div class="flex flex-row">
+          <i (click)="updateLineNotify(notify)" class="bi bi-pencil mx-1 text-white hover:text-yellow-500 hover:cursor-pointer"></i>
+          <i (click)="removeLineNotify(notify.line_notify_id)" class="bi bi-trash mx-1 text-white hover:text-red-500 hover:cursor-pointer"></i>
+        </div>
+      </div>
+    </div >
+      <mat-icon (click)="createLineNotify()" class="text-2xl font-bold text-green-500 hover:text-green-600 hover:cursor-pointer">add</mat-icon>
+  </div>
+
  </div>

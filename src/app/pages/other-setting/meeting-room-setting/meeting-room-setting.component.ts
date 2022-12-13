@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { AlertService } from './../../../services/alert.service';
 import { OtherSettingModalComponent } from './../../../shared/other-setting-modal/other-setting-modal.component';
 import { MeetingRoomService } from './../../../services/meeting-room.service';
@@ -13,11 +14,13 @@ export class MeetingRoomSettingComponent implements OnInit {
 
   public meetingRoomSizeList: any = []
   public meetingRoomStatusList: any = []
-  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService, private alertService: AlertService) { }
+  public line_token: any = []
+  constructor(private dialog: MatDialog, private meetingRoomService: MeetingRoomService, private alertService: AlertService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.getMeetingRoomSize();
     this.getMeetingRoomStatus();
+    this.getLineNotify();
   }
 
 
@@ -183,6 +186,91 @@ export class MeetingRoomSettingComponent implements OnInit {
             if (res.status == 1) {
               this.alertService.successAlert(res.msg)
               this.getMeetingRoomStatus();
+            }
+          }
+        })
+      }
+    })
+  }
+
+  createLineNotify(){
+    let dialogRef = this.dialog.open(OtherSettingModalComponent, {
+      width: '50%',
+      minWidth: '400px',
+      height: 'auto',
+      data: {
+        title_modal: 'เพิ่มโทเคนการแจ้งเตือนไลน์ Notify',
+        name_input: 'โทเคน'
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        if (res.data) {
+          let token = res.data
+          this.userService.createLineNotify(token).subscribe((response: any) => {
+            if (response) {
+              if (response.status == 1) {
+                this.alertService.successAlert(res.msg)
+                this.getLineNotify();
+              }
+            }
+          })
+        }
+      }
+
+    })
+  }
+
+  getLineNotify(){
+    this.userService.getLineNotify().subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.line_token = res.data
+        }
+      }
+    })
+  }
+
+  updateLineNotify(line_token: any) {
+    let dialogRef = this.dialog.open(OtherSettingModalComponent, {
+      width: '50%',
+      minWidth: '400px',
+      height: 'auto',
+      data: {
+        title_modal: 'เพิ่มโทเคนการแจ้งเตือนไลน์ Notify',
+        name_input: 'โทเคน',
+        name_value: line_token.token
+
+      }
+    })
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        if (res.data) {
+          let token = res.data
+          this.userService.updateLineNotify(line_token.line_notify_id , token).subscribe((response: any) => {
+            if (response) {
+              if (response.status == 1) {
+                this.alertService.successAlert(res.msg)
+                this.getLineNotify();
+              }
+            }
+          })
+        }
+      }
+
+    })
+  }
+
+  removeLineNotify(line_notify_id: number){
+    this.alertService.ensureDeleteAlert("ต้องการลบโทเคนใช่หรือไม่? หากลบจะไม่มีการแจ้งเตือนการจองห้องประชุม").subscribe((confirm: any) => {
+      if (confirm) {
+        this.userService.removeLineNotify(line_notify_id).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.getLineNotify();
             }
           }
         })

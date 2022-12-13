@@ -78,6 +78,7 @@ export class MeetingRoomModalComponent implements OnInit {
       roomCapacity: [null, Validators.required],
       roomStatus: [null, Validators.required],
       roomGallery: [[], Validators.required],
+      roomColor: ['#2674d9', Validators.required]
     });
   }
 
@@ -87,6 +88,7 @@ export class MeetingRoomModalComponent implements OnInit {
       roomSize: room.room_size_id,
       roomCapacity: room.room_capacity,
       roomStatus: room.room_status_id,
+      roomColor: room.room_color
     });
 
     let gallery: any = [];
@@ -157,6 +159,7 @@ export class MeetingRoomModalComponent implements OnInit {
       formData.append('room_size_id', String(room.room_size_id));
       formData.append('room_capacity', String(room.room_capacity));
       formData.append('room_status_id', String(room.room_status_id));
+      formData.append('room_color', String(room.room_color));
       for (let i = 0; i < room.room_gallery.length; i++) {
         formData.append('gallery', base64ToFile(room.room_gallery[i]));
       }
@@ -191,6 +194,7 @@ export class MeetingRoomModalComponent implements OnInit {
     room.room_capacity = this.formMeeting.controls['roomCapacity'].value;
     room.room_gallery = this.formMeeting.controls['roomGallery'].value;
     room.room_status_id = this.formMeeting.controls['roomStatus'].value;
+    room.room_color = this.formMeeting.controls['roomColor'].value;
 
     return room;
   }
@@ -237,4 +241,5 @@ export class MeetingRoomModalComponent implements OnInit {
     }
 
   }
+
 }

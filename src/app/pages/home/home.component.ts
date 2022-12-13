@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
       events: this.events,
       locale: 'th',
       firstDay: 1,
-      slotMinTime: "08:00",
+      slotMinTime: "06:00",
       slotMaxTime: "20:00",
       dayMaxEvents: true,
       eventTimeFormat: {
