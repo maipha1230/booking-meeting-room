@@ -14,8 +14,9 @@
     <a routerLink="/" class="my-2 flex flex-row items-center hover:cursor-pointer">
       <p class="hover: cursor-pointer hover:text-slate-400 duration-150">ไปยังหน้าผู้ใช้งาน</p>
     </a>
-    <a class="my-2 flex flex-row items-center hover:cursor-pointer">
-      <p (click)="onLogout()"  class="hover: cursor-pointer hover:text-slate-400 duration-150">ออกจากระบบ</p>
+    <a (click)="onLogout()" class="my-2 flex flex-row items-center justify-center hover:cursor-pointer">
+      <i class="bi bi-box-arrow-right mr-2 mb-2 hover: cursor-pointer hover:text-slate-400 duration-150"></i>
+      <p class="hover: cursor-pointer hover:text-slate-400 duration-150">ออกจากระบบ</p>
     </a>
     </span>
 </mat-menu>

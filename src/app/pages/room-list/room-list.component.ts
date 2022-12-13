@@ -9,7 +9,6 @@ import SwiperCore, {Navigation,
   Autoplay,
   Thumbs,
   Controller,} from 'swiper';
-import { registerLocaleData } from '@angular/common';
 SwiperCore.use([
   Navigation,
   Pagination,

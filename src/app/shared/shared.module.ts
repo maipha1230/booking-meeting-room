@@ -15,6 +15,7 @@ import { AdminModalComponent } from './admin-modal/admin-modal.component';
 import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { SwiperModule } from 'swiper/angular';
+import { BookingModalComponent } from './booking-modal/booking-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SwiperModule } from 'swiper/angular';
     UserModalComponent,
     AdminModalComponent,
     UserToolbarComponent,
-    DeviceModalComponent
+    DeviceModalComponent,
+    BookingModalComponent
   ],
   imports: [
     CommonModule,

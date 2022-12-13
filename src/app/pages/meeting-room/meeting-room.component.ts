@@ -4,7 +4,26 @@ import { MeetingRoomModel } from './../../model/meeting-room.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MeetingRoomModalComponent } from 'src/app/shared/meeting-room-modal/meeting-room-modal.component';
-
+import SwiperCore, {Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Virtual,
+  Zoom,
+  Autoplay,
+  Thumbs,
+  Controller,} from 'swiper';
+SwiperCore.use([
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Virtual,
+  Zoom,
+  Autoplay,
+  Thumbs,
+  Controller
+]);
 @Component({
   selector: 'app-meeting-room',
   templateUrl: './meeting-room.component.html',
@@ -24,8 +43,6 @@ export class MeetingRoomComponent implements OnInit {
     this.meetingRoomService.getMeetingRoom().subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
-          console.log(res.data);
-
           this.meeting_room_list = res.data
         }
       }

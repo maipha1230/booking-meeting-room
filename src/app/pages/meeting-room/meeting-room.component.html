@@ -11,7 +11,19 @@
 
   <div class="flex flex-row flex-wrap my-2 gap-8">
     <div class="rounded-lg bg-white w-64 shadow-lg" *ngFor="let meeting_room of meeting_room_list">
-        <img class="rounded" [src]="meeting_room.room_gallery[0].img_path" alt=""/>
+      <swiper
+          class="h-40 w-full rounded-lg"
+        [slidesPerView]="1"
+        [spaceBetween]="10"
+        [navigation]="true"
+        [pagination]="{ clickable: true }"
+        >
+        <ng-template swiperSlide *ngFor="let img of meeting_room.room_gallery">
+          <img
+          [src]="img.img_path"
+        />
+        </ng-template>
+        </swiper>
       <div class="p-6">
         <p class="text-gray-900 text-lg font-bold mb-2">{{meeting_room.room_name}}</p>
         <p class="text-gray-700 text-base mb-2">
