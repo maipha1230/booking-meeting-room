@@ -4,7 +4,11 @@
   <div class="w-4/5 h-auto min-h-screen bg-white rounded-lg shadow-lg my-5 p-3">
     <label class="text-black text-xl font-bold my-7">ห้องประชุม</label>
     <div class="flex flex-row flex-wrap my-2 gap-3">
-      <div class="w-72 h-auto bg-white rounded-lg shadow-lg flex flex-col" *ngFor="let room of room_list">
+      <div class="w-72 h-auto bg-white rounded-lg shadow-lg flex flex-col relative" *ngFor="let room of room_list">
+        <div *ngIf="room.room_available == true" class="w-5 h-5 bg-green-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-green-500/50">
+        </div>
+        <div *ngIf="room.room_available == false" class="w-5 h-5 bg-yellow-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-yellow-500/50">
+        </div>
         <div class="h-60 rounded-lg" >
           <swiper
           class="h-full w-full rounded-lg"
@@ -27,7 +31,12 @@
           <p class="text-gray-700 text-base pr-2">
             สถานะห้องประชุม: {{room.room_status}}
           </p>
-          <!-- <p class="text-gray-700 text-base pr-2">สถานะการใช้งาน: ว่าง</p> -->
+          <div class="flex flex-row">
+            <p class="text-gray-700 text-base pr-2">สถานะการใช้งาน: </p>
+            <p *ngIf="room.room_available == true" class="text-green-500 font-bold text-base pr-2">ว่าง</p>
+            <p *ngIf="room.room_available == false" class="text-yellow-500 font-bold text-base pr-2">ยังไม่ว่าง</p>
+          </div>
+
         </div>
       </div>
   </div>

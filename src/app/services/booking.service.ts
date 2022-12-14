@@ -11,7 +11,15 @@ export class BookingService {
 
   constructor(private http: HttpClient) { }
 
-  getBookingList(): Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/admin/getBookingList`)
+  getBookingList(status: number): Observable<any> {
+    return this.http.post<any>(`${environment.api_url}/admin/getBookingList`, { status: status })
+  }
+
+  getBookingById(booking_id:number):Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getBookingById/${booking_id}`)
+  }
+
+  bookingPermission(booking_id: number, permit: number): Observable<any> {
+    return this.http.put(`${environment.api_url}/admin/bookingPermission/${booking_id}`, { permit: permit })
   }
 }

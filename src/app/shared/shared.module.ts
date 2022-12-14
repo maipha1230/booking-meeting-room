@@ -7,7 +7,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from '../material/material/material.module';
 import { MeetingRoomModalComponent } from './meeting-room-modal/meeting-room-modal.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OtherSettingModalComponent } from './other-setting-modal/other-setting-modal.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserModalComponent } from './user-modal/user-modal.component';
@@ -16,6 +16,7 @@ import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
 import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { SwiperModule } from 'swiper/angular';
 import { BookingModalComponent } from './booking-modal/booking-modal.component';
+import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BookingModalComponent } from './booking-modal/booking-modal.component';
     AdminModalComponent,
     UserToolbarComponent,
     DeviceModalComponent,
-    BookingModalComponent
+    BookingModalComponent,
+    EditBookingModalComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { BookingModalComponent } from './booking-modal/booking-modal.component';
     HttpClientModule,
     RouterModule,
     PipesModule,
-    SwiperModule
+    SwiperModule,
+    FormsModule
   ],
   exports: [
     NavBarComponent,

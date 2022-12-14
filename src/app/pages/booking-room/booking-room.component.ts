@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class BookingRoomComponent implements OnInit {
 
   public booking_list: any[] = []
+  public approve_status: number = 0;
 
   constructor(private bookingUservice: BookingService, private dialog: MatDialog) { }
 
@@ -19,7 +20,7 @@ export class BookingRoomComponent implements OnInit {
   }
 
   getBookingList(){
-    this.bookingUservice.getBookingList().subscribe((res: any) => {
+    this.bookingUservice.getBookingList(this.approve_status).subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
           console.log(res.data);
@@ -42,9 +43,15 @@ export class BookingRoomComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((response: any) => {
-
+      if (response) {
+        this.getBookingList();
+      }
     })
+  }
 
+  onChangeStatusView(status: number){
+    this.approve_status = status
+    this.getBookingList();
   }
 
 }
