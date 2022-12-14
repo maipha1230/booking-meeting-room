@@ -1,14 +1,95 @@
 <div class="w-full h-auto flex flex-row gap-2">
-    <div class="w-1/2 h-4/5 bg-red-500 p-3 flex flex-col">
-        <label class="text-lg font-bold my-2">ห้องประชุม 1</label>
-        <div class="w-full h-48 flex flex-row bg-slate-300 rounded p-2">
-            <img src="../../../assets/images//logo.png" class="w-1/3" />
-            <img src="../../../assets/images//logo.png" class="w-1/3" />
-            <img src="../../../assets/images//logo.png" class="w-1/3" />
+  <div class="flex flex-col w-1/2">
+    <div
+      class="w-full h-auto bg-white rounded-lg shadow-lg p-3 flex flex-col my-2"
+    >
+      <label class="text-lg font-bold my-2">ห้องประชุม 1</label>
+      <div
+        class="w-full h-auto min-h-fit flex flex-row gap-2 p-2 bg-slate-300 rounded my-2"
+      >
+        <img
+          src="https://s3-ap-southeast-1.amazonaws.com/wordpress.venuee/blog/uploads/2019/02/21082059/405opf17joqxsdru.jpg"
+          class="w-1/3 block object-cover object-center h-28 rounded-lg"
+        />
+        <img
+          src="https://s3-ap-southeast-1.amazonaws.com/wordpress.venuee/blog/uploads/2019/02/21082059/405opf17joqxsdru.jpg"
+          class="w-1/3 block object-cover object-center h-28 rounded-lg"
+        />
+        <img
+          src="https://s3-ap-southeast-1.amazonaws.com/wordpress.venuee/blog/uploads/2019/02/21082059/405opf17joqxsdru.jpg"
+          class="w-1/3 block object-cover object-center h-28 rounded-lg"
+        />
+      </div>
+      <p class="text-base">ขนาด: เล็ก</p>
+      <p class="text-base">ความจุ: 15 คน</p>
+      <p class="text-base">สถานะ: พร้อมใช้งาน</p>
+    </div>
+    <div
+      class="w-full h-auto bg-white rounded-lg shadow-lg p-3 flex flex-col my-2"
+    >
+      <label class="text-lg font-bold my-2">คำร้องขอจองห้องประชุม</label>
+      <div class="flex flex-col">
+        <p class="text-base">เรื่อง: อบรมการใช้งานเครื่องมือแพทย์</p>
+        <p class="text-base">จุดประสงค์: ประชุม</p>
+        <p class="text-base">จำนวนผู้เข้าร่วม: 10 คน</p>
+        <p class="text-base">อุปกรณ์ที่ใช้:</p>
+        <div class="flex flex-row flex-wrap gap-2 p-2">
+          <li>555</li>
+          <li>555</li>
+          <li>555</li>
+          <li>555</li>
+          <li>555</li>
         </div>
+        <p class="text-base">ใช้งานวันที่: 23 ธันวาคม 2565</p>
+        <p class="text-base">เวลา: 09.00 - 12.00</p>
+        <p class="text-base">ยื่นคำร้องวันที่: 23 ธันวาคม 2565</p>
+      </div>
     </div>
-    <mat-divider [vertical]="true"></mat-divider>
-    <div class="w-1/2 h-4/5 bg-yellow-500">
-        awdawd
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div class="flex flex-col w-1/2">
+    <div
+      class="w-full h-auto bg-white rounded-lg shadow-lg p-3 flex flex-col my-2"
+    >
+      <label class="text-lg font-bold my-2">ผู้ยื่นคำร้อง</label>
+      <div class="flex justify-center items-center my-2">
+        <img
+          class="w-32 h-32 block object-cover object-center rounded-lg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLw3TGa6fpHBR-9uNu2FMjuVE-aTNVO-dtgQ&usqp=CAU"
+          alt=""
+        />
+      </div>
+      <p class="text-base">ชื่อ: ปฐมพงษ์ สีพลแสน</p>
+      <p class="text-base">สังกัด: กระทรวงสาธารณะสุข</p>
+      <p class="text-base">ตำแหน่ง: โปรแกรมเมอร์</p>
+      <p class="text-base">ระดับ: เชี่ยวชาญ</p>
+      <p class="text-base">ประเภทบรรจุ: อัตราจ้าง</p>
+      <p class="text-base">เบอร์โทร: 063-8970954</p>
+      <p class="text-base">อีเมล: phathompong.se@rmuti.ac.th</p>
     </div>
+    <div
+      class="w-full h-full p-3 flex flex-col justify-end my-2 "
+    >
+      <div class="flex flex-row flex-wrap justify-end gap-2">
+        <button
+          type="submit"
+          class="w-32 h-12 text-base text-white rounded bg-green-500 justify-center items-center hover:bg-green-600 hover:cursor-pointer duration-150"
+        >
+          อนุญาต
+        </button>
+        <button
+          type="submit"
+          class="w-32 h-12 text-base text-white rounded bg-red-500 justify-center items-center hover:bg-red-600 hover:cursor-pointer duration-150"
+        >
+          ไม่อนุญาต
+        </button>
+        <button
+          type="submit"
+          class="w-32 h-12 text-base text-white rounded bg-yellow-500 justify-center items-center hover:bg-yellow-600 hover:cursor-pointer duration-150"
+        >
+          แก้ไขคำร้อง
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
