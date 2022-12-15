@@ -69,14 +69,16 @@ export class BookingModalComponent implements OnInit {
         let dialogRef = this.dialog.open(EditBookingModalComponent, {
           width: '80%',
           minWidth: '400px',
-          height: '90%',
+          height: '100%',
           data: {
             booking_id: this.booking.booking_id
           }
         })
 
-        dialogRef.afterClosed().subscribe(() => {
-
+        dialogRef.afterClosed().subscribe((result: any) => {
+          if (result) {
+            this.getBookingById(this.booking.booking_id)
+          }
         })
       }
     })

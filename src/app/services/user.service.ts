@@ -282,7 +282,8 @@ export class UserService {
       device: data.device,
       date: data.date,
       time_start: data.time_start,
-      time_end: data.time_end
+      time_end: data.time_end,
+      link: data.link
     })
   }
 
@@ -296,7 +297,8 @@ export class UserService {
       device: data.device,
       date: data.date,
       time_start: data.time_start,
-      time_end: data.time_end
+      time_end: data.time_end,
+      link: data.link
     })
   }
 

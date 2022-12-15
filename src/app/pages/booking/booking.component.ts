@@ -66,6 +66,7 @@ export class BookingComponent implements OnInit {
       date: [null, Validators.required],
       time_start: [null, Validators.required],
       time_end: [null, Validators.required],
+      link: [""]
     });
   }
 
@@ -78,6 +79,7 @@ export class BookingComponent implements OnInit {
       date: data.date,
       time_start: data.time_start,
       time_end: data.time_end,
+      link: data.link
     });
 
     this.device_list.forEach((device: any) => {
@@ -140,6 +142,7 @@ export class BookingComponent implements OnInit {
     form.date = this.formBooking.controls['date'].value;
     form.time_start = this.formBooking.controls['time_start'].value;
     form.time_end = this.formBooking.controls['time_end'].value;
+    form.link = this.formBooking.controls['link'].value;
 
     form.device = form.device.filter((device: any) => {
       return device.selected == true;

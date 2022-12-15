@@ -1,9 +1,9 @@
 <div class="p-4 flex flex-col bg-gray-100 min-h-screen h-full">
   <label class="text-2xl font-bold mb-5">คำร้องขอการใช้งานห้องประชุม</label>
   <mat-chip-list class="my-2">
-    <mat-chip (click)="onChangeStatusView(0)" [selected]="approve_status == 0" class="bg-yellow-500 text-white text-base hover:cursor-pointer">ยังไม่อนุมัติ</mat-chip>
-    <mat-chip (click)="onChangeStatusView(1)" [selected]="approve_status == 1" class="bg-green-500 text-white text-base hover:cursor-pointer">อนุญาต</mat-chip>
-    <mat-chip (click)="onChangeStatusView(2)" [selected]="approve_status == 2" class="bg-red-500 text-white text-base hover:cursor-pointer">ไม่อนุญาต</mat-chip>
+    <mat-chip (click)="onChangeStatusView(0)" [selected]="approve_status === 0 ? true : false" class="bg-yellow-500 text-white text-base hover:cursor-pointer">ยังไม่อนุมัติ</mat-chip>
+    <mat-chip (click)="onChangeStatusView(1)" [selected]="approve_status === 1 ? true : false" class="bg-green-500 text-white text-base hover:cursor-pointer">อนุญาต</mat-chip>
+    <mat-chip (click)="onChangeStatusView(2)" [selected]="approve_status === 2 ? true : false" class="bg-red-500 text-white text-base hover:cursor-pointer">ไม่อนุญาต</mat-chip>
   </mat-chip-list>
 
   <div class="flex flex-row flex-wrap my-2 gap-5">

@@ -18,7 +18,10 @@
     <a routerLink="/admin" *ngIf="adminLogin" class="my-2 flex flex-row items-center hover:cursor-pointer">
       <p class="hover: cursor-pointer hover:text-slate-400 duration-150">ไปยังหน้าผู้ดูแล</p>
     </a>
-    <a class="my-2 flex flex-row items-center hover:cursor-pointer" (click)="onLogout()">
+    <a routerLink="/login" *ngIf="!isLoggedin" class="my-2 flex flex-row items-center hover:cursor-pointer">
+      <p class="hover: cursor-pointer hover:text-slate-400 duration-150">เข้าสู่ระบบ</p>
+    </a>
+    <a *ngIf="isLoggedin" class="my-2 flex flex-row items-center hover:cursor-pointer" (click)="onLogout()">
       <p class="hover: cursor-pointer hover:text-slate-400 duration-150">ออกจากระบบ</p>
     </a>
     </span>

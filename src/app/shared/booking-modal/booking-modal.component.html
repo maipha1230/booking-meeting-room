@@ -31,6 +31,7 @@
         </div>
         <p class="text-base">ใช้งานวันที่: {{booking?.date | thaidate: "medium" }}</p>
         <p class="text-base">เวลา: {{booking?.time_start}} - {{booking?.time_end}}</p>
+        <p class="text-base">ลิงค์ออนไลน์ <a class="text-blue-500" [href]="booking?.link" target="_blank">{{booking?.link}}</a></p>
         <p class="text-base">ยื่นคำร้องวันที่: {{booking?.createdAt | thaidate: "medium"}}</p>
       </div>
     </div>

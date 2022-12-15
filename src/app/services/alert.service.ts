@@ -176,5 +176,28 @@ export class AlertService {
     });
   }
 
+  ensureAlert(msg: string){
+    return new Observable<any>((observer) => {
+      Swal.fire({
+        icon: 'question',
+        title: msg,
+        showCancelButton: true,
+        cancelButtonText: 'ไม่',
+        showConfirmButton: true,
+        confirmButtonText: 'ใช่',
+      }).then((result) => {
+        if (result) {
+          if (result.isConfirmed) {
+            if (result.isConfirmed === true) {
+              observer.next(result.isConfirmed)
+            } else {
+              observer.next(result.isConfirmed)
+            }
+          }
+        }
+      })
+    });
+  }
+
 
 }

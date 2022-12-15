@@ -55,7 +55,7 @@ export class EditBookingModalComponent implements OnInit {
       date: [null, Validators.required],
       time_start: [null, Validators.required],
       time_end: [null, Validators.required],
-      link: ['']
+      link: [""]
     });
   }
 
@@ -131,6 +131,7 @@ export class EditBookingModalComponent implements OnInit {
     form.date = this.formBooking.controls['date'].value;
     form.time_start = this.formBooking.controls['time_start'].value;
     form.time_end = this.formBooking.controls['time_end'].value;
+    form.link = this.formBooking.controls['link'].value;
 
     form.device = form.device.filter((device: any) => {
       return device.selected == true;
@@ -145,7 +146,39 @@ export class EditBookingModalComponent implements OnInit {
         this.alertService.warningAlert('กรุณาเลือกเวลาจากน้อยไปหามาก');
       } else {
         const form = this.prepareForm();
-
+        this.alertService.submitAlert("บันทึกการแก้ไขคำร้อง?").subscribe((confirm: any) => {
+          if (confirm) {
+            this.bookingService.adminUpdateBooking(this.data.booking_id, form).subscribe((res: any) => {
+              if (res) {
+                if (res.status == 1) {
+                  this.alertService.successAlert(res.msg)
+                  this.dialogRef.close(true)
+                } else if (res.status == 2) {
+                  if (res.booked) {
+                    let msg = '';
+                    for (let i = 0; i < res.booked.length; i++) {
+                      if (
+                        i == res.booked.length - 1 &&
+                        res.booked.length == 1
+                      ) {
+                        msg += `${res.booked[i].time_start} - ${res.booked[i].time_end}`;
+                      } else {
+                        msg += `${res.booked[i].time_start} - ${res.booked[i].time_end}, `;
+                      }
+                    }
+                    this.alertService
+                      .timeBookingOverlapAlert(res.msg, msg)
+                      .subscribe((check: any) => {
+                        if (check) {
+                          this.router.navigate(['/home']);
+                        }
+                      });
+                  }
+                }
+              }
+            })
+          }
+        })
       }
     }
   }
@@ -179,12 +212,12 @@ export class EditBookingModalComponent implements OnInit {
     return false;
   }
 
-  onClearBookingForm() {
+  onCancel() {
     this.alertService
-      .ensureDeleteAlert('ต้องการล้างทั้งหมดใช่หรือไม่?')
+      .ensureDeleteAlert('ต้องยกเลิกการแก้ไขใช่หรือไม่?')
       .subscribe((result: any) => {
         if (result) {
-          this.createFormBooking();
+          this.dialogRef.close()
         }
       });
   }

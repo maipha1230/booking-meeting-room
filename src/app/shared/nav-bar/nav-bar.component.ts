@@ -1,3 +1,4 @@
+import { AlertService } from './../../services/alert.service';
 import { AuthService } from './../../services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   public user: any = null
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private userService: UserService, private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.getAdminNav();
@@ -25,7 +26,12 @@ export class NavBarComponent implements OnInit {
   }
 
   onLogout(){
-    this.authService.onLogout();
+    this.alertService.ensureAlert("ต้องการออกจากระบบใช่หรือไม่?").subscribe((confirm: any) => {
+      if (confirm) {
+        this.authService.onLogout();
+        this.alertService.successAlert("ออกจากระบบสำเร็จ")
+      }
+    })
   }
 
 }

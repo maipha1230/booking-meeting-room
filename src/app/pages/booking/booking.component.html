@@ -88,6 +88,21 @@
           <input type="time" class="w-20 text-base" formControlName="time_end">
         </div>
       </div>
+      <div class="mb-1 w-96 w- mx-2">
+        <label class="text-base font-bold text-gray-700"
+          >ลิงค์ออนไลน์(ถ้ามี)</label
+        >
+        <mat-form-field appearance="outline" class="w-full">
+          <input
+            matInput
+            type="text"
+            class="w-full text-base"
+            placeholder="ลิงค์ออนไลน์"
+            autocomplete="off"
+            formControlName="link"
+          />
+        </mat-form-field>
+      </div>
       <div class="flex flex-row my-5 place-content-around">
         <button
           type="submit"

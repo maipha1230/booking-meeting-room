@@ -106,6 +106,7 @@
               type="text"
               class="w-full text-base"
               placeholder="ลิงค์ออนไลน์"
+              formControlName="link"
               autocomplete="off"
             />
           </mat-form-field>
@@ -120,9 +121,10 @@
           บันทึกการแก้ไข
         </button>
         <button
+          (click)="onCancel()"
           type="button"
           class="w-32 h-12 text-base text-white rounded bg-red-500 justify-center items-center hover:bg-red-600 hover:cursor-pointer duration-150"
-          mat-dialog-close>
+          >
           ยกเลิก
         </button>
       </div>
