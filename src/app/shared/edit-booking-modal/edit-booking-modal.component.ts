@@ -1,10 +1,12 @@
+import { BookingService } from './../../services/booking.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookingFormModel } from './../../model/bookingForm.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from './../../services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { MeetingRoomService } from './../../services/meeting-room.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-edit-booking-modal',
@@ -17,17 +19,17 @@ export class EditBookingModalComponent implements OnInit {
   public purpose_list: any = [];
   public device_list: any = [];
 
-  public booking_id: any = null;
-
   public formBooking: FormGroup;
 
   constructor(
     private meetingRoomService: MeetingRoomService,
     private userService: UserService,
-    private alertService: AlertService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private activateRoute: ActivatedRoute
+    private dialogRef: MatDialogRef<EditBookingModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private alertService: AlertService,
+    private bookingService: BookingService,
   ) {}
 
   ngOnInit(): void {
@@ -35,23 +37,13 @@ export class EditBookingModalComponent implements OnInit {
     this.getBookingPurposeList();
     this.getRoomDeviceList();
     this.createFormBooking();
-    this.booking_id = this.activateRoute.snapshot.paramMap.get('booking_id');
-    if (this.booking_id) {
-      this.checkUserOwnBooking(Number(this.booking_id))
+    if (this.data) {
+      if (this.data.booking_id) {
+        this.getUserBookingById(this.data.booking_id)
+      }
     }
   }
 
-  checkUserOwnBooking(booking_id: number) {
-    this.userService.checkUserOwnBooking(booking_id).subscribe((res: any) => {
-      if (res) {
-        if (res.status == 1) {
-          this.getUserBookingById(booking_id);
-        } else if (res.status == 2) {
-          this.router.navigate(['/'])
-        }
-      }
-    })
-  }
 
   createFormBooking() {
     this.formBooking = this.formBuilder.group({
@@ -63,6 +55,7 @@ export class EditBookingModalComponent implements OnInit {
       date: [null, Validators.required],
       time_start: [null, Validators.required],
       time_end: [null, Validators.required],
+      link: ['']
     });
   }
 
@@ -75,11 +68,12 @@ export class EditBookingModalComponent implements OnInit {
       date: data.date,
       time_start: data.time_start,
       time_end: data.time_end,
+      link: data.link
     });
 
     this.device_list.forEach((device: any) => {
       data.device.forEach((item: any) => {
-        if (device.room_device_id == item.room_device_id) {
+        if (device.room_device_id == item) {
           device.selected = true;
         }
       });
@@ -97,13 +91,13 @@ export class EditBookingModalComponent implements OnInit {
   }
 
   getUserBookingById(booking_id: number) {
-    this.userService.getUserBookingById(booking_id).subscribe((res: any) => {
+    this.bookingService.getEditBookingById(booking_id).subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
-          this.pathFormBooking(res.data);
+          this.pathFormBooking(res.data)
         }
       }
-    });
+    })
   }
 
   getBookingPurposeList() {
@@ -151,83 +145,7 @@ export class EditBookingModalComponent implements OnInit {
         this.alertService.warningAlert('กรุณาเลือกเวลาจากน้อยไปหามาก');
       } else {
         const form = this.prepareForm();
-        if (this.booking_id) {
-          this.alertService.submitAlert("คุณต้องการแก้ไขการจองห้องประชุมใช่หรือไม่?").subscribe((result: any) => {
-            if (result) {
-              this.userService.userEditBooking(this.booking_id, form).subscribe((res: any) => {
-                if (res) {
-                  if (res.status == 1) {
-                    this.alertService.successAlert(res.msg)
-                    this.router.navigate(['/booking-list'])
-                  } else if (res.status == 2) {
-                    if (res.booked) {
-                      let msg = '';
-                      for (let i = 0; i < res.booked.length; i++) {
-                        if (
-                          i == res.booked.length - 1 &&
-                          res.booked.length == 1
-                        ) {
-                          msg += `${res.booked[i].time_start} - ${res.booked[i].time_end}`;
-                        } else {
-                          msg += `${res.booked[i].time_start} - ${res.booked[i].time_end}, `;
-                        }
-                      }
-                      this.alertService
-                        .timeBookingOverlapAlert(res.msg, msg)
-                        .subscribe((check: any) => {
-                          if (check) {
-                            this.router.navigate(['/home']);
-                          }
-                        });
-                    }
-                  }
-                }
-              })
-            }
-          })
-        } else {
-          this.alertService
-          .submitAlert('คุณต้องการจองห้องประชุมใช่หรือไม่?')
-          .subscribe((result: any) => {
-            if (result) {
-              this.userService.userSubmitBooking(form).subscribe((res: any) => {
-                if (res) {
-                  if (res.status == 1) {
-                    this.alertService
-                      .bookingSuccessAlert(res.msg)
-                      .subscribe((confirm: any) => {
-                        if (confirm) {
-                          this.router.navigate(['/booking-list']);
-                        }
-                      });
-                    this.createFormBooking();
-                  } else if (res.status == 2) {
-                    if (res.booked) {
-                      let msg = '';
-                      for (let i = 0; i < res.booked.length; i++) {
-                        if (
-                          i == res.booked.length - 1 &&
-                          res.booked.length == 1
-                        ) {
-                          msg += `${res.booked[i].time_start} - ${res.booked[i].time_end}`;
-                        } else {
-                          msg += `${res.booked[i].time_start} - ${res.booked[i].time_end}, `;
-                        }
-                      }
-                      this.alertService
-                        .timeBookingOverlapAlert(res.msg, msg)
-                        .subscribe((check: any) => {
-                          if (check) {
-                            this.router.navigate(['/home']);
-                          }
-                        });
-                    }
-                  }
-                }
-              });
-            }
-          });
-        }
+
       }
     }
   }

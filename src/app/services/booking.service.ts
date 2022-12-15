@@ -22,4 +22,8 @@ export class BookingService {
   bookingPermission(booking_id: number, permit: number): Observable<any> {
     return this.http.put(`${environment.api_url}/admin/bookingPermission/${booking_id}`, { permit: permit })
   }
+
+  getEditBookingById(booking_id: number): Observable<any> {
+    return this.http.get(`${environment.api_url}/admin/getEditBookingById/${booking_id}`)
+  }
 }

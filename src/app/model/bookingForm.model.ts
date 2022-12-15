@@ -8,7 +8,8 @@ export class BookingFormModel {
         public device: any = [],
         public date?: any,
         public time_start: string = "",
-        public time_end: string = ""
+        public time_end: string = "",
+        public link: string = ""
         ){
 
     }
