@@ -1,1 +1,63 @@
-<p>dashboard works!</p>
+<div class="w-full h-auto min-h-screen p-4 flex flex-col ">
+  <div class="grid grid-cols-3 gap-5 my-2">
+    <!-- booking -->
+    <div class="bg-white rounded-lg shadow-lg w-full h-full flex flex-col p-3">
+      <label class="text-xl font-bold">คำร้องขอการใช้งานห้องประชุม</label>
+      <div class="flex items-center justify-center h-full">
+        <label class="text-7xl font-bold my-5 text-blue-500">{{ bookingsTotal }}</label>
+      </div>
+      <p class="text-yellow-500 text-xl font-bold">ยังไม่อนุมัติ: {{ bookingsOverview[0].count }}</p>
+      <p class="text-green-500 text-xl font-bold">อนุญาต: {{ bookingsOverview[1].count }}</p>
+      <p class="text-red-500 text-xl font-bold">ไม่อนุญาต: {{ bookingsOverview[2].count }}</p>
+    </div>
+    <!-- user -->
+    <div class="bg-white rounded-lg shadow-lg w-full h-full flex flex-col p-3">
+      <label class="text-xl font-bold">ผู้ใช้งานทั้งหมด</label>
+      <div class="flex items-center justify-center h-full">
+        <label class="text-7xl text-blue-500 font-bold my-5">{{ usersTotal }}</label>
+      </div>
+      <p class="text-green-500 text-xl font-bold">พร้อมใช้งาน: {{ usersOverview[0].count }}</p>
+      <p class="text-red-500 text-xl font-bold">ถูกระงับการใช้งาน: {{ usersOverview[1].count }}</p>
+    </div>
+    <!-- admin -->
+    <div class="bg-white rounded-lg shadow-lg w-full h-full flex flex-col p-3">
+      <label class="text-xl font-bold">ผู้ใช้ดูแลทั้งหมด</label>
+      <div class="flex items-center justify-center h-full">
+        <label class="text-7xl font-bold my-5 text-blue-500">{{ adminsTotal }}</label>
+      </div>
+      <p class="text-green-500 text-xl font-bold">พร้อมใช้งาน: {{adminsOverview[0].count}}</p>
+      <p class="text-red-500 text-xl font-bold">ถูกระงับการใช้งาน: {{adminsOverview[1].count}}</p>
+    </div>
+
+  </div>
+  <div class="h-full grid grid-cols-2 gap-3">
+    <div class="bg-white rounded-lg shadow-lg p-3 flex flex-col">
+      <label class="text-xl font-bold">เวลาในการใช้งานห้องประชุม</label>
+      <div class="w-full flex flex-col p-2" *ngFor="let room of roomTime">
+        <label class="text-lg font-bold">{{room.room_name}}</label>
+        <img [src]="room.room_img"
+              alt="room_picture"
+              class="w-48 h-40 my-2 rounded-lg shadow-lg">
+        <div class="flex flex-row w-full my-2">
+          <p class="text-base mx-2">เวลาที่ใช้งานทั้งหมด:</p>
+          <p class="text-base mx-2" *ngIf="room.time?.years > 0">{{ room.time?.years }} ปี</p>
+          <p class="text-base mx-2" *ngIf="room.time?.months > 0">{{ room.time?.months }} เดือน</p>
+          <p class="text-base mx-2" *ngIf="room.time?.days > 0">{{ room.time?.days }} วัน</p>
+          <p class="text-base mx-2" *ngIf="room.time?.hours > 0">{{ room.time?.hours }} ชั่วโมง</p>
+          <p class="text-base mx-2" *ngIf="room.time?.minutes > 0">{{ room.time?.minutes }} นาที</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg h-auto p-3 flex flex-col items-center">
+      <div class="w-full flex">
+        <label class="text-xl font-bold">แผนกที่ใช้งานห้องประชุม</label>
+      </div>
+      <div class="flex flex-col justify-center items-center w-4/5">
+        <canvas  class="w-full h-full" id="pieChart" #pieChart></canvas>
+      </div>
+      <div class="w-full flex flex-col flex-wrap my-2">
+        <p *ngFor="let affiliation of affiliation_count" class="text-base font-bold">{{ affiliation.affiliation}}: {{affiliation.count}}</p>
+      </div>
+    </div>
+  </div>
+</div>
