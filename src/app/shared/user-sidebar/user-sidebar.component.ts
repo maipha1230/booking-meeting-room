@@ -4,16 +4,15 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-user-toolbar',
-  templateUrl: './user-toolbar.component.html',
-  styleUrls: ['./user-toolbar.component.scss']
+  selector: 'app-user-sidebar',
+  templateUrl: './user-sidebar.component.html',
+  styleUrls: ['./user-sidebar.component.scss']
 })
-export class UserToolbarComponent implements OnInit {
-
+export class UserSidebarComponent implements OnInit {
   public adminLogin: boolean = false;
   public isLoggedin: boolean = false;
-
-  constructor(private authService: AuthService, private alertService: AlertService, private eventService: EventService) { }
+  constructor(private authService: AuthService, private alertService: AlertService, private eventService: EventService) {
+   }
 
   ngOnInit(): void {
     this.adminLogin = this.authService.isAdminLogin();
@@ -29,7 +28,8 @@ export class UserToolbarComponent implements OnInit {
     })
   }
 
-  sideBarToggle(){
+  onMenuClick(){
     this.eventService.userSetSideBar()
   }
+
 }

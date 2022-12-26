@@ -1,4 +1,9 @@
-<div class="w-full h-full min-h-screen flex flex-col">
-  <app-user-toolbar></app-user-toolbar>
-  <router-outlet></router-outlet>
-</div>
+<mat-drawer-container class="h-auto min-h-screen">
+  <mat-drawer mode="over"  (closed)="onClose()" [opened]="sideBarShow ? true : false" class="h-screen min-h-screen fixed top-0 left-0 z-10">
+    <app-user-sidebar></app-user-sidebar>
+  </mat-drawer>
+  <mat-drawer-content class="h-auto min-h-screen">
+    <app-user-toolbar></app-user-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

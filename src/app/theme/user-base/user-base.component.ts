@@ -1,3 +1,4 @@
+import { EventService } from './../../services/event.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-base.component.scss']
 })
 export class UserBaseComponent implements OnInit {
-
-  constructor() { }
+  public sideBarShow: Boolean = false;
+  constructor(private eventService: EventService) {
+    this.eventService.userGetSideBar().subscribe((res: any) => {
+      if (res) {
+        this.sideBarShow = !this.sideBarShow
+      }
+    })
+   }
 
   ngOnInit(): void {
+  }
+
+  onClose(){
+    this.eventService.userSetSideBar()
   }
 
 }

@@ -32,9 +32,8 @@ export class HomeComponent implements OnInit {
   initCalendar(){
     this.calendarOptions = {
       headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek',
+        left: 'title',
+        right: 'today,prev,next dayGridMonth,timeGridWeek',
       },
       initialView: 'dayGridMonth',
       events: this.events,
@@ -50,16 +49,16 @@ export class HomeComponent implements OnInit {
       },
       displayEventEnd: true,
       buttonText: {
-        prev: '< ก่อนหน้า',
-        next: 'ข้างหน้า >',
+        prev: '<',
+        next: '>',
         today: 'วันนี้',
         month: 'เดือน',
         week: 'สัปดาห์',
-
       },
       eventOverlap: true,
+      eventDisplay: 'block',
       aspectRatio: 1.75,
-      contentHeight: 540,
+      contentHeight: 650,
       dateClick: this.onDateClick.bind(this)
 
     };

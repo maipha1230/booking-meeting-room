@@ -17,6 +17,7 @@ import { DeviceModalComponent } from './device-modal/device-modal.component';
 import { SwiperModule } from 'swiper/angular';
 import { BookingModalComponent } from './booking-modal/booking-modal.component';
 import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-modal.component';
+import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-mod
     UserToolbarComponent,
     DeviceModalComponent,
     BookingModalComponent,
-    EditBookingModalComponent
+    EditBookingModalComponent,
+    UserSidebarComponent,
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-mod
     MaterialModule,
     UserToolbarComponent,
     PipesModule,
-    SwiperModule
+    SwiperModule,
+    UserSidebarComponent
 
   ]
 })

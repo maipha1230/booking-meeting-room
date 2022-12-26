@@ -1,0 +1,42 @@
+<div class="flex flex-col px-3 py-5 bg-youngsalmon w-52 h-auto min-h-screen">
+  <a routerLink="/">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">หน้าแรก</p>
+    </div>
+  </a>
+  <a routerLink="/meeting-room">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">ห้องประชุม</p>
+    </div>
+  </a>
+  <a routerLink="/booking-meeting-room">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">จองห้องประชุม</p>
+    </div>
+  </a>
+  <a routerLink="/booking-list">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">การจองของฉัน</p>
+    </div>
+  </a>
+  <a routerLink="/meeting-room">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">จัดการโปรไฟล์</p>
+    </div>
+  </a>
+  <a routerLink="/admin" *ngIf="adminLogin">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">ไปยังหน้าผู้ดูแล</p>
+    </div>
+  </a>
+  <a routerLink="/login" *ngIf="!isLoggedin">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">เช้าสู่ระบบ</p>
+    </div>
+  </a>
+  <a *ngIf="isLoggedin" (click)="onLogout()">
+    <div class="w-full h-auto p-2 bg-youngsalmon hover:bg-prettyplease duration-200 flex items-center rounded-md">
+      <p class="text-base text-black hover:text-lightred hover:cursor-pointer duration-200 font-bold">ออกจากระบบ</p>
+    </div>
+  </a>
+</div>

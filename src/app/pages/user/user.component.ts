@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
   onAddUser(){
     let dialogRef = this.dialog.open(UserModalComponent, {
       width: "auto",
-      minWidth: "400px",
+      minWidth: '400px',
       height: "95%",
     })
 

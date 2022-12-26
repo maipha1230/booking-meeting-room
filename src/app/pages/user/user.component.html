@@ -9,10 +9,157 @@
   </div>
 
 
-  <div class="flex flex-row my-2" *ngIf="users.length > 0">
+  <div class="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 " *ngIf="users.length > 0">
 
     <!-- card-user -->
-    <div class="rounded-lg bg-white w-72 shadow-lg mx-4" *ngFor="let user of users">
+    <div class="rounded-lg bg-white w-full shadow-lg mx-2" *ngFor="let user of users">
+      <div class="relative">
+        <div
+        *ngIf="user.status == 1"
+        class="w-5 h-5 bg-green-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-green-500/50">
+      </div>
+        <div
+        *ngIf="user.status == 2"
+        class="w-5 h-5 bg-red-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-red-500/50">
+      </div>
+      <div class="w-full h-48">
+        <img *ngIf="user.picture_url" class="block object-cover object-center w-full h-full rounded-lg" style="object-fit: cover;" [src]="user.picture_url" alt=""/>
+         <img *ngIf="!user.picture_url" class="block object-cover object-center w-full h-full rounded-lg" style="object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgTgK1EYhwitE3CCCdbK1bNwFIu-vo2B5dnA&usqp=CAU" alt=""/>
+      </div>
+      </div>
+      <div class="p-4">
+        <label class="text-gray-900 break-words text-lg font-bold mb-2">{{(user.f_name.length +  user.f_name.length > 20) ? (user.f_name + ' '+ user.l_name | slice:0:20)+'...':(user.f_name+ ' '+user.l_name)}}</label>
+        <p class="text-gray-700 break-words text-base mb-2">
+          เบอร์โทร: {{user.phone}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          อีเมลล์: {{ (user.email.length > 15) ? (user.email | slice:0:15)+'...':(user.email) }}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ตำแหน่ง: {{(user.position.length > 15) ? (user.position | slice:0:15)+'...':(user.position)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          สังกัด: {{(user.affiliation.length > 15) ? (user.affiliation | slice:0:15)+'...':(user.affiliation)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ระดับ: {{(user.rank.length > 15) ? (user.rank | slice:0:15)+'...':(user.rank)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ประเภทบรรจุ: {{(user.type.length > 15) ? (user.type | slice:0:15)+'...':(user.type)}}
+        </p>
+      </div>
+      <div class="flex flex-row justify-end mb-2">
+        <button type="button"
+        (click)="onEditUser(user.user_id)"
+        class="inline-block mx-2 px-6 py-2.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition duration-150 ease-in-out">
+        แก้ไข
+      </button>
+        <button type="button"
+        (click)="onRemoveUser(user.user_id)"
+        class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out">
+        ลบ
+      </button>
+      </div>
+    </div>
+    <div class="rounded-lg bg-white w-full shadow-lg mx-4" *ngFor="let user of users">
+      <div class="relative">
+        <div
+        *ngIf="user.status == 1"
+        class="w-5 h-5 bg-green-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-green-500/50">
+      </div>
+        <div
+        *ngIf="user.status == 2"
+        class="w-5 h-5 bg-red-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-red-500/50">
+      </div>
+      <div class="w-full h-48">
+        <img *ngIf="user.picture_url" class="block object-cover object-center w-full h-full rounded-lg" style="object-fit: cover;" [src]="user.picture_url" alt=""/>
+         <img *ngIf="!user.picture_url" class="block object-cover object-center w-full h-full rounded-lg" style="object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgTgK1EYhwitE3CCCdbK1bNwFIu-vo2B5dnA&usqp=CAU" alt=""/>
+      </div>
+      </div>
+      <div class="p-4">
+        <label class="text-gray-900 break-words text-lg font-bold mb-2">{{(user.f_name.length +  user.f_name.length > 20) ? (user.f_name + ' '+ user.l_name | slice:0:20)+'...':(user.f_name+ ' '+user.l_name)}}</label>
+        <p class="text-gray-700 break-words text-base mb-2">
+          เบอร์โทร: {{user.phone}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          อีเมลล์: {{ (user.email.length > 15) ? (user.email | slice:0:15)+'...':(user.email) }}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ตำแหน่ง: {{(user.position.length > 15) ? (user.position | slice:0:15)+'...':(user.position)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          สังกัด: {{(user.affiliation.length > 15) ? (user.affiliation | slice:0:15)+'...':(user.affiliation)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ระดับ: {{(user.rank.length > 15) ? (user.rank | slice:0:15)+'...':(user.rank)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ประเภทบรรจุ: {{(user.type.length > 15) ? (user.type | slice:0:15)+'...':(user.type)}}
+        </p>
+      </div>
+      <div class="flex flex-row justify-end mb-2">
+        <button type="button"
+        (click)="onEditUser(user.user_id)"
+        class="inline-block mx-2 px-6 py-2.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition duration-150 ease-in-out">
+        แก้ไข
+      </button>
+        <button type="button"
+        (click)="onRemoveUser(user.user_id)"
+        class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out">
+        ลบ
+      </button>
+      </div>
+    </div>
+    <div class="rounded-lg bg-white w-full shadow-lg mx-4" *ngFor="let user of users">
+      <div class="relative">
+        <div
+        *ngIf="user.status == 1"
+        class="w-5 h-5 bg-green-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-green-500/50">
+      </div>
+        <div
+        *ngIf="user.status == 2"
+        class="w-5 h-5 bg-red-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-red-500/50">
+      </div>
+      <div class="w-full h-48">
+        <img *ngIf="user.picture_url" class="block object-cover object-center w-full h-full rounded-lg" style="object-fit: cover;" [src]="user.picture_url" alt=""/>
+         <img *ngIf="!user.picture_url" class="block object-cover object-center w-full h-full rounded-lg" style="object-fit: cover;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgTgK1EYhwitE3CCCdbK1bNwFIu-vo2B5dnA&usqp=CAU" alt=""/>
+      </div>
+      </div>
+      <div class="p-4">
+        <label class="text-gray-900 break-words text-lg font-bold mb-2">{{(user.f_name.length +  user.f_name.length > 20) ? (user.f_name + ' '+ user.l_name | slice:0:20)+'...':(user.f_name+ ' '+user.l_name)}}</label>
+        <p class="text-gray-700 break-words text-base mb-2">
+          เบอร์โทร: {{user.phone}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          อีเมลล์: {{ (user.email.length > 15) ? (user.email | slice:0:15)+'...':(user.email) }}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ตำแหน่ง: {{(user.position.length > 15) ? (user.position | slice:0:15)+'...':(user.position)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          สังกัด: {{(user.affiliation.length > 15) ? (user.affiliation | slice:0:15)+'...':(user.affiliation)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ระดับ: {{(user.rank.length > 15) ? (user.rank | slice:0:15)+'...':(user.rank)}}
+        </p>
+        <p class="text-gray-700 break-words text-base mb-2">
+          ประเภทบรรจุ: {{(user.type.length > 15) ? (user.type | slice:0:15)+'...':(user.type)}}
+        </p>
+      </div>
+      <div class="flex flex-row justify-end mb-2">
+        <button type="button"
+        (click)="onEditUser(user.user_id)"
+        class="inline-block mx-2 px-6 py-2.5 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition duration-150 ease-in-out">
+        แก้ไข
+      </button>
+        <button type="button"
+        (click)="onRemoveUser(user.user_id)"
+        class="inline-block mx-2 px-6 py-2.5 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out">
+        ลบ
+      </button>
+      </div>
+    </div>
+    <div class="rounded-lg bg-white w-full shadow-lg mx-4" *ngFor="let user of users">
       <div class="relative">
         <div
         *ngIf="user.status == 1"

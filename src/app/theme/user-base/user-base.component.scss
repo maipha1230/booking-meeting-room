@@ -1,0 +1,25 @@
+::host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: none;
+}
+
+mat-drawer-container {
+  height: 100%;
+  border: none;
+}
+
+mat-drawer{
+  width: 208px;
+  height: 100%;
+  border: none;
+}
+
+// .toggled {
+//   margin-left: -320px;
+// }
+
+// .untoggled {
+//   margin-left: 0;
+// }

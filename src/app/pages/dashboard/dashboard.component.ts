@@ -35,6 +35,8 @@ export class DashboardComponent implements OnInit {
         if (res.status == 1) {
           if (res.data) {
             this.bookingsOverview = res.data
+            console.log(res.data);
+
           }
           if (res.total) {
             this.bookingsTotal = res.total

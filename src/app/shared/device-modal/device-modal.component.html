@@ -8,7 +8,7 @@
           *ngIf="!image_device && !image_upload_status"
           alt="gallery"
           class="block object-cover object-center w-full h-full rounded-lg"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgTgK1EYhwitE3CCCdbK1bNwFIu-vo2B5dnA&usqp=CAU"
+          src="../../../assets/images/upload-device.png"
         />
         <img
           *ngIf="image_device && image_upload_status"
@@ -42,7 +42,7 @@
 
   <form [formGroup]="formDevice">
     <div class="flex flex-col">
-      <div class="mb-1 w-96 mx-2">
+      <div class="mb-1 w-full mx-2">
         <label class="text-base text-gray-700">ชื่ออุปกรณ์</label>
         <mat-form-field appearance="outline" class="w-full">
           <input

@@ -6,8 +6,8 @@
     <mat-chip (click)="onChangeStatusView(2)" [selected]="approve_status === 2 ? true : false" class="bg-red-500 text-white text-base hover:cursor-pointer">ไม่อนุญาต</mat-chip>
   </mat-chip-list>
 
-  <div class="flex flex-row flex-wrap my-2 gap-5">
-    <div class="rounded-lg bg-white w-64 shadow-lg relative" *ngFor="let booking of booking_list">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 my-2 gap-2">
+    <div class="rounded-lg bg-white w-full shadow-lg relative" *ngFor="let booking of booking_list">
       <div *ngIf="booking.approve_status == 0" class="w-5 h-5 bg-yellow-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-yellow-500/50">
       </div>
       <div *ngIf="booking.approve_status == 1" class="w-5 h-5 bg-green-500 rounded-full z-10 absolute right-2 top-2 shadow-lg shadow-green-500/50">

@@ -1,3 +1,4 @@
+import { EventService } from './../../services/event.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminBaseComponent implements OnInit {
 
-  constructor() { }
+  public sideBarShow: Boolean = false;
+  constructor(private eventService: EventService) {
+    this.eventService.getSideBar().subscribe((res: any) => {
+      if (res) {
+        this.sideBarShow = !this.sideBarShow
+      }
+    })
+  }
 
   ngOnInit(): void {
+  }
+
+  onClose(){
+    this.eventService.setSideBar()
   }
 
 }

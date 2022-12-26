@@ -1,18 +1,21 @@
 <div
-  class="min-h-screen h-auto bg-slate-300 w-full flex flex-col justify-center items-center"
+  class="min-h-screen h-auto bg-slate-300 w-full flex flex-col justify-center items-center p-2"
 >
   <div
-    class="w-2/5 min-w-fit h-auto bg-white rounded-lg shadow-lg flex flex-col content-start items-center p-6"
+    class="w-full md:w-2/5 min-w-fit h-auto bg-white rounded-lg shadow-lg flex flex-col content-start items-center p-6"
   >
     <img src="../../../assets/images//logo.png" alt="logo" class="w-40 h-40" />
-    <label class="my-2 text-xl font-bold"
+    <label class="hidden sm:block my-2 text-xl font-bold"
       >ระบบจองห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ 7</label
+    >
+    <label class="block sm:hidden my-2 text-xl font-bold"
+      >ระบบจองห้องประชุม ศบส.7</label
     >
     <mat-tab-group class="items-center">
       <mat-tab label="ผู้ใช้งาน" class="text-base font-bold">
         <form [formGroup]="formUser">
           <div class="flex flex-col items-center py-2">
-            <div class="mb-1 w-96 mx-2">
+            <div class="mb-1 w-full mx-2">
               <label class="text-base text-gray-700">ชื่อ-นามสกุล</label>
               <mat-form-field appearance="outline" class="w-full">
                 <mat-select class="w-full text-base pl-2" placeholder="ชื่อ-นามสกุล" formControlName="username">
@@ -21,7 +24,7 @@
                 <mat-error class="text-xs">กรุณาระบุชื่อ-นามสกุล</mat-error>
               </mat-form-field>
             </div>
-            <div class="mb-1 w-96 mx-2">
+            <div class="mb-1 w-full mx-2">
               <label class="text-base text-gray-700">รหัสผ่าน</label>
               <mat-form-field appearance="outline" class="w-full">
                 <input
@@ -36,7 +39,7 @@
                 <mat-error class="text-xs">กรุณากรอกรหัสผ่าน</mat-error>
               </mat-form-field>
             </div>
-            <div>
+            <div class="flex flex-row justify-center items-center">
               <button
               (click)="onLoginUser()"
               type="submit"
@@ -58,7 +61,7 @@
       <mat-tab label="ผู้ดูแลระบบ" class="text-base font-bold">
         <form action="" [formGroup]="formAdmin">
           <div class="flex flex-col items-center py-2">
-            <div class="mb-1 w-96 mx-2">
+            <div class="mb-1 w-full mx-2">
               <label class="text-base text-gray-700">ชื่อ-นามสกุล</label>
               <mat-form-field appearance="outline" class="w-full">
                 <mat-select class="w-full text-base pl-2" placeholder="ชื่อ-นามสกุล" formControlName="username">
@@ -67,7 +70,7 @@
                 <mat-error class="text-xs">กรุณาระบุชื่อ-นามสกุล</mat-error>
               </mat-form-field>
             </div>
-            <div class="mb-1 w-96 mx-2">
+            <div class="mb-1 w-full mx-2">
               <label class="text-base text-gray-700">รหัสผ่าน</label>
               <mat-form-field appearance="outline" class="w-full">
                 <input
@@ -82,7 +85,7 @@
                 <mat-error class="text-xs">กรุณากรอกรหัสผ่าน</mat-error>
               </mat-form-field>
             </div>
-            <div>
+            <div class="flex flex-row justify-center items-center">
               <button
               (click)="onLoginAdmin()"
               type="submit"

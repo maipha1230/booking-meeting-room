@@ -1,8 +1,8 @@
 <!-- user-setting -->
 <label class="text-xl font-bold">หมวดหมู่ผู้ใช้งาน</label>
-<div class="flex flex-row flex-wrap my-2 gap-8 ">
+<div class="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
   <!-- สังกัด -->
-  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+  <div class="flex flex-col p-3 rounded-lg bg-white w-full shadow-lg">
     <label class="text-lg font-bold ">สังกัด</label>
     <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
       <div *ngFor="let userAffiliation of userAffiliationList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
@@ -17,7 +17,7 @@
   </div>
 
   <!-- ตำแหน่ง -->
-  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+  <div class="flex flex-col p-3 rounded-lg bg-white w-full shadow-lg">
    <label class="text-lg font-bold ">ตำแหน่ง</label>
    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
      <div *ngFor="let userPosition of userPositionList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
@@ -32,7 +32,7 @@
  </div>
 
   <!-- ระดับ -->
-  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+  <div class="flex flex-col p-3 rounded-lg bg-white w-full shadow-lg">
    <label class="text-lg font-bold ">ระดับ</label>
    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
      <div *ngFor="let userRank of userRankList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
@@ -47,7 +47,7 @@
  </div>
 
   <!-- ประเภทบรรจุ -->
-  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+  <div class="flex flex-col p-3 rounded-lg bg-white w-full shadow-lg">
    <label class="text-lg font-bold ">ประเภทบรรจุ</label>
    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
      <div *ngFor="let userType of userTypeList" class="flex flex-row place-content-between my-0.5 px-2 py-2 bg-secondary rounded snap-start">
@@ -62,7 +62,7 @@
  </div>
 
   <!-- บทบาท -->
-  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+  <div class="flex flex-col p-3 rounded-lg bg-white w-full shadow-lg">
    <label class="text-lg font-bold ">บทบาท</label>
    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
      <div *ngFor="let userRole of userRoleList"  class="flex flex-row place-content-between bg-secondary my-0.5 px-2 py-2 rounded snap-start">
@@ -77,7 +77,7 @@
  </div>
 
  <!-- สถานะ -->
-  <div class="flex flex-col p-3 rounded-lg bg-white w-64 shadow-lg">
+  <div class="flex flex-col p-3 rounded-lg bg-white w-full shadow-lg">
    <label class="text-lg font-bold ">สถานะ</label>
    <div class="flex flex-col my-2 h-40 overflow-auto snap-y">
      <div *ngFor="let userStatus of userStatusList"  class="flex flex-row place-content-between bg-secondary my-0.5 px-2 py-2 rounded snap-start">

@@ -84,4 +84,8 @@ export class BookingModalComponent implements OnInit {
     })
   }
 
+  onClose(){
+    this.dialogRef.close()
+  }
+
 }

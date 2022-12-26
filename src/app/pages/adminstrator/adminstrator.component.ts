@@ -33,7 +33,7 @@ export class AdminstratorComponent implements OnInit {
   onAddAdmin(){
     let dialogRef = this.dialog.open(AdminModalComponent, {
       width: "auto",
-      minWidth: "400px",
+      minWidth: '400px',
       height: "95%",
     })
 
@@ -47,7 +47,7 @@ export class AdminstratorComponent implements OnInit {
   onEditAdmin(user_id: number) {
     let dialogRef = this.dialog.open(AdminModalComponent, {
       width: "auto",
-      minWidth: "400px",
+      minWidth: '400px',
       height: "95%",
       data: {
         user_id: user_id

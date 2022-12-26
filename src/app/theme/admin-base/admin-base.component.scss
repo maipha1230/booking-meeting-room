@@ -11,7 +11,15 @@ mat-drawer-container {
 }
 
 mat-drawer{
-  width: 320px;
+  width: 288px;
   height: 100%;
   border: none;
+}
+
+.toggled {
+  margin-left: -320px;
+}
+
+.untoggled {
+  margin-left: 0;
 }

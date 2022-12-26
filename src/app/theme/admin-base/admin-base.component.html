@@ -1,5 +1,5 @@
 <mat-drawer-container class="h-auto min-h-screen">
-  <mat-drawer mode="side" opened class="h-screen min-h-screen fixed top-0 left-0">
+  <mat-drawer ngClass="[sideBarClass]" (closed)="onClose()" mode="over" [opened]="sideBarShow ? true : false" class="h-screen min-h-screen fixed top-0 left-0 z-10 ">
     <app-side-bar></app-side-bar>
   </mat-drawer>
   <mat-drawer-content class="h-auto min-h-screen">
