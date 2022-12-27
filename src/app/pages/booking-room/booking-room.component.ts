@@ -1,3 +1,4 @@
+import { MeetingRoomService } from './../../services/meeting-room.service';
 import { BookingModalComponent } from './../../shared/booking-modal/booking-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BookingService } from './../../services/booking.service';
@@ -12,19 +13,25 @@ export class BookingRoomComponent implements OnInit {
 
   public booking_list: any[] = []
   public approve_status: number = 0;
+  public room_list: any[] = []
 
-  constructor(private bookingUservice: BookingService, private dialog: MatDialog) { }
+  constructor(private bookingUservice: BookingService, private dialog: MatDialog, public meetingRoomService: MeetingRoomService) { }
 
   ngOnInit(): void {
-    this.getBookingList();
+    this.getRoomList();
   }
 
   getBookingList(){
-    this.bookingUservice.getBookingList(this.approve_status).subscribe((res: any) => {
+    let room_selected = this.room_list.filter((room: any) => {
+      return room.selected == true
+    })
+    let room:number[] = []
+    room_selected.forEach((r: any) => {
+      room.push(r.room_id)
+    })
+    this.bookingUservice.getBookingList(this.approve_status, room).subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
-          console.log(res.data);
-
           this.booking_list = res.data
         }
       }
@@ -50,6 +57,29 @@ export class BookingRoomComponent implements OnInit {
 
   onChangeStatusView(status: number){
     this.approve_status = status
+    this.getBookingList();
+  }
+
+  getRoomList(){
+    this.meetingRoomService.getRoomList().subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          if (res.data) {
+            res.data.forEach((room: any) => {
+              this.room_list.push({
+                room_id: room.room_id,
+                room_name: room.room_name,
+                selected: true
+              })
+            })
+            this.getBookingList();
+          }
+        }
+      }
+    })
+  }
+
+  onRoomClick(){
     this.getBookingList();
   }
 

@@ -85,6 +85,8 @@ export class MeetingRoomSettingComponent implements OnInit {
               if (response.status == 1) {
                 this.alertService.successAlert(response.msg)
                 this.getMeetingRoomSize();
+              } else if (response.status == 2) {
+                this.alertService.warningAlert(res.msg)
               }
             }
           })
@@ -95,13 +97,15 @@ export class MeetingRoomSettingComponent implements OnInit {
   }
 
   removeMeetingRoomSize(id: number) {
-    this.alertService.ensureDeleteAlert("ต้องการลบใช่หรือไม่ หากคุณลบห้องประชุมที่ใช้ขนาดนี้จะถูกลบไปด้วย").subscribe((result: any) => {
+    this.alertService.ensureDeleteAlert("ต้องการลบขนาดห้องนี้ใช่หรือไม่?").subscribe((result: any) => {
       if (result) {
         this.meetingRoomService.removeMeetingRoomSize(id).subscribe((res: any) => {
           if (res) {
             if (res.status == 1) {
               this.alertService.successAlert(res.msg)
               this.getMeetingRoomSize();
+            } else if (res.status == 2) {
+              this.alertService.warningAlert(res.msg)
             }
           }
         })

@@ -48,8 +48,8 @@ export class UserSettingComponent implements OnInit {
       minWidth: '400px',
       height: 'auto',
       data: {
-        title_modal: 'เพิ่มสังกัดผู้ใช้งาน',
-        name_input: 'สังกัดผู้ใช้งาน',
+        title_modal: 'เพิ่มแผนกผู้ใช้งาน',
+        name_input: 'แผนกผู้ใช้งาน',
       },
     });
 
@@ -79,8 +79,8 @@ export class UserSettingComponent implements OnInit {
       minWidth: '400px',
       height: 'auto',
       data: {
-        title_modal: 'แก้ไขสังกัดผู้ใช้งาน',
-        name_input: 'สังกัดผู้ใช้งาน',
+        title_modal: 'แก้ไขแผนกผู้ใช้งาน',
+        name_input: 'แผนกผู้ใช้งาน',
         name_value: userAffiliation.user_affiliation_name,
       },
     });
@@ -96,6 +96,8 @@ export class UserSettingComponent implements OnInit {
                 if (response.status == 1) {
                   this.alertService.successAlert(response.msg)
                   this.getUserAffiliation();
+                } else if (response.status == 2 ) {
+                  this.alertService.warningAlert(response.msg)
                 }
               }
             });
@@ -107,7 +109,7 @@ export class UserSettingComponent implements OnInit {
   removeUserAffiliation(id: number) {
     this.alertService
       .ensureDeleteAlert(
-        'ต้องการลบใช่หรือไม่ หากคุณลบผู้ใช้งานที่อยู่ในสังกัดจะถูกลบไปด้วย'
+        'ต้องการลบแผนกนี้ใช่หรือไม่?'
       )
       .subscribe((result: any) => {
         if (result) {
@@ -116,6 +118,8 @@ export class UserSettingComponent implements OnInit {
               if (res.status == 1) {
                 this.alertService.successAlert(res.msg);
                 this.getUserAffiliation();
+              } else if (res.status == 2) {
+                this.alertService.warningAlert(res.msg)
               }
             }
           });
@@ -186,6 +190,8 @@ export class UserSettingComponent implements OnInit {
                 if (response.status == 1) {
                   this.alertService.successAlert(response.msg)
                   this.getUserPosition();
+                }else if (response.status == 2 ) {
+                  this.alertService.warningAlert(response.msg)
                 }
               }
             });
@@ -197,7 +203,7 @@ export class UserSettingComponent implements OnInit {
   removeUserPosition(id: number) {
     this.alertService
       .ensureDeleteAlert(
-        'ต้องการลบใช่หรือไม่ หากคุณลบผู้ใช้งานที่อยู่ในตำแหน่งจะถูกลบไปด้วย'
+        'ต้องการลบตำแหน่งนี้ใช่หรือไม่?'
       )
       .subscribe((result: any) => {
         if (result) {
@@ -206,6 +212,8 @@ export class UserSettingComponent implements OnInit {
               if (res.status == 1) {
                 this.alertService.successAlert(res.msg);
                 this.getUserPosition();
+              } else if (res.status == 2) {
+                this.alertService.warningAlert(res.msg)
               }
             }
           });
@@ -275,6 +283,8 @@ export class UserSettingComponent implements OnInit {
                 if (response.status == 1) {
                   this.alertService.successAlert(response.msg)
                   this.getUserRank();
+                }else if (response.status == 2 ) {
+                  this.alertService.warningAlert(response.msg)
                 }
               }
             });
@@ -286,7 +296,7 @@ export class UserSettingComponent implements OnInit {
   removeUserRank(id: number) {
     this.alertService
       .ensureDeleteAlert(
-        'ต้องการลบใช่หรือไม่ หากคุณลบผู้ใช้งานที่อยู่ในระดับจะถูกลบไปด้วย'
+        'ต้องการลบระดับนี้ใช่หรือไม่?'
       )
       .subscribe((result: any) => {
         if (result) {
@@ -295,6 +305,8 @@ export class UserSettingComponent implements OnInit {
               if (res.status == 1) {
                 this.alertService.successAlert(res.msg);
                 this.getUserRank();
+              } else if (res.status == 2) {
+                this.alertService.warningAlert(res.msg)
               }
             }
           });
@@ -364,6 +376,8 @@ export class UserSettingComponent implements OnInit {
                 if (response.status == 1) {
                   this.alertService.successAlert(response.msg)
                   this.getUserType();
+                } else if (response.status == 2 ) {
+                  this.alertService.warningAlert(response.msg)
                 }
               }
             });
@@ -375,7 +389,7 @@ export class UserSettingComponent implements OnInit {
   removeUserType(id: number) {
     this.alertService
       .ensureDeleteAlert(
-        'ต้องการลบใช่หรือไม่ หากคุณลบผู้ใช้งานที่อยู่ในประเภทบรรจุจะถูกลบไปด้วย'
+        'ต้องการลบประเภทบรรจุนี้ใช่หรือไม่?'
       )
       .subscribe((result: any) => {
         if (result) {
@@ -384,6 +398,8 @@ export class UserSettingComponent implements OnInit {
               if (res.status == 1) {
                 this.alertService.successAlert(res.msg);
                 this.getUserType();
+              } else if (res.status == 2) {
+                this.alertService.warningAlert(res.msg)
               }
             }
           });

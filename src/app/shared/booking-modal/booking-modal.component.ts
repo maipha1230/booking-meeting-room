@@ -53,14 +53,34 @@ export class BookingModalComponent implements OnInit {
   }
 
   onPermitClick(permit: number){
-    this.bookingService.bookingPermission(this.booking.booking_id, permit).subscribe((res: any) => {
-      if (res) {
-        if (res.status == 1) {
-          this.alertService.successAlert(res.msg)
-          this.dialogRef.close(true)
+    if (permit == 1) {
+      this.alertService.ensureAlert("อนุญาตใช่หรือไม่?").subscribe((confirm: any) => {
+        if (confirm) {
+          this.bookingService.bookingPermission(this.booking.booking_id, permit).subscribe((res: any) => {
+            if (res) {
+              if (res.status == 1) {
+                this.alertService.successAlert(res.msg)
+                this.dialogRef.close(true)
+              }
+            }
+          })
         }
-      }
-    })
+      })
+    } else if (permit == 2) {
+      this.alertService.ensureAlert("ปฏิเสธใช่หรือไม่?").subscribe((confirm: any) => {
+        if (confirm) {
+          this.bookingService.bookingPermission(this.booking.booking_id, permit).subscribe((res: any) => {
+            if (res) {
+              if (res.status == 1) {
+                this.alertService.successAlert(res.msg)
+                this.dialogRef.close(true)
+              }
+            }
+          })
+        }
+      })
+    }
+
   }
 
   onEditBooking(){

@@ -142,7 +142,9 @@ export class EditBookingModalComponent implements OnInit {
 
   onSubmitBookingForm() {
     if (this.formBooking.valid) {
-      if (!this.timeCheck() || !this.dateCheck()) {
+      if (!this.dateCheck()) {
+        this.alertService.warningAlert("ไม่สามารถเลือกวันที่ผ่านมาแล้วได้")
+      } else if (!this.timeCheck()) {
         this.alertService.warningAlert('กรุณาเลือกเวลาจากน้อยไปหามาก');
       } else {
         const form = this.prepareForm();
@@ -199,15 +201,19 @@ export class EditBookingModalComponent implements OnInit {
   dateCheck(){
     let dateNow = new Date();
     let datePicked = new Date(this.formBooking.controls['date'].value);
-    datePicked.getFullYear()
-    console.log(datePicked.getFullYear());
 
-    if (datePicked.getFullYear() >= dateNow.getFullYear()) {
-      if (datePicked.getMonth() >= dateNow.getMonth()) {
+    datePicked.getFullYear()
+
+    if (datePicked.getFullYear() == dateNow.getFullYear()) {
+      if (datePicked.getMonth() == dateNow.getMonth()) {
         if (datePicked.getDate() >= dateNow.getDate()) {
           return true;
         }
+      } else if (datePicked.getMonth() > dateNow.getMonth()) {
+        return true;
       }
+    } else if (datePicked.getFullYear() > dateNow.getFullYear()) {
+      return true;
     }
     return false;
   }
