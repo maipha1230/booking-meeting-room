@@ -1,3 +1,4 @@
+import { HistoryComponent } from './pages/history/history.component';
 import { BookingListComponent } from './pages/booking-list/booking-list.component';
 import { UserGuard } from './services/user.guard';
 import { BookingComponent } from './pages/booking/booking.component';
@@ -82,6 +83,10 @@ const routes: Routes = [
       {
         path: 'adminstrator',
         component: AdminstratorComponent
+      },
+      {
+        path: 'history',
+        component: HistoryComponent
       },
       {
         path: 'other-setting',

@@ -42,4 +42,8 @@ export class BookingService {
       link: data.link
     })
   }
+
+  getBookingHistory(dateFrom: any, dateTo: any): Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/getBookingHistory`, { dateFrom: dateFrom, dateTo: dateTo })
+  }
 }

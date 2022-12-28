@@ -1,0 +1,75 @@
+<div class="w-full h-auto flex flex-col lg:flex-row gap-2">
+  <div class="flex flex-col w-full lg:w-1/2">
+    <div
+      class="w-full h-auto bg-white rounded-lg shadow-lg p-3 flex flex-col my-2"
+    >
+      <label class="text-lg font-bold my-2">{{room?.room_name}}</label>
+      <div
+        class="w-full h-auto grid grid-cols-2 lg:grid-cols-3 gap-2 p-2 bg-slate-300 rounded my-2"
+      >
+        <img
+          *ngFor="let img of room?.gallery"
+          [src]="img"
+          class="w-full block object-cover object-center h-auto rounded-lg"
+        />
+      </div>
+      <p class="text-base">ขนาด: {{room?.size}}</p>
+      <p class="text-base">ความจุ: {{room?.capacity}} คน</p>
+      <p class="text-base">สถานะ: {{room?.status}}</p>
+    </div>
+    <div
+      class="w-full h-auto bg-white rounded-lg shadow-lg p-3 flex flex-col my-2"
+    >
+      <label class="text-lg font-bold my-2">คำร้องขอจองห้องประชุม</label>
+      <div class="flex flex-col">
+        <p class="text-base">เรื่อง: {{booking?.title}}</p>
+        <p class="text-base">จุดประสงค์: {{booking?.purpose}}</p>
+        <p class="text-base">จำนวนผู้เข้าร่วม: {{booking?.quantity}} คน</p>
+        <p class="text-base">อุปกรณ์ที่ใช้:</p>
+        <div class="flex flex-row flex-wrap gap-2 p-2">
+          <li *ngFor="let device of booking?.device">{{device}}</li>
+        </div>
+        <p class="text-base">ใช้งานวันที่: {{booking?.date | thaidate: "medium" }}</p>
+        <p class="text-base">เวลา: {{booking?.time_start}} - {{booking?.time_end}}</p>
+        <p class="text-base">ลิงค์ออนไลน์ <a class="text-blue-500" [href]="booking?.link" target="_blank">{{booking?.link}}</a></p>
+        <p class="text-base">ยื่นคำร้องวันที่: {{booking?.createdAt | thaidate: "medium"}}</p>
+      </div>
+    </div>
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div class="flex flex-col w-full lg:w-1/2">
+    <div
+      class="w-full h-auto bg-white rounded-lg shadow-lg p-3 flex flex-col my-2"
+    >
+      <label class="text-lg font-bold my-2">ผู้ยื่นคำร้อง</label>
+      <div class="flex justify-center items-center my-2">
+        <img
+          class="w-32 h-32 block object-cover object-center rounded-lg"
+          [src]="user?.picture_url"
+          alt=""
+        />
+      </div>
+      <p class="text-base">ชื่อ: {{user?.name}}</p>
+      <p class="text-base">สังกัด: {{user?.affiliation}}</p>
+      <p class="text-base">ตำแหน่ง: {{user?.position}}</p>
+      <p class="text-base">ระดับ: {{user?.rank}}</p>
+      <p class="text-base">ประเภทบรรจุ: {{user?.type}}</p>
+      <p class="text-base">เบอร์โทร: {{user?.phone}}</p>
+      <p class="text-base">อีเมล: {{user?.email}}</p>
+    </div>
+    <div
+      class="w-full h-full p-3 flex flex-col justify-end my-2 "
+    >
+      <div class="flex flex-row flex-wrap justify-end gap-2">
+        <button
+          (click)="onClose()"
+          type="submit"
+          class="w-32 h-12 text-base text-white rounded bg-gray-400 justify-center items-center hover:bg-gray-600 hover:cursor-pointer duration-150"
+        >
+          ปิด
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

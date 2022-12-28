@@ -18,6 +18,7 @@ import { SwiperModule } from 'swiper/angular';
 import { BookingModalComponent } from './booking-modal/booking-modal.component';
 import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-modal.component';
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
+import { BookingDetailModalComponent } from './booking-detail-modal/booking-detail-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
     BookingModalComponent,
     EditBookingModalComponent,
     UserSidebarComponent,
+    BookingDetailModalComponent,
   ],
   imports: [
     CommonModule,

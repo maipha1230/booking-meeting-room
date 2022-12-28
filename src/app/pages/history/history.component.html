@@ -1,0 +1,185 @@
+<div class="p-6 flex flex-col min-h-screen h-full">
+  <label class="text-2xl font-bold mb-5">ประวัติการใช้งานห้องประชุม</label>
+  <div class="flex flex-col lg:flex-row">
+    <form [formGroup]="formDate" class="flex flex-col lg:flex-row gap-2">
+      <mat-form-field appearance="fill">
+        <mat-label class="text-base font-bold text-gray-700"
+          >เลือกวันที่</mat-label
+        >
+        <input
+          matInput
+          [matDatepicker]="pickerFrom"
+          class="w-full text-base"
+          formControlName="dateFrom"
+        />
+        <mat-hint>วัน/เดือน/ปี</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerFrom"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label class="text-base font-bold text-gray-700"
+          >เลือกวันที่</mat-label
+        >
+        <input
+          matInput
+          [matDatepicker]="pickerTo"
+          class="w-full text-base"
+          formControlName="dateTo"
+        />
+        <mat-hint>วัน/เดือน/ปี</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerTo"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo></mat-datepicker>
+      </mat-form-field>
+    </form>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mx-3 justify-center items-center my-2">
+      <div class="w-full">
+        <button
+          (click)="onSearchClick()"
+          type="button"
+          class="w-full inline-block px-6 py-2.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out"
+        >
+          <i class="bi bi-search font-bold"></i> ค้นหา
+        </button>
+      </div>
+      <div class="w-full" *ngIf="showDownload">
+        <button
+          type="button"
+          class="w-full inline-block px-6 py-2.5 bg-green-500 text-white rounded hover:bg-green-600 transition duration-150 ease-in-out"
+        >
+          <i class="bi bi-file-earmark-excel-fill"></i> ดาวน์โหลด Excel
+        </button>
+      </div>
+      <div class="w-full" *ngIf="showDownload">
+        <button
+          type="button"
+          class="w-full inline-block px-6 py-2.5 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out"
+        >
+          <i class="bi bi-file-earmark-pdf-fill"></i> ดาวน์โหลด PDF
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="w-full h-full rounded-lg shadow-lg bg-white p-3 flex flex-col my-3"
+  >
+    <div class="hidden lg:flex flex-col ">
+      <label class="text-base mx-1">ค้นหา</label>
+      <mat-form-field appearance="outline" class="w-full">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target)"
+          placeholder="ค้นหา"
+          autocomplete="off"
+        />
+      </mat-form-field>
+    </div>
+    <div class="hidden lg:block w-full">
+      <table mat-table [dataSource]="dataSource" matSort class="w-full">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ลำดับ</th>
+          <td mat-cell *matCellDef="let data; let i = index">{{ i + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="room">
+          <th mat-header-cell *matHeaderCellDef>ห้องประชุม</th>
+          <td mat-cell *matCellDef="let data">{{ data.room_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>เรื่อง</th>
+          <td mat-cell *matCellDef="let data">{{ data.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="purpose">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>จุดประสงค์</th>
+          <td mat-cell *matCellDef="let data">{{ data.purpose }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>จำนวนผู้เข้าร่วม</th>
+          <td mat-cell *matCellDef="let data">{{ data.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>วันที่</th>
+          <td mat-cell *matCellDef="let data">
+            {{ data.date | thaidate : "medium" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>เวลา</th>
+          <td mat-cell *matCellDef="let data">{{ data.time }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef>ผู้จอง</th>
+          <td mat-cell *matCellDef="let data">{{ data.user }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>ดูรายละเอียด</th>
+          <td mat-cell *matCellDef="let data">
+            <div>
+              <button
+                (click)="onDetailClick(data.booking_id)"
+                type="button"
+                class="w-auto px-2 py-2.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out"
+              >
+                <i class="bi bi-eye-fill text-base"></i> ดูรายละเอียด
+              </button>
+            </div>
+          </td></ng-container
+        >
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let data; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      class="hidden lg:block"
+      #paginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      showFirstLastButtons="true"
+    >
+    </mat-paginator>
+
+    <div class="flex lg:hidden flex-col w-full bg-white rounded-lg shadow-lg gap-1 mb-3 p-3" *ngFor="let data of bookingList">
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">ห้องประชุม: {{data.room_name}}</p>
+      </div>
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">เรื่อง: {{data.title}}</p>
+      </div>
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">จุดประสงค์: {{data.purpose}}</p>
+      </div>
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">จำนวนผู้เข้าร่วม: {{data.quantity}}</p>
+      </div>
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">วันที่: {{data.date | thaidate:"medium"}}</p>
+      </div>
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">เวลา: {{data.time}}</p>
+      </div>
+      <div class="bg-white rounded-lg flex flex-row items-center">
+        <p class="text-base">ผู้จอง: {{data.user}}</p>
+      </div>
+      <button
+      (click)="onDetailClick(data.booking_id)"
+      type="button"
+      class="w-auto px-2 py-2.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out"
+    >
+      <i class="bi bi-eye-fill text-base"></i> ดูรายละเอียด
+    </button>
+    </div>
+
+  </div>
+</div>

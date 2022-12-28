@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // api_url: "http://203.158.201.117/api",
-  api_url: "http://localhost:3000/api",
+  api_url: "http://203.158.201.117/api",
+  // api_url: "http://localhost:3000/api",
   login_token: "login_token",
 };
 
