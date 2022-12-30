@@ -218,24 +218,31 @@ export class UserService {
     );
   }
 
-    //create line notify
+  //create line notify
   createLineNotify(token: string): Observable<any> {
-    return this.http.post(`${environment.api_url}/admin/createLineNotify`, { token: token })
+    return this.http.post(`${environment.api_url}/admin/createLineNotify`, {
+      token: token,
+    });
   }
 
   //get line notify
-  getLineNotify():Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/admin/getLineNotify`)
+  getLineNotify(): Observable<any> {
+    return this.http.get<any>(`${environment.api_url}/admin/getLineNotify`);
   }
 
   //update line notify
-  updateLineNotify(line_notify_id: number, token: string):Observable<any> {
-    return this.http.put(`${environment.api_url}/admin/updateLineNotify/${line_notify_id}`, { token: token })
+  updateLineNotify(line_notify_id: number, token: string): Observable<any> {
+    return this.http.put(
+      `${environment.api_url}/admin/updateLineNotify/${line_notify_id}`,
+      { token: token }
+    );
   }
 
   //remove line notify
-  removeLineNotify(line_notify_id: number):Observable<any> {
-    return this.http.delete(`${environment.api_url}/admin/removeLineNotify/${line_notify_id}`)
+  removeLineNotify(line_notify_id: number): Observable<any> {
+    return this.http.delete(
+      `${environment.api_url}/admin/removeLineNotify/${line_notify_id}`
+    );
   }
 
   ////////////////////////////// users //////////////////////
@@ -268,69 +275,121 @@ export class UserService {
 
   //get admin nav
   getAdminNav(): Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/admin/getAdminNav`)
+    return this.http.get<any>(`${environment.api_url}/admin/getAdminNav`);
   }
 
   //booking meeting room
   userSubmitBooking(data: BookingFormModel): Observable<any> {
-    return this.http.post<any>(`${environment.api_url}/users/userSubmitBooking`,
-    {
-      room: data.room,
-      title: data.title,
-      purpose: data.purpose,
-      quantity: data.quantity,
-      device: data.device,
-      date: data.date,
-      time_start: data.time_start,
-      time_end: data.time_end,
-      link: data.link
-    })
+    return this.http.post<any>(
+      `${environment.api_url}/users/userSubmitBooking`,
+      {
+        room: data.room,
+        title: data.title,
+        purpose: data.purpose,
+        quantity: data.quantity,
+        device: data.device,
+        date: data.date,
+        time_start: data.time_start,
+        time_end: data.time_end,
+        link: data.link,
+      }
+    );
   }
 
   userEditBooking(booking_id: number, data: BookingFormModel): Observable<any> {
-    return this.http.put(`${environment.api_url}/users/userEditBooking/${booking_id}`,
-    {
-      room: data.room,
-      title: data.title,
-      purpose: data.purpose,
-      quantity: data.quantity,
-      device: data.device,
-      date: data.date,
-      time_start: data.time_start,
-      time_end: data.time_end,
-      link: data.link
-    })
+    return this.http.put(
+      `${environment.api_url}/users/userEditBooking/${booking_id}`,
+      {
+        room: data.room,
+        title: data.title,
+        purpose: data.purpose,
+        quantity: data.quantity,
+        device: data.device,
+        date: data.date,
+        time_start: data.time_start,
+        time_end: data.time_end,
+        link: data.link,
+      }
+    );
   }
 
   //user booking list
   userBookingList(): Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/users/userBookingList`)
+    return this.http.get<any>(`${environment.api_url}/users/userBookingList`);
   }
 
   //get user booking by id
   getUserBookingById(booking_id: number): Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/users/getUserBookingById/${booking_id}`)
+    return this.http.get<any>(
+      `${environment.api_url}/users/getUserBookingById/${booking_id}`
+    );
   }
 
   //user remove booking
   userRemoveBooking(booking_id: number): Observable<any> {
-    return this.http.delete(`${environment.api_url}/users/userRemoveBooking/${booking_id}`)
+    return this.http.delete(
+      `${environment.api_url}/users/userRemoveBooking/${booking_id}`
+    );
   }
 
   //check user own booking
   checkUserOwnBooking(booking_id: number): Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/users/checkUserOwnBooking/${booking_id}`)
+    return this.http.get<any>(
+      `${environment.api_url}/users/checkUserOwnBooking/${booking_id}`
+    );
   }
 
   //get Meeting room list
   getMeetingRoomList(): Observable<any> {
-    return this.http.get(`${environment.api_url}/users/getMeetingRoomList`)
+    return this.http.get(`${environment.api_url}/users/getMeetingRoomList`);
   }
 
   //get booking to calendar
   getBookingToCalendar(): Observable<any> {
-    return this.http.get<any>(`${environment.api_url}/users/getBookingToCalendar`)
+    return this.http.get<any>(
+      `${environment.api_url}/users/getBookingToCalendar`
+    );
   }
 
+  // upload image profile
+  uploadImageProfile(formData: FormData): Observable<any> {
+    return this.http.put(
+      `${environment.api_url}/users/uploadImageProfile`,
+      formData
+    );
+  }
 
+  //get user detail
+  getUserDetail(): Observable<any> {
+    return this.http.get(`${environment.api_url}/users/getUserDetail`);
+  }
+
+  userGetUserPosition(): Observable<any> {
+    return this.http.get(`${environment.api_url}/users/userGetUserPosition`);
+  }
+
+  userGetUserAffiliation(): Observable<any> {
+    return this.http.get(`${environment.api_url}/users/userGetUserAffiliation`);
+  }
+
+  userGetUserRank(): Observable<any> {
+    return this.http.get(`${environment.api_url}/users/userGetUserRank`);
+  }
+
+  userGetUserType(): Observable<any> {
+    return this.http.get(`${environment.api_url}/users/userGetUserType`);
+  }
+
+  userUpdateUser(user: any): Observable<any> {
+    return this.http.put(`${environment.api_url}/users/userUpdateUser`, {
+      f_name: user.f_name,
+      l_name: user.l_name,
+      phone: user.phone,
+      email: user.email,
+      affiliation: user.affiliation,
+      position: user.position,
+      rank: user.rank,
+      type: user.type,
+    });
+  }
 }

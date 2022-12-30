@@ -17,6 +17,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DeviceComponent } from './pages/device/device.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
 
@@ -52,7 +53,12 @@ const routes: Routes = [
         path: "booking-list",
         canActivate: [UserGuard],
         component: BookingListComponent
-      }
+      },
+      {
+        path: "profile",
+        canActivate: [UserGuard],
+        component: ProfileComponent
+      },
     ]
   },
   {

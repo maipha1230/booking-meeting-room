@@ -1,0 +1,47 @@
+<div class="flex flex-col gap-2 items-center">
+  <label class="text-lg font-bold">อัพโหลดรูปภาพ</label>
+  <div class="w-4/5 bg-white rounded-lg shadow-lg p-3 flex items-center justify-center"*ngIf="imageChangedEvent">
+    <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    [resizeToWidth]="500"
+    format="jpeg"
+    (imageCropped)="imageCropped($event)"
+    class="w-96 h-96 flex justify-center items-center"
+  ></image-cropper>
+  </div>
+  <label for="uploadFile" class="hover:cursor-pointer flex flex-col items-center">
+    <div class="bg-white rounded shadow p-2 w-40 items-center flex flex-col gap-2">
+      <i class="bi bi-upload font-bold text-lg"></i>
+      <p class="text-base font-bold">อัพโหลดรูปภาพ</p>
+    </div>
+    <input type="file"
+    class="hidden"
+    id="uploadFile"
+    accept="image/png, image/jpg, image/jpeg"
+    (change)="fileChangeEvent($event)">
+  </label>
+  <div class="flex flex-row gap-2">
+    <div *ngIf="imageChangedEvent">
+      <button
+        (click)="save()"
+        type="button"
+        class="w-48 h-10 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"
+      >
+        บันทึกรูปภาพ
+      </button>
+    </div>
+    <div>
+      <button
+        mat-dialog-close
+        (click)="save()"
+        type="button"
+        class="w-48 h-10 text-base text-white rounded bg-gray-500 justify-center items-center hover:bg-gray-600 hover:cursor-pointer duration-150"
+      >
+        ยกเลิก
+      </button>
+    </div>
+  </div>
+
+</div>

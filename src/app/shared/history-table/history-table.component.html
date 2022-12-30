@@ -1,0 +1,56 @@
+<div class="w-full h-full items-center">
+  <div class="flex flex-col" id="pdf" #pdf>
+    <div class="flex flex-col">
+      <label class="text-lg">ประวัติการใช้งานห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ 7</label>
+      <label class="text-base">วันที่: {{date.dateFrom | thaidate:"medium"}} - {{date.dateTo | thaidate:"medium"}}</label>
+    </div>
+    <div class="w-full my-3">
+      <table mat-table [dataSource]="dataSource" matSort class="w-full" id="pdf2" #pdf2>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ลำดับ</th>
+          <td mat-cell *matCellDef="let data; let i = index">{{ i + 1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="room">
+          <th mat-header-cell *matHeaderCellDef>ห้องประชุม</th>
+          <td mat-cell *matCellDef="let data">{{ data.room_name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>เรื่อง</th>
+          <td mat-cell *matCellDef="let data">{{ data.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="purpose">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>จุดประสงค์</th>
+          <td mat-cell *matCellDef="let data">{{ data.purpose }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef>จำนวนผู้เข้าร่วม</th>
+          <td mat-cell *matCellDef="let data">{{ data.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>วันที่</th>
+          <td mat-cell *matCellDef="let data">
+            {{ data.date | thaidate : "medium" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>เวลา</th>
+          <td mat-cell *matCellDef="let data">{{ data.time }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef>ผู้จอง</th>
+          <td mat-cell *matCellDef="let data">{{ data.user }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let data; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+</div>

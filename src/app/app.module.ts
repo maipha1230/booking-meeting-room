@@ -30,6 +30,7 @@ import { RoomListComponent } from './pages/room-list/room-list.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { BookingListComponent } from './pages/booking-list/booking-list.component';
 import { HistoryComponent } from './pages/history/history.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -54,6 +55,7 @@ FullCalendarModule.registerPlugins([
     BookingComponent,
     BookingListComponent,
     HistoryComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

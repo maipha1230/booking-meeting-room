@@ -57,6 +57,7 @@
       </div>
       <div class="w-full" *ngIf="showDownload">
         <button
+          (click)="onPDFClick()"
           type="button"
           class="w-full inline-block px-6 py-2.5 bg-red-500 text-white rounded hover:bg-red-600 transition duration-150 ease-in-out"
         >

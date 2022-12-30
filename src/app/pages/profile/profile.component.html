@@ -1,0 +1,217 @@
+<div
+  class="w-full min-h-screen h-auto bg-youngsalmon flex flex-col items-center px-2"
+>
+  <div
+    class="w-full md:w-4/5 h-auto bg-white rounded-lg shadow-lg my-3 p-3 grid grid-cols-2 gap-2"
+  >
+    <div class="flex flex-col items-center rounded-lg shadow-lg bg-white p-5">
+      <label class="text-lg font-bold">ข้อมูลส่วนตัว</label>
+      <div class="flex flex-col my-2 gap-2">
+        <div class="bg-white rounded shadow p-2 w-48 h-48">
+          <img
+            [src]="image_profile"
+            class="object-cover rounded"
+          />
+        </div>
+        <div>
+          <button
+            (click)="onUploadImageClick()"
+            type="button"
+            class="w-48 h-10 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"
+          >
+            แก้ไขรูปโปรไฟล์
+          </button>
+        </div>
+      </div>
+      <form class="flex flex-col w-full gap-2" [formGroup]="formProfile">
+        <div class="flex flex-row gap-2">
+          <div class="w-full">
+            <label class="text-base text-gray-700">ชื่อ</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                type="text"
+                class="w-full text-base pl-2"
+                placeholder="ชื่อ"
+                required
+                autocomplete="off"
+                formControlName="f_name"
+              />
+              <mat-error class="text-xs">กรุณากรอกชื่อ</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="w-full">
+            <label class="text-base text-gray-700">นามสกุล</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                type="text"
+                class="w-full text-base pl-2"
+                placeholder="นามสกุล"
+                required
+                autocomplete="off"
+                formControlName="l_name"
+              />
+              <mat-error class="text-xs">กรุณากรอกนามสกุล</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="flex flex-row gap-2">
+          <div class="w-full">
+            <label class="text-base text-gray-700">เบอร์โทร</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                type="text"
+                class="w-full text-base pl-2"
+                placeholder="เบอร์โทร"
+                autocomplete="off"
+                formControlName="phone"
+              />
+            </mat-form-field>
+          </div>
+          <div class="w-full">
+            <label class="text-base text-gray-700">อีเมล</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input
+                matInput
+                type="text"
+                class="w-full text-base pl-2"
+                placeholder="อีเมล"
+                autocomplete="off"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="flex flex-row gap-2">
+          <div class="w-full">
+            <label class="text-base text-gray-700">แผนก</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select
+                class="w-full text-base"
+                placeholder="แผนก"
+                formControlName="affiliation"
+              >
+                <mat-option *ngFor="let affiliation of affiliations" [value]="affiliation.user_affiliation_id">{{ affiliation.user_affiliation_name }}</mat-option>
+              </mat-select>
+              <mat-error class="text-xs">กรุณาระบุสังกัด</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="w-full">
+            <label class="text-base text-gray-700">ตำแหน่ง</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select
+                class="w-full text-base"
+                placeholder="ตำแหน่ง"
+                formControlName="position"
+              >
+              <mat-option *ngFor="let position of positions" [value]="position.user_position_id">{{ position.user_position_name }}</mat-option>
+              </mat-select>
+              <mat-error class="text-xs">กรุณาระบุตำแหน่ง</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="flex flex-row gap-2">
+          <div class="w-full">
+            <label class="text-base text-gray-700">ระดับ</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select
+                class="w-full text-base"
+                placeholder="ระดับ"
+                formControlName="rank"
+              >
+              <mat-option *ngFor="let rank of ranks" [value]="rank.user_rank_id">{{ rank.user_rank_name }}</mat-option>
+              </mat-select>
+              <mat-error class="text-xs">กรุณาระบุระดับ</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="w-full">
+            <label class="text-base text-gray-700">ประเภทบรรจุ</label>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select
+                class="w-full text-base"
+                placeholder="ประเภทบรรจุ"
+                formControlName="type"
+              >
+              <mat-option *ngFor="let type of types" [value]="type.user_type_id">{{ type.user_type_name }}</mat-option>
+              </mat-select>
+              <mat-error class="text-xs">กรุณาระบุประเภทบรรจุ</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <button
+          (click)="onUpdateProfileClick()"
+            type="button"
+            class="w-full h-10 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"
+            *ngIf="(formProfile.valid && formProfile.dirty)"
+          >
+            บันทึกโปรไฟล์
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="flex flex-col items-center rounded-lg shadow-lg bg-white p-5">
+      <label class="text-lg font-bold">เปลี่ยนรหัสผ่าน</label>
+      <form class="flex flex-col w-full gap-2" [formGroup]="formPassword">
+        <div class="w-full">
+          <label class="text-base text-gray-700">รหัสผ่านเดิม</label>
+          <mat-form-field appearance="outline" class="w-full">
+            <input
+              matInput
+              type="text"
+              class="w-full text-base pl-2"
+              placeholder="รหัสผ่านเดิม"
+              required
+              autocomplete="off"
+              formControlName="old"
+            />
+            <mat-error class="text-xs">กรุณากรอกรหัสผ่านเดิม</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="w-full">
+          <label class="text-base text-gray-700">รหัสผ่านใหม่</label>
+          <mat-form-field appearance="outline" class="w-full">
+            <input
+              matInput
+              type="text"
+              class="w-full text-base pl-2"
+              placeholder="รหัสผ่านใหม่"
+              required
+              autocomplete="off"
+              formControlName="new"
+            />
+            <mat-error class="text-xs">กรุณากรอกรหัสผ่านใหม่</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="w-full">
+          <label class="text-base text-gray-700">ยืนยันรหัสผ่านใหม่</label>
+          <mat-form-field appearance="outline" class="w-full">
+            <input
+              matInput
+              type="text"
+              class="w-full text-base pl-2"
+              placeholder="ยืนยันรหัสผ่านใหม่"
+              required
+              autocomplete="off"
+              formControlName="new2"
+            />
+            <mat-error class="text-xs">กรุณากรอกยืนยันรหัสผ่านใหม่</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="w-full h-10 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"
+          >
+            บันทึกแก้ไขรหัสผ่าน
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

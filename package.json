@@ -32,6 +32,8 @@
     "@types/chart.js": "^2.9.37",
     "bootstrap-icons": "^1.10.2",
     "chart.js": "^4.1.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "ngx-image-cropper": "^6.3.1",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",

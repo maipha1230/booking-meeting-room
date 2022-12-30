@@ -19,6 +19,9 @@ import { BookingModalComponent } from './booking-modal/booking-modal.component';
 import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-modal.component';
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { BookingDetailModalComponent } from './booking-detail-modal/booking-detail-modal.component';
+import { HistoryTableComponent } from './history-table/history-table.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { BookingDetailModalComponent } from './booking-detail-modal/booking-deta
     EditBookingModalComponent,
     UserSidebarComponent,
     BookingDetailModalComponent,
+    HistoryTableComponent,
+    UploadImageComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,8 @@ import { BookingDetailModalComponent } from './booking-detail-modal/booking-deta
     RouterModule,
     PipesModule,
     SwiperModule,
-    FormsModule
+    FormsModule,
+    ImageCropperModule
   ],
   exports: [
     NavBarComponent,
