@@ -392,4 +392,8 @@ export class UserService {
       type: user.type,
     });
   }
+
+  userChangePassword(old: string, password: string):Observable<any> {
+    return this.http.put(`${environment.api_url}/users/userChangePassword`, { old: old, password: password })
+  }
 }

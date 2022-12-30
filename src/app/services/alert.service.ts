@@ -199,5 +199,17 @@ export class AlertService {
     });
   }
 
+  imageViewAlert(url: string){
+    Swal.fire({
+        width:'500px',
+        imageWidth: '100%',
+        imageHeight: '100%',
+        imageUrl: url,
+        showConfirmButton:false,
+        background:'rgba(0, 0, 0, 0)',
+        backdrop:'rgba(0, 0, 0, 0.9)',
+      })
+  }
+
 
 }

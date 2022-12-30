@@ -168,4 +168,32 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  onChangePasswordClick(){
+    if (this.formPassword.valid) {
+      let pass1 = this.formPassword.controls['new'].value
+      let pass2 = this.formPassword.controls['new2'].value
+
+      if (pass1 != pass2) {
+        this.alertService.warningAlert("รหัสผ่านใหม่ไม่ตรงกัน")
+      } else {
+        let old = this.formPassword.controls['old'].value
+        this.userService.userChangePassword(old, pass1).subscribe((res: any) => {
+          if (res) {
+            if (res.status == 1) {
+              this.alertService.successAlert(res.msg)
+              this.createFormPassword();
+            } else if (res.status == 2) {
+              this.alertService.warningAlert(res.msg)
+            }
+          }
+        })
+      }
+    }
+
+  }
+
+  onViewImage(url:string){
+    this.alertService.imageViewAlert(url)
+  }
+
 }
