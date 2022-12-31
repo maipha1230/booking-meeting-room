@@ -54,6 +54,7 @@
           </button>
         </div>
       </div>
+      <label *ngIf="!dateStart && !dateEnd" class="text-sm">*การใช้งานห้องประชุมย้อนหลัง 30 วัน</label>
       <div class="w-full flex flex-col p-2" *ngFor="let room of roomTime">
         <label class="text-lg font-bold">{{room.room_name}}</label>
         <img [src]="room.room_img"
@@ -66,6 +67,11 @@
           <p class="text-base mx-2" *ngIf="room.time?.days > 0">{{ room.time?.days }} วัน</p>
           <p class="text-base mx-2" *ngIf="room.time?.hours > 0">{{ room.time?.hours }} ชั่วโมง</p>
           <p class="text-base mx-2" *ngIf="room.time?.minutes > 0">{{ room.time?.minutes }} นาที</p>
+          <p class="text-base mx-2" *ngIf="room.time?.minutes == 0 &&
+          room.time?.hours == 0 &&
+          room.time?.days == 0 &&
+          room.time?.months == 0 &&
+          room.time?.years == 0 ">ไม่มีการใช้งาน</p>
         </div>
       </div>
     </div>

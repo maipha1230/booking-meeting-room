@@ -22,6 +22,7 @@ import { BookingDetailModalComponent } from './booking-detail-modal/booking-deta
 import { HistoryTableComponent } from './history-table/history-table.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { DerectiveModule } from './directives/directive.module';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     PipesModule,
     SwiperModule,
     FormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    DerectiveModule
   ],
   exports: [
     NavBarComponent,
@@ -59,7 +61,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     UserToolbarComponent,
     PipesModule,
     SwiperModule,
-    UserSidebarComponent
+    UserSidebarComponent,
+    DerectiveModule
 
   ]
 })

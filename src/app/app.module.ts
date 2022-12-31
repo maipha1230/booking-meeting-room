@@ -32,6 +32,7 @@ import { BookingComponent } from './pages/booking/booking.component';
 import { BookingListComponent } from './pages/booking-list/booking-list.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ThaiDatePipe } from './shared/pipes/thaiDate.pipe';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -72,8 +73,7 @@ FullCalendarModule.registerPlugins([
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    // { provide: LOCALE_ID, useValue: "th-TH" },
-    // MatDatepickerModule,
+    ThaiDatePipe,
     JwtHelperService,
   ],
   bootstrap: [AppComponent]

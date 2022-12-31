@@ -9,7 +9,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-
+import * as XLSX from 'xlsx';
+import { ThaiDatePipe } from 'src/app/shared/pipes/thaiDate.pipe';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -39,6 +40,7 @@ export class HistoryComponent implements OnInit {
     private bookingService: BookingService,
     private dialog: MatDialog,
     private alertService: AlertService,
+    private thaiDate: ThaiDatePipe
   ) {}
 
   ngOnInit(): void {
@@ -120,5 +122,24 @@ export class HistoryComponent implements OnInit {
         booking: this.bookingList
       }
     })
+  }
+
+  exportExcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('tableData');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    let dateFrom = this.thaiDate.transform(this.formDate.controls['dateFrom'].value, "short")
+    let dateTo = this.thaiDate.transform(this.formDate.controls['dateTo'].value, "short")
+
+
+    /* save to file */
+    XLSX.writeFile(wb, `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}.xlsx`);
+
   }
 }

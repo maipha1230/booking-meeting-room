@@ -11,6 +11,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-history-table',
   templateUrl: './history-table.component.html',
@@ -60,6 +61,8 @@ export class HistoryTableComponent implements OnInit {
 
 
   }
+
+
 
 
 }

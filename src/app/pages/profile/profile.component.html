@@ -37,6 +37,7 @@
                 required
                 autocomplete="off"
                 formControlName="f_name"
+                maxlength="30"
               />
               <mat-error class="text-xs">กรุณากรอกชื่อ</mat-error>
             </mat-form-field>
@@ -52,6 +53,7 @@
                 required
                 autocomplete="off"
                 formControlName="l_name"
+                maxlength="30"
               />
               <mat-error class="text-xs">กรุณากรอกนามสกุล</mat-error>
             </mat-form-field>
@@ -68,6 +70,8 @@
                 placeholder="เบอร์โทร"
                 autocomplete="off"
                 formControlName="phone"
+                maxlength="10"
+                phoneNumber
               />
             </mat-form-field>
           </div>
@@ -76,7 +80,7 @@
             <mat-form-field appearance="outline" class="w-full">
               <input
                 matInput
-                type="text"
+                type="email"
                 class="w-full text-base pl-2"
                 placeholder="อีเมล"
                 autocomplete="off"
@@ -206,6 +210,7 @@
         </div>
         <div>
           <button
+          *ngIf = "(formPassword.valid && formPassword.dirty)"
             (click)="onChangePasswordClick()"
             type="button"
             class="w-full h-10 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"

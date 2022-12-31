@@ -175,6 +175,8 @@ export class ProfileComponent implements OnInit {
 
       if (pass1 != pass2) {
         this.alertService.warningAlert("รหัสผ่านใหม่ไม่ตรงกัน")
+      }else if (pass1 == this.formPassword.controls['old'].value){
+        this.alertService.warningAlert("รหัสผ่านเดิมและรหัสผ่านใหม่ไม่ควรซ้ำกัน")
       } else {
         let old = this.formPassword.controls['old'].value
         this.userService.userChangePassword(old, pass1).subscribe((res: any) => {
