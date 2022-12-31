@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-history',
@@ -46,7 +46,7 @@ export class HistoryComponent implements OnInit {
     this.createFormDate();
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -83,6 +83,7 @@ export class HistoryComponent implements OnInit {
     this.dataSource = new MatTableDataSource<BookingTable>(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
 
   public applyFilter(event: any) {

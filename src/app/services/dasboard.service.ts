@@ -22,8 +22,8 @@ export class DasboardService {
     return this.http.get(`${environment.api_url}/admin/getAdminOverview`)
   }
 
-  getRoomTime():Observable<any> {
-    return this.http.get(`${environment.api_url}/admin/getRoomTime`)
+  getRoomTime(dateStart: any, dateEnd: any):Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/getRoomTime`, { dateStart: dateStart, dateEnd: dateEnd })
   }
 
   getAffiliationChart(): Observable<any> {

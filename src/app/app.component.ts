@@ -1,6 +1,5 @@
-import { AuthService } from './services/auth.service';
-import { Observable } from 'rxjs';
 import { Component } from '@angular/core';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'booking-meeting-room';
 
-  constructor(private authService: AuthService){
-
+  constructor(private dateAdapter: DateAdapter<any>){
   }
-
-  isAdminLoggedIn$: Observable<boolean>;
   ngOnInit(): void {
-
+    this.dateAdapter.setLocale('th-TH');
   }
 
 }

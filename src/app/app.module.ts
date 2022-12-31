@@ -1,9 +1,10 @@
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PipesModule } from './shared/pipes/pipes.module';
 import { ThemeModule } from './theme/theme.module';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './pages/home/home.component';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,6 +72,8 @@ FullCalendarModule.registerPlugins([
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    // { provide: LOCALE_ID, useValue: "th-TH" },
+    // MatDatepickerModule,
     JwtHelperService,
   ],
   bootstrap: [AppComponent]

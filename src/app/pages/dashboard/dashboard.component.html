@@ -33,6 +33,27 @@
   <div class="h-full grid grid-cols-1 md:grid-cols-2 gap-3">
     <div class="bg-white rounded-lg shadow-lg p-3 flex flex-col">
       <label class="text-xl font-bold">เวลาในการใช้งานห้องประชุม</label>
+      <div class="w-full flex flex-col md:flex-row gap-2 items-center">
+        <mat-form-field appearance="fill" class="w-full inline-block">
+          <mat-label>เลือกช่วงวันที่</mat-label>
+          <mat-date-range-input [rangePicker]="picker" (change)="getRoomTime()">
+            <input matStartDate placeholder="จากวันที่" [(ngModel)]="dateStart" [ngModelOptions]="{standalone: true}" >
+            <input matEndDate placeholder="ถึงวันที่" [(ngModel)]="dateEnd" [ngModelOptions]="{standalone: true}" >
+          </mat-date-range-input>
+          <mat-hint>วัน/เดือน/ปี – วัน/เดือน/ปี</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <div>
+          <button
+            (click)="onSearchRoomTime()"
+            type="button"
+            class="w-28 px-2 py-2.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out"
+          >
+            ค้นหา
+          </button>
+        </div>
+      </div>
       <div class="w-full flex flex-col p-2" *ngFor="let room of roomTime">
         <label class="text-lg font-bold">{{room.room_name}}</label>
         <img [src]="room.room_img"

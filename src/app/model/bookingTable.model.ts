@@ -1,5 +1,6 @@
 export class BookingTable {
   constructor(
+    public index: number = 0,
     public booking_id: number = 0,
     public room_name: string = '',
     public title: string = '',
