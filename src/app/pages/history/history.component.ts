@@ -10,6 +10,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import * as XLSX from 'xlsx';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "../../../assets/fonts/vfs_fonts.js";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { ThaiDatePipe } from 'src/app/shared/pipes/thaiDate.pipe';
 @Component({
   selector: 'app-history',
@@ -85,7 +88,6 @@ export class HistoryComponent implements OnInit {
     this.dataSource = new MatTableDataSource<BookingTable>(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-
   }
 
   public applyFilter(event: any) {
@@ -108,38 +110,117 @@ export class HistoryComponent implements OnInit {
   }
 
   onPDFClick() {
-    let dateFrom = this.formDate.controls['dateFrom'].value;
-    let dateTo = this.formDate.controls['dateTo'].value;
-    let dialogRef = this.dialog.open(HistoryTableComponent, {
-      width: '80%',
-      minWidth: '400px',
-      height: '95%',
-      data: {
-        date: {
-          dateFrom: dateFrom,
-          dateTo: dateTo
+    // let dateFrom = this.formDate.controls['dateFrom'].value;
+    // let dateTo = this.formDate.controls['dateTo'].value;
+    // let dialogRef = this.dialog.open(HistoryTableComponent, {
+    //   width: '80%',
+    //   minWidth: '400px',
+    //   height: '95%',
+    //   data: {
+    //     date: {
+    //       dateFrom: dateFrom,
+    //       dateTo: dateTo
+    //     },
+    //     booking: this.bookingList
+    //   }
+    // })
+
+    pdfMake.fonts = {
+      THSarabunNew: {
+        normal: "THSarabunNew.ttf",
+        bold: "THSarabunNew Bold.ttf",
+        italics: "THSarabunNew Italic.ttf",
+        bolditalics: "THSarabunNew BoldItalic.ttf"
         },
-        booking: this.bookingList
-      }
+    }
+    let dateFrom = this.thaiDate.transform(
+      this.formDate.controls['dateFrom'].value,
+      'short'
+    );
+    let dateTo = this.thaiDate.transform(
+      this.formDate.controls['dateTo'].value,
+      'short'
+    );
+
+    let headers: any[] = ["ลำดับ", "ห้อง", "เรื่อง" , "จุดประสงค์", "จำนวนผู้เข้าร่วม", "วันที่", "เวลา", "ผู้จอง"]
+    let headerOptions:any[] = []
+    let data: any[] = []
+    headers.forEach((h: any) => {
+      headerOptions.push({ text: h , bold: true})
     })
+    data.push(headerOptions)
+
+    this.bookingList.forEach((b:BookingTable) => {
+      let temp = []
+      temp.push(b.index)
+      temp.push(b.room_name)
+      temp.push(b.title)
+      temp.push(b.purpose)
+      temp.push(b.quantity)
+      temp.push(this.thaiDate.transform(b.date, "short"))
+      temp.push(b.time)
+      temp.push(b.user)
+      data.push(temp)
+    })
+
+    const docDefinition = {
+
+      content: [
+        { text: "ประวัติการใช้งานห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ 7", style: "header" },
+        `วันที่: ${dateFrom} - ${dateTo}`,
+        {
+          table: {
+            widths: [ 20, 50, 100, 40,55, 55, '*', '*' ],
+            body: data
+          }
+        }
+      ], defaultStyle: {
+        font: "THSarabunNew"
+        },
+
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10]
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5]
+        },
+        tableExample: {
+          margin: [0, 5, 0, 15]
+        }
+      }
+    };
+
+    pdfMake.createPdf(docDefinition).download(`ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}.pdf`);
+
   }
 
-  exportExcel(): void
-  {
+  exportExcel(): void {
     /* pass here the table id */
     let element = document.getElementById('tableData');
-    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    let dateFrom = this.thaiDate.transform(this.formDate.controls['dateFrom'].value, "short")
-    let dateTo = this.thaiDate.transform(this.formDate.controls['dateTo'].value, "short")
-
+    let dateFrom = this.thaiDate.transform(
+      this.formDate.controls['dateFrom'].value,
+      'short'
+    );
+    let dateTo = this.thaiDate.transform(
+      this.formDate.controls['dateTo'].value,
+      'short'
+    );
 
     /* save to file */
-    XLSX.writeFile(wb, `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}.xlsx`);
-
+    XLSX.writeFile(
+      wb,
+      `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}.xlsx`
+    );
   }
 }
