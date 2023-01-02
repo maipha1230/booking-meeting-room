@@ -25,9 +25,7 @@ export class MeetingRoomModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private meetingRoomService: MeetingRoomService,
     private alertService: AlertService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.getMeetingRoomSize();
     this.getMeetingRoomStatus();
     this.createMeetingForm();
@@ -36,6 +34,10 @@ export class MeetingRoomModalComponent implements OnInit {
         this.getMeetingRoomById(this.data.room_id);
       }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
   getMeetingRoomSize() {
@@ -98,7 +100,7 @@ export class MeetingRoomModalComponent implements OnInit {
       });
     }
     this.formMeeting.controls['roomGallery'].setValue(gallery);
-    console.log(this.formMeeting.controls['roomGallery'].value);
+    // console.log(this.formMeeting.controls['roomGallery'].value);
   }
 
   fileChangeEvent(event: any) {
@@ -125,7 +127,7 @@ export class MeetingRoomModalComponent implements OnInit {
       }
       this.formMeeting.controls['roomGallery'].setValue(gallery);
     } else {
-      console.log('จำกัดมากสุด 3 รูปภาพ');
+      // console.log('จำกัดมากสุด 3 รูปภาพ');
     }
   }
 
@@ -200,7 +202,7 @@ export class MeetingRoomModalComponent implements OnInit {
   }
 
   onRemoveImage(index: number) {
-    console.log(index);
+    // console.log(index);
     if (this.formMeeting.controls['roomGallery'].value.length == 1) {
       this.alertService.warningAlert("ไม่สามารถลบรูปภาพออกทั้งหมด");
     } else {
@@ -225,7 +227,7 @@ export class MeetingRoomModalComponent implements OnInit {
                   .subscribe((response: any) => {
                     if (response) {
                       if (response.status == 1) {
-                        console.log(response.msg);
+                        // console.log(response.msg);
                         this.meetingRoom.room_gallery.splice(index, 1);
                         this.formMeeting.controls['roomGallery'].value.splice(
                           index,

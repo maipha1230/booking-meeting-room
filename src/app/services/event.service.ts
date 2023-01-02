@@ -7,6 +7,7 @@ export class EventService {
 
   private sideBar = new Subject<any>();
   private userSideBar = new Subject<any>();
+  private adminNav = new Subject<any>();
   constructor() { }
 
   setSideBar(){
@@ -22,5 +23,13 @@ export class EventService {
 
   userGetSideBar(): Observable<any>{
     return this.userSideBar.asObservable();
+  }
+
+  setAdminNav() {
+    this.adminNav.next(true)
+  }
+
+  getAdminNav(): Observable<any>{
+    return this.adminNav.asObservable();
   }
 }

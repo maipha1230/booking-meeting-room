@@ -29,9 +29,7 @@ export class UserModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
     private alertService: AlertService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.getUserAffiliation();
     this.getUserPosition();
     this.getUserRank();
@@ -43,6 +41,10 @@ export class UserModalComponent implements OnInit {
         this.getUserById(this.data.user_id);
       }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
   createFormUser() {

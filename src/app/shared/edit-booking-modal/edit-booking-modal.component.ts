@@ -30,9 +30,7 @@ export class EditBookingModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private alertService: AlertService,
     private bookingService: BookingService,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.getRoomList();
     this.getBookingPurposeList();
     this.getRoomDeviceList();
@@ -42,6 +40,10 @@ export class EditBookingModalComponent implements OnInit {
         this.getUserBookingById(this.data.booking_id)
       }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
 

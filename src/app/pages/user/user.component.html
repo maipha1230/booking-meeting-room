@@ -30,7 +30,7 @@
       <div class="p-4">
         <label class="text-gray-900 break-words text-lg font-bold mb-2">{{(user.f_name.length +  user.f_name.length > 20) ? (user.f_name + ' '+ user.l_name | slice:0:20)+'...':(user.f_name+ ' '+user.l_name)}}</label>
         <p class="text-gray-700 break-words text-base mb-2">
-          เบอร์โทร: {{user.phone}}
+          เบอร์โทร: {{user.phone | phoneNumber}}
         </p>
         <p class="text-gray-700 break-words text-base mb-2">
           อีเมลล์: {{ (user.email.length > 15) ? (user.email | slice:0:15)+'...':(user.email) }}

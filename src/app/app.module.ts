@@ -1,3 +1,4 @@
+import { LoadingInterceptor } from './services/loading.interceptor';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { PipesModule } from './shared/pipes/pipes.module';
 import { ThemeModule } from './theme/theme.module';
@@ -73,6 +74,7 @@ FullCalendarModule.registerPlugins([
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     ThaiDatePipe,
     JwtHelperService,
   ],

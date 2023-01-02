@@ -20,15 +20,17 @@ export class DeviceModalComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private meetingRoomService: MeetingRoomService,
     private alertService: AlertService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.createFormDevice();
     if (this.data) {
       if (this.data.room_device_id) {
         this.getMeetingRoomDeviceById(this.data.room_device_id)
       }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
 

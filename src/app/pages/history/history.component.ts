@@ -1,4 +1,3 @@
-import { HistoryTableComponent } from './../../shared/history-table/history-table.component';
 import { AlertService } from './../../services/alert.service';
 import { BookingDetailModalComponent } from './../../shared/booking-detail-modal/booking-detail-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
-import * as XLSX from 'xlsx';
+import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "../../../assets/fonts/vfs_fonts.js";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -75,7 +74,9 @@ export class HistoryComponent implements OnInit {
             if (res.status == 1) {
               this.bookingList = res.data;
               this.initDataSource(this.bookingList);
-              this.showDownload = true;
+              if (this.bookingList.length > 0) {
+                this.showDownload = true;
+              }
             }
           }
         });
@@ -110,21 +111,6 @@ export class HistoryComponent implements OnInit {
   }
 
   onPDFClick() {
-    // let dateFrom = this.formDate.controls['dateFrom'].value;
-    // let dateTo = this.formDate.controls['dateTo'].value;
-    // let dialogRef = this.dialog.open(HistoryTableComponent, {
-    //   width: '80%',
-    //   minWidth: '400px',
-    //   height: '95%',
-    //   data: {
-    //     date: {
-    //       dateFrom: dateFrom,
-    //       dateTo: dateTo
-    //     },
-    //     booking: this.bookingList
-    //   }
-    // })
-
     pdfMake.fonts = {
       THSarabunNew: {
         normal: "THSarabunNew.ttf",
@@ -200,14 +186,11 @@ export class HistoryComponent implements OnInit {
   }
 
   exportExcel(): void {
-    /* pass here the table id */
-    let element = document.getElementById('tableData');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
+    let data:BookingTable[] = this.bookingList
+    data.forEach((b: BookingTable) => {
+      b.date = this.thaiDate.transform(b.date, "short")
+      delete b.booking_id
+    })
     let dateFrom = this.thaiDate.transform(
       this.formDate.controls['dateFrom'].value,
       'short'
@@ -217,10 +200,19 @@ export class HistoryComponent implements OnInit {
       'short'
     );
 
-    /* save to file */
-    XLSX.writeFile(
-      wb,
-      `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}.xlsx`
-    );
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      useBom: true,
+      noDownload: false,
+      headers: ["ลำดับ", "ห้อง", "เรื่อง" , "จุดประสงค์", "จำนวนผู้เข้าร่วม", "วันที่", "เวลา", "ผู้จอง"],
+      useHeader: false,
+      nullToEmptyString: true,
+    };
+
+    new AngularCsv(this.bookingList, `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}`, options);
   }
 }

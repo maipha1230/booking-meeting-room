@@ -16,7 +16,13 @@ export class NavBarComponent implements OnInit {
     private authService: AuthService,
     private alertService: AlertService,
     private eventService: EventService
-  ) {}
+  ) {
+    this.eventService.getAdminNav().subscribe((res: any) => {
+      if (res) {
+        this.getAdminNav();
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.getAdminNav();

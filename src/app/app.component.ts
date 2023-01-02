@@ -1,6 +1,6 @@
+import { AnimationOptions } from 'ngx-lottie';
 import { Component } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,5 +14,6 @@ export class AppComponent {
   ngOnInit(): void {
     this.dateAdapter.setLocale('th-TH');
   }
+
 
 }

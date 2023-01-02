@@ -19,10 +19,19 @@ import { BookingModalComponent } from './booking-modal/booking-modal.component';
 import { EditBookingModalComponent } from './edit-booking-modal/edit-booking-modal.component';
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { BookingDetailModalComponent } from './booking-detail-modal/booking-detail-modal.component';
-import { HistoryTableComponent } from './history-table/history-table.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { DerectiveModule } from './directives/directive.module';
+import { LoaderComponent } from './loader/loader.component';
+
+import { LottieModule } from "ngx-lottie";
+import player from 'lottie-web';
+
+export function playerFactory() {
+  return player;
+}
+
+import { LottieAnimationViewModule } from 'ng-lottie';
 
 @NgModule({
   declarations: [
@@ -38,8 +47,8 @@ import { DerectiveModule } from './directives/directive.module';
     EditBookingModalComponent,
     UserSidebarComponent,
     BookingDetailModalComponent,
-    HistoryTableComponent,
     UploadImageComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +60,8 @@ import { DerectiveModule } from './directives/directive.module';
     SwiperModule,
     FormsModule,
     ImageCropperModule,
-    DerectiveModule
+    DerectiveModule,
+    LottieModule.forRoot({ player: playerFactory })
   ],
   exports: [
     NavBarComponent,
@@ -62,7 +72,8 @@ import { DerectiveModule } from './directives/directive.module';
     PipesModule,
     SwiperModule,
     UserSidebarComponent,
-    DerectiveModule
+    DerectiveModule,
+    LoaderComponent
 
   ]
 })

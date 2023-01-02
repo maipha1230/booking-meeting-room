@@ -1,3 +1,4 @@
+import { EventService } from './../../services/event.service';
 import { base64ToFile } from 'ngx-image-cropper';
 import { AlertService } from './../../services/alert.service';
 import { UserService } from 'src/app/services/user.service';
@@ -29,10 +30,9 @@ export class AdminModalComponent implements OnInit {
     private dialogRef: MatDialogRef<AdminModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
-    private alertService: AlertService
-  ) { }
-
-  ngOnInit(): void {
+    private alertService: AlertService,
+    private eventService: EventService
+  ) {
     this.getUserAffiliation();
     this.getUserPosition();
     this.getUserRank();
@@ -44,6 +44,10 @@ export class AdminModalComponent implements OnInit {
         this.getAdminById(this.data.user_id);
       }
     }
+  }
+
+  ngOnInit(): void {
+
   }
 
   createFormAdmin() {
@@ -166,6 +170,10 @@ export class AdminModalComponent implements OnInit {
             if (res) {
               if (res.status == 1) {
                 this.alertService.successAlert(res.msg);
+                this.dialogRef.close(true);
+              } else if (res.status == 2) {
+                this.alertService.successAlert(res.msg);
+                this.eventService.setAdminNav();
                 this.dialogRef.close(true);
               }
             }

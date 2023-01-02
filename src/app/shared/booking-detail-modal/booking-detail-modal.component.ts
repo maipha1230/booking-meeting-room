@@ -20,15 +20,17 @@ export class BookingDetailModalComponent implements OnInit {
     private alertService: AlertService,
     private bookingService: BookingService,
     private dialog: MatDialog
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     if (this.data) {
       if (this.data.booking_id) {
         this.getBookingById(this.data.booking_id)
       }
 
     }
+   }
+
+  ngOnInit(): void {
+
   }
 
   getBookingById(booking_id: number){

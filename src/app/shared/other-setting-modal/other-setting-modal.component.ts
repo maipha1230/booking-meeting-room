@@ -16,22 +16,24 @@ export class OtherSettingModalComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<OtherSettingModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.createForm();
+      if (this.data) {
+        if (this.data.title_modal) {
+          this.title = this.data.title_modal
+        }
+        if (this.data.name_input) {
+          this.name_input = this.data.name_input
+        }
+        if (this.data.name_value) {
+          this.name_value = this.data.name_value
+          this.pathForm();
+        }
+      }
+     }
 
   ngOnInit(): void {
-    this.createForm();
-    if (this.data) {
-      if (this.data.title_modal) {
-        this.title = this.data.title_modal
-      }
-      if (this.data.name_input) {
-        this.name_input = this.data.name_input
-      }
-      if (this.data.name_value) {
-        this.name_value = this.data.name_value
-        this.pathForm();
-      }
-    }
+
   }
 
   createForm(){
