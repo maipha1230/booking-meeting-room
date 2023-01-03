@@ -75,6 +75,10 @@ const routes: Routes = [
         component: BookingRoomComponent
       },
       {
+        path: "booking-room/:booking_id",
+        component: BookingRoomComponent
+      },
+      {
         path: 'meeting-room',
         component: MeetingRoomComponent
       },

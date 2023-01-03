@@ -351,6 +351,11 @@ export class UserService {
     );
   }
 
+  //get event date calendar
+  eventDateCalendar(date: any): Observable<any> {
+    return this.http.post(`${environment.api_url}/users/eventDateCalendar`, { date: date })
+  }
+
   // upload image profile
   uploadImageProfile(formData: FormData): Observable<any> {
     return this.http.put(

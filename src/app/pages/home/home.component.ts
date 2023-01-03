@@ -1,3 +1,5 @@
+import { DateEventComponent } from './../../shared/date-event/date-event.component';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   events:any [] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private diaLog: MatDialog) {}
 
   ngOnInit(): void {
     this.getBookingToCalendar();
@@ -65,6 +67,20 @@ export class HomeComponent implements OnInit {
   }
 
   onDateClick(date: any){
+    this.userService.eventDateCalendar(date.dateStr).subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.diaLog.open(DateEventComponent, {
+            width: '60%',
+            minWidth: '400px',
+            height: '90%',
+            data: {
+              booking: res.data
+            }
+          })
+        }
+      }
+    })
 
   }
 }

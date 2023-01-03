@@ -32,6 +32,7 @@ export function playerFactory() {
 }
 
 import { LottieAnimationViewModule } from 'ng-lottie';
+import { DateEventComponent } from './date-event/date-event.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { LottieAnimationViewModule } from 'ng-lottie';
     BookingDetailModalComponent,
     UploadImageComponent,
     LoaderComponent,
+    DateEventComponent,
   ],
   imports: [
     CommonModule,

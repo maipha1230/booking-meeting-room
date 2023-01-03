@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { MeetingRoomService } from './../../services/meeting-room.service';
 import { BookingModalComponent } from './../../shared/booking-modal/booking-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,11 +15,16 @@ export class BookingRoomComponent implements OnInit {
   public booking_list: any[] = []
   public approve_status: number = 0;
   public room_list: any[] = []
+  public booking_id: any = null
 
-  constructor(private bookingUservice: BookingService, private dialog: MatDialog, public meetingRoomService: MeetingRoomService) { }
+  constructor(private bookingUservice: BookingService, private dialog: MatDialog, public meetingRoomService: MeetingRoomService, private activateRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getRoomList();
+    this.booking_id = this.activateRoute.snapshot.paramMap.get('booking_id');
+    if (this.booking_id) {
+      this.onDetail(this.booking_id)
+    }
   }
 
   getBookingList(){
@@ -51,6 +57,10 @@ export class BookingRoomComponent implements OnInit {
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response) {
         this.getBookingList();
+      }
+      if (this.booking_id) {
+        this.booking_id = null
+        this.router.navigate(['/admin/booking-room'])
       }
     })
   }
