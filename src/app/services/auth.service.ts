@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-
+  public userUrl: string = ""
+  public adminUrl: string = "/admin"
   constructor(private jwtHelper: JwtHelperService, private router: Router) { }
 
 

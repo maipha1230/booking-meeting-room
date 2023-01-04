@@ -59,8 +59,7 @@ export class HomeComponent implements OnInit {
       },
       eventOverlap: true,
       eventDisplay: 'block',
-      aspectRatio: 1.75,
-      contentHeight: 'auto',
+      height: 'auto',
       dateClick: this.onDateClick.bind(this)
 
     };
@@ -83,4 +82,5 @@ export class HomeComponent implements OnInit {
     })
 
   }
+
 }

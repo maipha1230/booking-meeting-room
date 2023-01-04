@@ -26,6 +26,7 @@ export class UserGuard implements CanActivate {
     if (this.authService.isUserLogin()){
       return true;
     }
+    this.authService.userUrl = url
     this.alertService.warningAlert("กรุณาเข้าสู่ระบบ")
     this.router.navigate(['/login'])
     return false;

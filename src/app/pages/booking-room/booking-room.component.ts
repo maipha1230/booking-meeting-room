@@ -48,7 +48,7 @@ export class BookingRoomComponent implements OnInit {
     let dialogRef =  this.dialog.open( BookingModalComponent, {
       width: '80%',
       minWidth: '400px',
-      height: '100%',
+      height: '85vh',
       data: {
         booking_id: booking_id
       }
