@@ -201,6 +201,7 @@ export class BookingComponent implements OnInit {
               this.userService.userSubmitBooking(form).subscribe((res: any) => {
                 if (res) {
                   if (res.status == 1) {
+                    this.createFormBooking();
                     this.alertService
                       .bookingSuccessAlert(res.msg)
                       .subscribe((confirm: any) => {
@@ -208,7 +209,6 @@ export class BookingComponent implements OnInit {
                           this.router.navigate(['/booking-list']);
                         }
                       });
-                    this.createFormBooking();
                   } else if (res.status == 2) {
                     if (res.booked) {
                       let msg = '';

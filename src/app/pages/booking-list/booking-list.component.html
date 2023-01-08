@@ -2,7 +2,7 @@
   class="w-full min-h-screen h-auto bg-youngsalmon flex flex-col items-center px-2"
 >
   <div
-    class="w-full md:w-4/5 h-auto min-h-screen bg-white rounded-lg shadow-lg my-5 p-3 flex flex-col items-center"
+    class="w-full md:w-4/5 h-auto min-h-screen bg-white rounded-lg shadow-lg my-3 p-3 flex flex-col items-center"
   >
     <label class="text-lg font-bold mb-3">การจองของฉัน</label>
     <div class="w-full h-auto flex flex-col">
@@ -22,7 +22,7 @@
                     <p *ngIf="booking.approve_status == 2" class="text-red-500">ไม่อนุญาต</p>
                 </div>
             </div>
-            <div class="flex flex-row gap-3 px-2" *ngIf="booking.approve_status == 0">
+            <div class="flex flex-row gap-3 px-2" *ngIf="booking.approve_status == 0 && booking.date >= dateNow">
                 <mat-icon (click)="onEditBooking(booking.booking_id)" matTooltip="แก้ไข" class="hover:cursor-pointer hover:text-yellow-500 hover:scale-125 duration-150">edit</mat-icon>
                 <mat-icon (click)="onRemoveBooking(booking.booking_id)" matTooltip="ยกเลิก"class="hover:cursor-pointer hover:text-red-500 hover:scale-125 duration-150">delete</mat-icon>
             </div>

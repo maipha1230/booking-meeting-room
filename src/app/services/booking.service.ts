@@ -46,4 +46,8 @@ export class BookingService {
   getBookingHistory(dateFrom: any, dateTo: any): Observable<any> {
     return this.http.post(`${environment.api_url}/admin/getBookingHistory`, { dateFrom: dateFrom, dateTo: dateTo })
   }
+
+  checkBookingExist(booking_id: number): Observable<any> {
+    return this.http.get(`${environment.api_url}/admin/checkBookingExist/${booking_id}`)
+  }
 }

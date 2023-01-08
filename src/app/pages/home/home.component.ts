@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   initCalendar(){
+    let innerHeight = window.innerHeight
     this.calendarOptions = {
       headerToolbar: {
         left: 'title',
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
       },
       eventOverlap: true,
       eventDisplay: 'block',
+      contentHeight: 'auto',
       height: 'auto',
       dateClick: this.onDateClick.bind(this)
 

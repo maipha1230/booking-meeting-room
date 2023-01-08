@@ -2,9 +2,9 @@
   <mat-drawer ngClass="[sideBarClass]" (closed)="onClose()" mode="over" [opened]="sideBarShow ? true : false" class="h-screen min-h-screen fixed top-0 left-0 z-10 ">
     <app-side-bar></app-side-bar>
   </mat-drawer>
-  <mat-drawer-content class="h-auto min-h-screen">
-    <app-nav-bar></app-nav-bar>
-    <router-outlet>
+  <mat-drawer-content class="flex flex-col h-auto min-h-screen">
+    <app-nav-bar class="w-full fixed top-0 z-50"></app-nav-bar>
+    <router-outlet class="mt-10">
       <app-loader></app-loader>
     </router-outlet>
   </mat-drawer-content>

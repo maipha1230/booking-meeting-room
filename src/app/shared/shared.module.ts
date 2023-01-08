@@ -30,8 +30,6 @@ import player from 'lottie-web';
 export function playerFactory() {
   return player;
 }
-
-import { LottieAnimationViewModule } from 'ng-lottie';
 import { DateEventComponent } from './date-event/date-event.component';
 
 @NgModule({
@@ -63,7 +61,7 @@ import { DateEventComponent } from './date-event/date-event.component';
     FormsModule,
     ImageCropperModule,
     DerectiveModule,
-    LottieModule.forRoot({ player: playerFactory })
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   exports: [
     NavBarComponent,
@@ -75,7 +73,7 @@ import { DateEventComponent } from './date-event/date-event.component';
     SwiperModule,
     UserSidebarComponent,
     DerectiveModule,
-    LoaderComponent
+    LoaderComponent,
 
   ]
 })

@@ -2,9 +2,9 @@
   <mat-drawer mode="over"  (closed)="onClose()" [opened]="sideBarShow ? true : false" class="h-screen min-h-screen fixed top-0 left-0 z-10">
     <app-user-sidebar></app-user-sidebar>
   </mat-drawer>
-  <mat-drawer-content class="h-auto min-h-screen">
-    <app-user-toolbar></app-user-toolbar>
-    <router-outlet>
+  <mat-drawer-content class="h-auto min-h-screen flex flex-col">
+    <app-user-toolbar class="w-full fixed top-0 z-50"></app-user-toolbar>
+    <router-outlet class="mt-14">
       <app-loader></app-loader>
     </router-outlet>
   </mat-drawer-content>

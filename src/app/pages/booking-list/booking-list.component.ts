@@ -11,9 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class BookingListComponent implements OnInit {
 
   booking_list: any[] = []
+  dateNow = new Date()
   constructor(private userService: UserService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit(): void {
+    this.dateNow = new Date();
     this.getBookingList();
   }
 
@@ -22,6 +24,9 @@ export class BookingListComponent implements OnInit {
       if (res) {
         if (res.status == 1) {
           this.booking_list = res.data
+          this.booking_list.forEach((b: any) => {
+            b.date = new Date(b.date)
+          })
         }
       }
     })

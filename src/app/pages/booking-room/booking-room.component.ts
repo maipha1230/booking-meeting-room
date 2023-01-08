@@ -23,7 +23,15 @@ export class BookingRoomComponent implements OnInit {
     this.getRoomList();
     this.booking_id = this.activateRoute.snapshot.paramMap.get('booking_id');
     if (this.booking_id) {
-      this.onDetail(this.booking_id)
+      this.bookingUservice.checkBookingExist(this.booking_id).subscribe((res: any) => {
+        if (res) {
+          if (res.status == 1) {
+            this.onDetail(this.booking_id)
+          } else if (res.status == 2) {
+            this.router.navigate(['/admin/booking-room'])
+          }
+        }
+      })
     }
   }
 

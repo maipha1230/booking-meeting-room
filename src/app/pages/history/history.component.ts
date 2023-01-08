@@ -186,10 +186,22 @@ export class HistoryComponent implements OnInit {
   }
 
   exportExcel(): void {
-    let data:BookingTable[] = this.bookingList
+    let data:BookingTable[] = []
+    this.bookingList.forEach((b: BookingTable) => {
+      let temp: any = {
+        index: b.index,
+        room_name: b.room_name,
+        title: b.title,
+        purpose: b.purpose,
+        quantity: b.quantity,
+        date: b.date,
+        time: b.time,
+        user: b.user
+      }
+      data.push(temp)
+    })
     data.forEach((b: BookingTable) => {
       b.date = this.thaiDate.transform(b.date, "short")
-      delete b.booking_id
     })
     let dateFrom = this.thaiDate.transform(
       this.formDate.controls['dateFrom'].value,
@@ -213,6 +225,6 @@ export class HistoryComponent implements OnInit {
       nullToEmptyString: true,
     };
 
-    new AngularCsv(this.bookingList, `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}`, options);
+    new AngularCsv(data, `ประวัติการใช้งานห้องประชุม ศบส7 ${dateFrom} - ${dateTo}`, options);
   }
 }
