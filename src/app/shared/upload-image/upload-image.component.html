@@ -1,6 +1,6 @@
 <div class="flex flex-col gap-2 items-center">
   <label class="text-lg font-bold">อัพโหลดรูปภาพ</label>
-  <div class="w-96 h-96 bg-white rounded-lg shadow-lg p-3 flex items-center justify-center"*ngIf="imageChangedEvent">
+  <div class="w-auto h-auto min-w-full p-3 flex items-center justify-center"*ngIf="imageChangedEvent">
     <image-cropper
     [imageChangedEvent]="imageChangedEvent"
     [maintainAspectRatio]="true"
@@ -8,7 +8,7 @@
     [resizeToWidth]="500"
     format="jpeg"
     (imageCropped)="imageCropped($event)"
-    class="w-full h-full object-cover items-center"
+    class="w-auto h-auto max-w-md object-cover items-center justify-center"
   ></image-cropper>
   </div>
   <label for="uploadFile" class="hover:cursor-pointer flex flex-col items-center">
@@ -22,7 +22,7 @@
     accept="image/png, image/jpg, image/jpeg"
     (change)="fileChangeEvent($event)">
   </label>
-  <div class="flex flex-row gap-2">
+  <div class="flex flex-col md:flex-row gap-2">
     <div *ngIf="imageChangedEvent">
       <button
         (click)="save()"

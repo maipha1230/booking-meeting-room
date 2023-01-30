@@ -1,12 +1,12 @@
-<div class="h-full bg-primary flex flex-col items-center p-10 w-72 duration-1000 z-30">
-  <img src="../../../assets/images//logo.png" alt="logo" class="w-32 h-32" />
+<div class="h-auto min-h-screen bg-primary flex flex-col items-center p-5 w-72 duration-1000 z-30">
+  <img src="../../../assets/images//logo.png" alt="logo" class="w-2/5 h-2/5" />
   <label class="my-4 text-lg text-white">ระบบจองห้องประชุม</label>
   <div class="flex flex-col w-full">
     <label for="" class="text-white text-base my-2">เมนู</label>
     <div
       *ngFor="let menu of menu_list"
       (click)="route(menu.link)"
-      class="my-0 px-2 w-full h-12 bg-primary rounded flex items-center hover:bg-secondary hover:cursor-pointer focus:bg-secondary ease-in duration-300"
+      class="my-0 py-3 px-2 w-full  bg-primary rounded flex items-center hover:bg-secondary hover:cursor-pointer focus:bg-secondary ease-in duration-300"
     >
       <label for="" class="text-white text-base hover:cursor-pointer">{{
         menu.name
