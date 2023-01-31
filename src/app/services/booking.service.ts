@@ -50,4 +50,8 @@ export class BookingService {
   checkBookingExist(booking_id: number): Observable<any> {
     return this.http.get(`${environment.api_url}/admin/checkBookingExist/${booking_id}`)
   }
+
+  endMeeting(booking_id: number, time_end: string): Observable<any> {
+    return this.http.post(`${environment.api_url}/admin/endMeeting/${booking_id}`, { time_end: time_end })
+  }
 }
