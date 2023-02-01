@@ -16,6 +16,7 @@ export class BookingRoomComponent implements OnInit {
   public approve_status: number = 0;
   public room_list: any[] = [];
   public booking_id: any = null;
+  public dateNow: any = null;
 
   constructor(
     private bookignService: BookingService,
@@ -27,6 +28,7 @@ export class BookingRoomComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.dateNow = new Date()
     this.getRoomList();
     this.booking_id = this.activateRoute.snapshot.paramMap.get('booking_id');
     if (this.booking_id) {
@@ -58,7 +60,28 @@ export class BookingRoomComponent implements OnInit {
         if (res) {
           if (res.status == 1) {
             this.booking_list = res.data;
-            // console.log(this.booking_list);
+
+            for(let booking of this.booking_list) {
+              if (new Date(this.dateNow).getDate() < new Date(booking.date).getDate()) {
+                booking.isEnd = false
+              } else {
+                const time_end = String(booking.time).split(" - ")[1]
+                const p = time_end.split(":").map(Number)
+
+                let h_now = new Date(this.dateNow).getHours()
+                let m_now = new Date(this.dateNow).getMinutes()
+
+                if (h_now > p[0]) {
+                  booking.isEnd = true
+                } else {
+                  if (m_now >= p[1]) {
+                    booking.isEnd = true
+                  } else {
+                    booking.isEnd = false
+                  }
+                }
+              }
+            }
           }
         }
       });
