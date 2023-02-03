@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { ThaiDatePipe } from './../../shared/pipes/thaiDate.pipe';
+import { AlertService } from './../../services/alert.service';
 import { DateEventComponent } from './../../shared/date-event/date-event.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
@@ -12,27 +15,33 @@ import { CalendarOptions } from '@fullcalendar/angular';
 export class HomeComponent implements OnInit {
   calendarOptions: CalendarOptions;
 
-  events:any [] = [];
+  events: any[] = [];
 
-  constructor(private userService: UserService, private diaLog: MatDialog) {}
+  constructor(
+    private userService: UserService,
+    private diaLog: MatDialog,
+    private alertService: AlertService,
+    private thaidatePipe: ThaiDatePipe,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getBookingToCalendar();
   }
 
-  getBookingToCalendar(){
+  getBookingToCalendar() {
     this.userService.getBookingToCalendar().subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
-          this.events = res.data
+          this.events = res.data;
           this.initCalendar();
         }
       }
-    })
+    });
   }
 
-  initCalendar(){
-    let innerHeight = window.innerHeight
+  initCalendar() {
+    let innerHeight = window.innerHeight;
     this.calendarOptions = {
       headerToolbar: {
         left: 'title',
@@ -42,8 +51,8 @@ export class HomeComponent implements OnInit {
       events: this.events,
       locale: 'th',
       firstDay: 1,
-      slotMinTime: "06:00",
-      slotMaxTime: "20:00",
+      slotMinTime: '06:00',
+      slotMaxTime: '20:00',
       dayMaxEvents: true,
       eventTimeFormat: {
         hour: 'numeric',
@@ -62,27 +71,30 @@ export class HomeComponent implements OnInit {
       eventDisplay: 'block',
       // contentHeight: 'auto',
       // height: 'auto',
-      dateClick: this.onDateClick.bind(this)
-
+      dateClick: this.onDateClick.bind(this),
     };
   }
 
-  onDateClick(date: any){
-    this.userService.eventDateCalendar(date.dateStr).subscribe((res: any) => {
-      if (res) {
-        if (res.status == 1) {
-          this.diaLog.open(DateEventComponent, {
-            width: '60%',
-            minWidth: '400px',
-            height: '90%',
-            data: {
-              booking: res.data
-            }
-          })
-        }
+  onDateClick(date: any) {
+    // this.userService.eventDateCalendar(date.dateStr).subscribe((res: any) => {
+    //   if (res) {
+    //     if (res.status == 1) {
+    //       this.diaLog.open(DateEventComponent, {
+    //         width: '60%',
+    //         minWidth: '400px',
+    //         height: '90%',
+    //         data: {
+    //           booking: res.data
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
+    let time = this.thaidatePipe.transform(date.dateStr, "medium")
+    this.alertService.ensureAlert(`ต้องการจองห้องประชุมในวันที่ ${time} ใช่หรือไม่`).subscribe((confirm: any) => {
+      if (confirm) {
+        this.router.navigate(['/booking-meeting-room'], { queryParams: { date: String(date.dateStr) } })
       }
     })
-
   }
-
 }

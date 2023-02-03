@@ -42,6 +42,16 @@ export class BookingComponent implements OnInit {
     if (this.booking_id) {
       this.checkUserOwnBooking(Number(this.booking_id))
     }
+    this.activateRoute.queryParams.subscribe((params: any) => {
+      if (params) {
+        if (params.date) {
+          this.pathFormBookingDate(new Date(params.date))
+        }
+        if (params.room_id) {
+          this.pathFormBookingRoom(Number(params.room_id))
+        }
+      }
+    })
   }
 
   checkUserOwnBooking(booking_id: number) {
@@ -89,6 +99,18 @@ export class BookingComponent implements OnInit {
         }
       });
     });
+  }
+
+  pathFormBookingDate(date: any) {
+    this.formBooking.patchValue({
+      date: date
+    })
+  }
+
+  pathFormBookingRoom(room_id: number) {
+    this.formBooking.patchValue({
+      room: room_id
+    })
   }
 
   getRoomList() {
@@ -152,7 +174,7 @@ export class BookingComponent implements OnInit {
   }
 
   onSubmitBookingForm() {
-    if (this.formBooking.valid) {
+    if (this.formBooking.valid && this.formBooking.dirty) {
       if (!this.dateCheck()) {
         this.alertService.warningAlert("ไม่สามารถเลือกวันที่ผ่านมาแล้วได้")
       } else if (!this.timeCheck()) {
@@ -201,14 +223,8 @@ export class BookingComponent implements OnInit {
               this.userService.userSubmitBooking(form).subscribe((res: any) => {
                 if (res) {
                   if (res.status == 1) {
-                    this.createFormBooking();
-                    this.alertService
-                      .bookingSuccessAlert(res.msg)
-                      .subscribe((confirm: any) => {
-                        if (confirm) {
-                          this.router.navigate(['/booking-list']);
-                        }
-                      });
+                    this.alertService.successAlert(res.msg)
+                    this.router.navigate(['/booking-list'])
                   } else if (res.status == 2) {
                     if (res.booked) {
                       let msg = '';

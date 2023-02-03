@@ -36,6 +36,15 @@
             <p *ngIf="room.room_available == true" class="text-green-500 font-bold text-base pr-2">ว่าง</p>
             <p *ngIf="room.room_available == false" class="text-yellow-500 font-bold text-base pr-2">ยังไม่ว่าง</p>
           </div>
+          <div class="flex justify-end">
+            <button
+            (click)="onRoomClick(room.room_id, room.room_name)"
+            type="button"
+            class="w-48 h-10 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"
+          >
+            จองห้องประชุม
+          </button>
+          </div>
 
         </div>
       </div>

@@ -1,6 +1,9 @@
+import { Router } from '@angular/router';
+import { AlertService } from './../../services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
-import SwiperCore, {Navigation,
+import SwiperCore, {
+  Navigation,
   Pagination,
   Scrollbar,
   A11y,
@@ -8,7 +11,8 @@ import SwiperCore, {Navigation,
   Zoom,
   Autoplay,
   Thumbs,
-  Controller,} from 'swiper';
+  Controller,
+} from 'swiper';
 SwiperCore.use([
   Navigation,
   Pagination,
@@ -18,31 +22,41 @@ SwiperCore.use([
   Zoom,
   Autoplay,
   Thumbs,
-  Controller
+  Controller,
 ]);
 @Component({
   selector: 'app-room-list',
   templateUrl: './room-list.component.html',
-  styleUrls: ['./room-list.component.scss']
+  styleUrls: ['./room-list.component.scss'],
 })
 export class RoomListComponent implements OnInit {
+  public room_list: any[] = [];
 
-  public room_list: any[] = []
-
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private alertService: AlertService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getMeetingRoomList();
   }
 
-  getMeetingRoomList(){
+  getMeetingRoomList() {
     this.userService.getMeetingRoomList().subscribe((res: any) => {
       if (res) {
         if (res.status == 1) {
-          this.room_list = res.data
+          this.room_list = res.data;
         }
+      }
+    });
+  }
+
+  onRoomClick(room_id: number, room_name: string) {
+    this.alertService.ensureAlert(`ต้องการจอง ${room_name} ใช่หรือไม่`).subscribe((confirm: any) => {
+      if (confirm) {
+        this.router.navigate(['/booking-meeting-room'], { queryParams: { room_id: room_id } })
       }
     })
   }
-
 }
