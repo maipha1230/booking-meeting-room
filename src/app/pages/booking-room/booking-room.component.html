@@ -68,7 +68,7 @@
             วันที่: {{ booking.date | thaidate : "medium" }}
           </p>
           <p class="text-gray-700 text-base mb-4">เวลา: {{ booking.time }}</p>
-          <p class="text-red-500 text-base mb-4" [ngClass]="booking.isEnd == true ? 'visible' : 'invisible'">
+          <p class="text-red-500 text-base mb-4" [ngClass]="booking.isEnd == true && booking.approve_status == 1 ? 'visible' : 'invisible'">
             (การประชุมสิ้นสุดแล้ว)
           </p>
         </div>

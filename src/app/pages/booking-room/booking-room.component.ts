@@ -73,12 +73,14 @@ export class BookingRoomComponent implements OnInit {
 
                 if (h_now > p[0]) {
                   booking.isEnd = true
-                } else {
+                } else if (h_now == p[0]){
                   if (m_now >= p[1]) {
                     booking.isEnd = true
                   } else {
                     booking.isEnd = false
                   }
+                } else {
+                  booking.isEnd = false
                 }
               }
             }
