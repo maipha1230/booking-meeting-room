@@ -6,28 +6,52 @@
   >
     <label class="text-lg font-bold mb-3">การจองของฉัน</label>
     <div class="w-full h-auto flex flex-col">
-        <div *ngFor="let booking of booking_list" class="bg-white rounded-lg shadow-lg h-auto flex flex-row place-content-between border-2 border-slate-400 p-2 gap-2 my-1">
-            <div class="flex flex-col">
-                <div class="flex flex-col md:flex-row gap-3">
-                    <p>ห้อง: {{booking.room_name}}</p>
-                    <p>เรื่อง: {{booking.title}}</p>
-                </div>
-                <div class="flex flex-col lg:flex-row gap-3">
-                    <p>จุดประสงค์: {{booking.purpose}}</p>
-                    <p>วันที่: {{ booking.date | thaidate: "medium"}}</p>
-                    <p>เวลา: {{booking.time}}</p>
-                    <p>จองเมื่อวันที่: {{ booking.createdAt | thaidate: "medium"}}</p>
-                    <p *ngIf="booking.approve_status == 0" class="text-yellow-500">ยังไม่อนุมัติ</p>
-                    <p *ngIf="booking.approve_status == 1" class="text-green-500">อนุญาต</p>
-                    <p *ngIf="booking.approve_status == 2" class="text-red-500">ไม่อนุญาต</p>
-                </div>
-            </div>
-            <div class="flex flex-row gap-3 px-2" *ngIf="booking.approve_status == 0 && booking.date >= dateNow">
-                <mat-icon (click)="onEditBooking(booking.booking_id)" matTooltip="แก้ไข" class="hover:cursor-pointer hover:text-yellow-500 hover:scale-125 duration-150">edit</mat-icon>
-                <mat-icon (click)="onRemoveBooking(booking.booking_id)" matTooltip="ยกเลิก"class="hover:cursor-pointer hover:text-red-500 hover:scale-125 duration-150">delete</mat-icon>
-            </div>
+      <div
+        *ngFor="let booking of booking_list"
+        class="bg-white rounded-lg shadow-lg h-auto flex flex-row place-content-between border-2 border-slate-400 p-2 gap-2 my-1"
+      >
+        <div class="flex flex-col">
+          <div class="flex flex-col md:flex-row gap-3">
+            <p>ห้อง: {{ booking.room_name }}</p>
+            <p>เรื่อง: {{ booking.title }}</p>
+          </div>
+          <div class="flex flex-col lg:flex-row gap-3">
+            <p>จุดประสงค์: {{ booking.purpose }}</p>
+            <p>วันที่: {{ booking.date | thaidate : "medium" }}</p>
+            <p>เวลา: {{ booking.time }}</p>
+            <p>จองเมื่อวันที่: {{ booking.createdAt | thaidate : "medium" }}</p>
+            <p *ngIf="booking.approve_status == 0" class="text-yellow-500">
+              ยังไม่อนุมัติ
+            </p>
+            <p *ngIf="booking.approve_status == 1" class="text-green-500">
+              อนุญาต
+            </p>
+            <p *ngIf="booking.approve_status == 2" class="text-red-500">
+              ไม่อนุญาต
+            </p>
+          </div>
         </div>
+        <div class="flex flex-col items-end lg:items-start lg:flex-row gap-3 px-2">
+          <a class="hover:cursor-pointer text-end" (click)="onPDFClick(booking)">
+            <p class="text-blue-500 hover:text-blue-600 text-base"><i class="bi bi-file-earmark-pdf-fill"></i> ดาวน์โหลดฟอร์ม</p>
+          </a>
+          <div *ngIf="booking.approve_status == 0 && booking.date >= dateNow" class="flex flex-row">
+            <mat-icon
+            (click)="onEditBooking(booking.booking_id)"
+            matTooltip="แก้ไข"
+            class="hover:cursor-pointer hover:text-yellow-500 hover:scale-125 duration-150 text-end"
+            >edit</mat-icon
+          >
+          <mat-icon
+          *ngIf="booking.approve_status == 0 && booking.date >= dateNow"
+          (click)="onRemoveBooking(booking.booking_id)"
+          matTooltip="ยกเลิก"
+          class="hover:cursor-pointer hover:text-red-500 hover:scale-125 duration-150 text-end"
+          >delete</mat-icon
+        >
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-

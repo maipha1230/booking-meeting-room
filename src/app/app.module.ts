@@ -34,6 +34,7 @@ import { BookingListComponent } from './pages/booking-list/booking-list.componen
 import { HistoryComponent } from './pages/history/history.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ThaiDatePipe } from './shared/pipes/thaiDate.pipe';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -70,11 +71,12 @@ FullCalendarModule.registerPlugins([
     ThemeModule,
     FullCalendarModule,
     FormsModule,
+    NgxMatTimepickerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },,
     ThaiDatePipe,
     JwtHelperService,
   ],

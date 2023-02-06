@@ -26,7 +26,7 @@ import { LoaderComponent } from './loader/loader.component';
 
 import { LottieModule } from "ngx-lottie";
 import player from 'lottie-web';
-
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 export function playerFactory() {
   return player;
 }
@@ -62,6 +62,7 @@ import { DateEventComponent } from './date-event/date-event.component';
     ImageCropperModule,
     DerectiveModule,
     LottieModule.forRoot({ player: playerFactory }),
+    NgxMatTimepickerModule
   ],
   exports: [
     NavBarComponent,

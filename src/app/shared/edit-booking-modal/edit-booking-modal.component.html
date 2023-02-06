@@ -90,11 +90,15 @@
       <div class="flex flex-col lg:flex-row">
         <div class="flex flex-col w-full mx-2 max-w-xs2">
           <label class="text-base font-bold text-gray-700 mb-2">เวลาในการใช้งานห้องประชุม</label>
-          <div class="flex flex-row place-content-around">
-            <label class="text-base">จาก</label>
-            <input type="time" class="w-20 text-base" formControlName="time_start">
-            <label class="text-base">ถึง</label>
-            <input type="time" class="w-20 text-base" formControlName="time_end">
+          <div class="flex flex-col place-content-around">
+            <mat-form-field appearance="outline">
+              <ngx-mat-timepicker #time_start ></ngx-mat-timepicker>
+              <input matInput class="text-base" placeholder="เริ่มเวลา" [format]="24" [ngxMatTimepicker]="time_start" formControlName="time_start" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <ngx-mat-timepicker #time_end ></ngx-mat-timepicker>
+              <input matInput class="text-base" placeholder="จบเวลา" [format]="24" [ngxMatTimepicker]="time_end" formControlName="time_end" />
+            </mat-form-field>
           </div>
         </div>
         <div class="mb-1 w-full mx-2 max-w-xs">
