@@ -62,6 +62,13 @@
     >
       <div class="flex flex-row flex-wrap justify-end gap-2">
         <button
+          (click)="onPDFClick(data?.booking_id)"
+          type="button"
+          class="w-32 h-12 text-base text-white rounded bg-blue-500 justify-center items-center hover:bg-blue-600 hover:cursor-pointer duration-150"
+        >
+          พิมพ์
+        </button>
+        <button
           (click)="onPermitClick(1)"
           type="submit"
           class="w-32 h-12 text-base text-white rounded bg-green-500 justify-center items-center hover:bg-green-600 hover:cursor-pointer duration-150"

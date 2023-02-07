@@ -1,3 +1,4 @@
+import { ThaiDatePipe } from './../../shared/pipes/thaiDate.pipe';
 import { Router } from '@angular/router';
 import { AlertService } from './../../services/alert.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,7 +18,8 @@ export class BookingListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private thaiDatePipe: ThaiDatePipe
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +69,17 @@ export class BookingListComponent implements OnInit {
       });
   }
 
-  onPDFClick(booking: any) {
+  onPDFClick(booking_id: number) {
+    this.userService.getBookingPrint(booking_id).subscribe((res: any) => {
+      if (res) {
+        if (res.status == 1) {
+          this.showPDF(res.data)
+        }
+      }
+    })
+  }
+
+  async showPDF(booking: any){
     pdfMake.fonts = {
       THSarabunNew: {
         normal: 'THSarabunNew.ttf',
@@ -78,14 +90,29 @@ export class BookingListComponent implements OnInit {
     };
 
     const docDefinition = {
+      pageSize: {
+        width: 595.28,
+        height: 841.995
+      },
       content: [
         {
-          text: 'แบบฟอร์มขอใช้งานห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ ๗ \n\n',
+          image: await this.getBase64ImageFromURL(
+            "../../../assets/images/logo.png"
+          ),
+          width: 45,
+          height: 45,
+          absolutePosition: {
+            x: 20,
+            y: 20
+          }
+        },
+        {
+          text: 'แบบฟอร์มขอใช้งานห้องประชุมศูนย์สนับสนุนบริการสุขภาพที่ ๗ \n',
           style: 'header',
           alignment: 'center',
         },
         {
-          text: [{ text: `เรื่อง\t`, style: 'subheader' }, '55555555'],
+          text: [{ text: `เรื่อง\t`, style: 'subheader' }, 'ขออนุญาตใช้ห้องประชุม'],
         },
         {
           text: [
@@ -94,50 +121,65 @@ export class BookingListComponent implements OnInit {
           ],
         },
         {
-          text: [
-            '\n',
-            { text: 'ด้วยข้าพเจ้า ปฐมพงษ์ สีพลแสน', style: 'para' },
-            { text: '\tตำแหน่ง', style: 'subheader' },
-            '\tโปรแกรมเมอร์',
-          ],
+          text: "\n"
+        },
+        {
+          table: {
+            width: [300, 'auto', 'auto'],
+            body: [
+              [
+                { text: '\t\t\t\t' },
+                { text: `ด้วยข้าพเจ้า ${booking.user}`, style: 'para' },
+                {
+                  text: [
+                    { text: '\tตำแหน่ง', style: 'subheader' },
+                    `\t${booking.position}`,
+                  ],
+                },
+              ],
+            ],
+          },
+          layout: "noBorders",
+          absolutePosition: {
+            x: 70,
+            y: 115
+          }
         },
         {
           text: [
             { text: '\tสังกัด/ฝ่าย/แผนก', style: 'subheader' },
-            '\tบริหารงานทั่วไป',
+            `\t${booking.affiliation}`,
             {
               text: '\tมีความประสงค์ขอใช้ห้องประชุมเพื่อ ',
               style: 'subheader',
             },
-            '\tสัมมนา',
+            `\t${booking.purpose}`,
           ],
         },
         {
           text: [
             { text: '\tเรื่อง', style: 'subheader' },
-            '\tสัมมนาการเบิกงบสำหรับเครื่องมือแพทย์ปี พุทธศุกราช 2566',
+            `\t${booking.title}`,
           ],
         },
         {
           text: [
+            { text: '\tห้อง', style: 'subheader' },
+            `\t${booking.room}`,
             { text: '\tในวันที่', style: 'subheader' },
-            '\t25 กุมภาพันธ์ 2566',
-          ],
-        },
-        {
-          text: [
+            `\t${this.thaiDatePipe.transform(booking.date, "medium")}`,
             { text: '\tตั้งแต่เวลา', style: 'subheader' },
-            '\t10.00',
+            `\t${booking.time_start}`,
             { text: '\tถึงเวลา', style: 'subheader' },
-            '\t12.00',
+            `\t${booking.time_end}`
           ],
         },
         {
           text: [
             { text: '\tจำนวนผู้เข้าร่วม', style: 'subheader' },
-            '\t6 คน',
+            `\t${booking.quantity} คน`,
             { text: '\tหมายเลขโทรศัพท์', style: 'subheader' },
-            '\t0638970954',
+            `\t${booking.phone}`,
           ],
         },
         {
@@ -147,18 +189,7 @@ export class BookingListComponent implements OnInit {
               stack: [
                 { text: 'อุปกรณ์ที่ขอใช้', style: 'subheader' },
                 {
-                  ul: [
-                    '\t\t\titem 1',
-                    '\t\t\titem 2',
-                    '\t\t\titem 3',
-                    '\t\t\titem 1',
-                    '\t\t\titem 2',
-                    '\t\t\titem 3',
-                    '\t\t\titem 1',
-                    '\t\t\titem 2',
-                    '\t\t\titem 3',
-                    '\t\t\titem 1',
-                  ],
+                  ul: booking.device,
                   lineHeight: 0.8,
                   fontSize: 12
                 },
@@ -168,6 +199,9 @@ export class BookingListComponent implements OnInit {
             '',
             '',
           ],
+        },
+        {
+          text:"\n\n"
         },
         {
           columns: [
@@ -182,8 +216,8 @@ export class BookingListComponent implements OnInit {
                   text: '(                                                        )',
                   alignment: 'right',
                 },
-                { text: 'ตำแหน่ง โปรแกรมเมอร์', alignment: 'right' },
-                { text: 'วันที่ 1 กุมภาพันธ์ 2566', alignment: 'right' },
+                { text: `ตำแหน่ง ${booking.position}`, alignment: 'right' },
+                { text: `${this.thaiDatePipe.transform(booking.updatedAt, "medium")}`, alignment: 'right' },
               ],
             },
           ],
@@ -198,7 +232,7 @@ export class BookingListComponent implements OnInit {
                 '\n',
                 '\t\t(นางเปรมฤดี โคตรสมุทร)',
                 '\t\tหัวหน้ากลุ่มบริหารงานทั่วไป',
-                'วันที่ 1 กุมภาพันธ์ 2566',
+                '.................../..................../...................',
               ],
             },
             '',
@@ -223,15 +257,15 @@ export class BookingListComponent implements OnInit {
                 },
                 '\n',
                 {
-                  text: 'ลงชื่อ.......................................ผู้ขอใช้ห้องประชุม',
+                  text: 'ลงชื่อ.........................................................',
                   alignment: 'right',
                 },
                 {
-                  text: '(                                                        )',
+                  text: '(                                                    )',
                   alignment: 'right',
                 },
-                { text: 'ตำแหน่ง โปรแกรมเมอร์', alignment: 'right' },
-                { text: 'วันที่ 1 กุมภาพันธ์ 2566', alignment: 'right' },
+                { text: 'ตำแหน่ง .....................................................', alignment: 'right' },
+                { text: '.................../..................../...................', alignment: 'right' },
               ],
             },
           ],
@@ -268,6 +302,32 @@ export class BookingListComponent implements OnInit {
     pdfGenerator.getBlob((blob: any) => {
       const url = URL.createObjectURL(blob);
       window.open(url, '_blank');
+    });
+  }
+
+  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
+
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+
+        resolve(dataURL);
+      };
+
+      img.onerror = error => {
+        reject(error);
+      };
+
+      img.src = url;
     });
   }
 }

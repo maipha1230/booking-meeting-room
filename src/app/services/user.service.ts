@@ -401,4 +401,8 @@ export class UserService {
   userChangePassword(old: string, password: string):Observable<any> {
     return this.http.put(`${environment.api_url}/users/userChangePassword`, { old: old, password: password })
   }
+
+  getBookingPrint(booking_id: number):Observable<any> {
+    return this.http.get(`${environment.api_url}/users/getBookingPrint/${booking_id}`)
+  }
 }

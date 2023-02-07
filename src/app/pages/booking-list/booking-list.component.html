@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="flex flex-col items-end lg:items-start lg:flex-row gap-3 px-2">
-          <a class="hover:cursor-pointer text-end" (click)="onPDFClick(booking)">
+          <a class="hover:cursor-pointer text-end" (click)="onPDFClick(booking.booking_id)">
             <p class="text-blue-500 hover:text-blue-600 text-base"><i class="bi bi-file-earmark-pdf-fill"></i> ดาวน์โหลดฟอร์ม</p>
           </a>
           <div *ngIf="booking.approve_status == 0 && booking.date >= dateNow" class="flex flex-row">
