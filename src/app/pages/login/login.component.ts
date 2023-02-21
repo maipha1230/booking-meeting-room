@@ -86,7 +86,9 @@ export class LoginComponent implements OnInit {
             if (res.token) {
               localStorage.setItem(environment.login_token, res.token);
               this.alertService.successAlert(res.msg);
-              this.router.navigate([this.authService.userUrl])
+              console.log(this.authService.userUrl);
+              window.location.href = this.authService.userUrl
+              // this.router.navigate([this.authService.userUrl])
             }
             this.alertService.successAlert(res.msg);
           } else if (res.status == 2) {
@@ -112,7 +114,8 @@ export class LoginComponent implements OnInit {
             if (res.token) {
               localStorage.setItem(environment.login_token, res.token);
               this.alertService.successAlert(res.msg)
-              this.router.navigate([this.authService.adminUrl])
+              window.location.href = this.authService.adminUrl
+              // this.router.navigate([this.authService.adminUrl])
             }
           } else if (res.status == 2) {
             this.alertService.bannedUserAlert(res.msg);
